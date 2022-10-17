@@ -1,0 +1,68 @@
+/* ==================== */
+/* yok semangat yok styling */
+/* ==================== */
+
+/* body */
+body {
+  display: flex;
+  flex-direction: column;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  margin: auto;
+  height: 100vh;
+
+  /* default color */
+  color: #815b5b;
+}
+/* ==================== */
+
+/* upper divs */
+nav.upper-section {
+  background-color: #594545;
+  color: #fff8ea;
+  padding: 1em;
+}
+
+section.main {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+}
+/* ==================== */
+
+/* mid/center/tengah-tengah divs */
+
+/* ==================== */
+/* upper divs */
+
+/* ==================== */
+
+/* komponen gitu loh */
+button.btn {
+  border: 0;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-weight: bold;
+}
+
+button.btn-default {
+  background-color: #594545;
+  color: #fff8ea;
+}
+
+button.btn-urgent {
+  background-color: #ff4f4f;
+  color: #fff8ea;
+}
+
+button:hover {
+  transition: 0.3s;
+  background-color: #815b5b;
+}
+
+a.link {
+  text-decoration: none;
+}
+
+/* ==================== */
