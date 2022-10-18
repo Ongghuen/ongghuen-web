@@ -6,8 +6,9 @@
 
     <section>
       <?php
+
       $lists = App::get('db')->selectAll("test");
-      foreach ($lists as $list) :
+      foreach ($lists as $list):
       ?>
         <p><?= $list->nama ?></p>
         <p><?= $list->harga ?></p>
