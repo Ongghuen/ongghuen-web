@@ -1,33 +1,74 @@
 /* ==================== */
 /* yok semangat yok styling */
 /* ==================== */
+* {
+  box-sizing: border-box;
+}
 
 /* body */
-body {
-  display: flex;
-  flex-direction: column;
-  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-  margin: auto;
-  height: 100vh;
-
-  /* default color */
-  color: #815b5b;
+body{
+  margin: 0;
+  font-family: sans-serif;
 }
 /* ==================== */
 
 /* upper divs */
-nav.upper-section {
-  background-color: #594545;
-  color: #fff8ea;
-  padding: 1em;
+header{
+  height: 65px;
+  width: 100%;
+  background-color: rgba(44, 61, 65, 0.9);
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
-section.main {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  justify-content: center;
-  align-items: center;
+a{
+  text-decoration: none;
+}
+
+.logo{
+  width: 200px;
+  height: 50px;
+  margin-top: 8px;
+}
+
+.header-left{
+  float: left;
+  margin-left: 30px;
+}
+
+.header-right{
+  float: right;
+  margin-right: 30px;
+}
+
+.header-right a{
+  height: 65px;
+  line-height: 65px;
+  padding: 0 25px;
+  color: white;
+  display: block;
+  float: left;
+  transition: all 0.5s;
+  font-family: sans-serif;
+}
+
+.header-right a:hover{
+  background-color: rgba(240, 239, 239, 0.3);
+}
+
+.header-right .btn-login{
+  background-color: black;
+  border-radius: 20px;
+  height: 30px;
+  line-height: 30px;
+  margin-top: 18px;
+}
+
+.header-right .btn-login:hover{
+  color: rgba(44, 61, 65, 0.9);
+  font-weight: bold;
+  background-color: white;
 }
 /* ==================== */
 
