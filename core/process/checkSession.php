@@ -7,11 +7,15 @@ function checkSession()
 
 function checkSessionAndView()
 {
-  if (checkSession()) {
-    view('home');
-  } else {
-    view('login');
+  if(!isset($_SESSION["isLogged"])){
+    view('landing');
+    exit;
   }
+  // if (checkSession()) {
+  //   view('home');
+  // } else {
+  //   view('landing');
+  // }
 }
 
 function checkSessionAndRedirect()
