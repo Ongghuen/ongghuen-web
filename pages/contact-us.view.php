@@ -26,7 +26,7 @@
           <li><a href="">Perlindungan</a></li>
         </ul> -->
       <div>
-        <a href="index.html" class="login-btn">Home</a>
+        <a href="/web/index.php" class="login-btn">Home</a>
         <a href="/web/pages/contact-us.view.php" class="login-btn">Contact Us</a>
         <a href="/web/pages/login.view.php" class="login-btn">Login</a>
         <a href="#" class="btn">Download App</a>
