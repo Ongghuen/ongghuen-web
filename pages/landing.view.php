@@ -20,7 +20,7 @@
                 <a href="#beranda">Beranda</a>
                 <a href="#fitur">Fitur</a>
                 <a href="/web/pages/contact-us.view.php">Kontak</a>
-                <a href="login.view.php" class="btn-login shadow-lg shadow-gray-500/90">Masuk</a>
+                <a href="/web/pages/login.view.php" class="btn-login shadow-lg shadow-gray-500/90">Masuk</a>
             </nav>
         </div>
     </header>

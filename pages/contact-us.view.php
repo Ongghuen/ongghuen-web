@@ -27,8 +27,8 @@
         </ul> -->
       <div>
         <a href="index.html" class="login-btn">Home</a>
-        <a href="contact-us.html" class="login-btn">Contact Us</a>
-        <a href="login.html" class="login-btn">Login</a>
+        <a href="/web/pages/contact-us.view.php" class="login-btn">Contact Us</a>
+        <a href="/web/pages/login.view.php" class="login-btn">Login</a>
         <a href="#" class="btn">Download App</a>
       </div>
     </nav>
