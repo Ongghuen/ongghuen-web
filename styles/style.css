@@ -9,10 +9,11 @@
 body{
   margin: 0;
   font-family: "Lucida Grande";
+  background-color: whitesmoke;
 }
 /* ==================== */
 
-/* upper divs */
+/* LANDING PAGE */
 header{
   height: 65px;
   width: 100%;
@@ -135,35 +136,98 @@ a{
 }
 
 /* ==================== */
-/* upper divs */
+/* LOGIN PAGE */
 
-/* ==================== */
+section{
+  position: relative;
+  width: 80%;
+  height: 80vh;
+  display: flex;
+  margin: 65px 135px;
+  border-radius: 10px;
+}
 
-/* komponen gitu loh */
-button.btn {
-  border: 0;
-  border-radius: 4px;
-  padding: 8px 12px;
+section .leftBox{
+  position: relative;
+  width: 50%;
+  height: 100%;
+  background-image: url(../assets/img/login.png);
+  border-radius: 10px 0 0 10px;
+}
+
+section .leftBox h1{
+  color: white;
   font-weight: bold;
 }
 
-button.btn-default {
-  background-color: #594545;
-  color: #fff8ea;
+section .rightBox{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+  border-radius: 0 10px 10px 0;
+  background-color: white;
 }
 
-button.btn-urgent {
-  background-color: #ff4f4f;
-  color: #fff8ea;
+section .rightBox .formBox{
+  width: 50%;
 }
 
-button:hover {
-  transition: 0.3s;
-  background-color: #815b5b;
+section .rightBox h2{
+  color: black;
+  font-weight: 600;
+  font-size: 1.5em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  border-bottom: 4px solid rgba(66, 64, 62, 0.5);
+  display: inline-block;
+  letter-spacing: 1px;
 }
 
-a.link {
-  text-decoration: none;
+section .rightBox .formBox .inputBox{
+  margin-bottom: 20px;
 }
 
-/* ==================== */
+section .rightBox .formBox .inputBox span{
+  font-size: 16px;
+  margin-bottom: 5px;
+  display: inline-block;
+  color: black;
+  font-weight: 300;
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+
+section .rightBox .formBox .inputBox input{
+  width: 100%;
+  padding: 5px 20px;
+  outline: none;
+  font-weight: 400;
+  border: 1px solid;
+  font-size: 16px;
+  letter-spacing: 1px;
+  color: black;
+  background: transparent;
+  border-radius: 20px;
+}
+
+section .rightBox .formBox .inputBox input[type="submit"]{
+  background: rgba(66, 64, 62, 0.5);
+  color: white;
+  outline: none;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+section .rightBox .formBox .inputBox input[type="submit"]:hover{
+  font-size: 17px;
+  background: rgba(66, 64, 62, 0.7);
+}
+
+section .rightBox .formBox .remember{
+  margin-bottom: 10px;
+  font-weight: 400;
+  font-size: 14px;
+}
