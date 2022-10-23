@@ -8,7 +8,7 @@ function checkSession()
 function checkSessionAndView()
 {
   if (!isset($_SESSION["isLogged"])) {
-    view('landing');
+    view('landing2');
   }
 
   // if (checkSession()) {

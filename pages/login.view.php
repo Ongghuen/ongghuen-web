@@ -7,8 +7,8 @@
   <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet" />
   <script src="https://kit.fontawesome.com/a81368914c.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="icon" href="images/icon.png" sizes="32x32" />
-  <link rel="icon" href="images/icon.png" sizes="192x192" />
+  <link rel="icon" href="../assets/images/icon.png" sizes="32x32" />
+  <link rel="icon" href="../assets/images/icon.png" sizes="192x192" />
   <link rel="apple-touch-icon" href="images/icon.png" />
 </head>
 
