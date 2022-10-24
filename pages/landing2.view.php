@@ -148,6 +148,102 @@
             </div>
         </section>
     </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="grid-4">
+                <div class="grid-4-col footer-about">
+                    <h3 class="title-sm">About</h3>
+                    <p class="text">
+                        Suki - Mebel Sumber Rezeki merupakan toko yang bergerak pada
+                        bidang furniture. Produk kami berani bersaing dengan produk
+                        furniture lainya.
+                    </p>
+                </div>
+
+                <div class="grid-4-col footer-links">
+                    <h3 class="title-sm">Links</h3>
+                    <ul>
+                        <li>
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li>
+                            <a href="contact-us.html">Contact Us</a>
+                        </li>
+                        <li>
+                            <a href="login.html">Admin Login</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="grid-4-col footer-links">
+                    <h3 class="title-sm">Services</h3>
+                    <ul>
+                        <li>
+                            <a href="#">Quiality Furnitre</a>
+                        </li>
+                        <li>
+                            <a href="#">Custom Furniture</a>
+                        </li>
+                        <li>
+                            <a href="#">Fast Delivery</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="grid-4-col footer-newstletter">
+                    <h3 class="title-sm">Subscribe</h3>
+                    <p class="text">
+                        Anda ingin mendapatkan berita terbaru mengenai produk kami,
+                        langgganan sekarang.
+                    </p>
+                    <div class="footer-input-wrap">
+                        <input type="email" class="footer-input" placeholder="Email" />
+                        <a href="#" class="input-arrow">
+                            <i class="fas fa-angle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bottom-footer">
+                <div class="copyright">
+                    <p class="text">
+                        Copyright&copy;2022 All rights reserved | Made by
+                        <span>Suki App</span>
+                    </p>
+                </div>
+
+                <div class="followme-wrap">
+                    <div class="followme">
+                        <h3>Follow me</h3>
+                        <span class="footer-line"></span>
+                        <div class="social-media">
+                            <a href="#">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="back-btn-wrap">
+                        <a href="#" class="back-btn">
+                            <i class="fas fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
 </body>
 
 </html>

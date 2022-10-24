@@ -44,7 +44,6 @@
     </div>
   </div>
   <script type="text/javascript" src="../js/login.js"></script>
-  <script type="php"></script>
 </body>
 
 </html>
