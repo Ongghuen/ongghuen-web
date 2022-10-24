@@ -18,10 +18,15 @@ function view($name, $val = [])
 // redirect ke mana nihh
 function redirect($path)
 {
-  header("Location: /web/{$path}.php");
+  header("Location: /demo/project-3/web/{$path}.php");
 }
 // redirect ke view
 function redirectView($path)
 {
-  header("Location: /web/{$path}.view.php");
+  header("Location: /demo/project-3/web/pages/{$path}.view.php");
+}
+
+function redirectViewError($path)
+{
+  header("Location: /demo/project-3/web/pages/{$path}.view.php?error");
 }

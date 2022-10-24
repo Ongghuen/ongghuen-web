@@ -15,7 +15,7 @@ class QueryBuilder
   {
     // prepare statement and execute
     try {
-      $statement = $this->pdo->prepare("select username, password from users
+      $statement = $this->pdo->prepare("select username, password from admin
       where username = '$username'
       and password = '$password'");
       $statement->execute();
@@ -23,7 +23,20 @@ class QueryBuilder
       return $this->errMsg . $ex->getMessage();
     }
 
-    return $statement->fetchAll(PDO::FETCH_CLASS);
+    return $statement->fetchAll(PDO::FETCH_ASSOC);
+  }
+
+  public function selectRow($column, $value){
+        // prepare statement and execute
+        try {
+          $statement = $this->pdo->prepare("select id, username, password, fullname from admin 
+          where $column = '$value'");
+          $statement->execute();
+        } catch (PDOException $ex) {
+          return $this->errMsg . $ex->getMessage();
+        }
+    
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
   }
 
   public function selectAll($table)

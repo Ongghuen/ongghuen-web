@@ -153,6 +153,13 @@ section .leftBox{
   height: 100%;
   background-image: url(../assets/img/login.png);
   border-radius: 10px 0 0 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+section .leftBox img{
+  opacity: 0.5;
 }
 
 section .leftBox h1{

@@ -5,17 +5,23 @@ function checkSession()
   return $_SESSION['isLogged'];
 }
 
-function checkSessionAndView()
+function checkCookieAndSession()
 {
-  if(!isset($_SESSION["isLogged"])){
-    view('landing');
-    exit;
+  if (isset($_COOKIE['id']) && isset($_COOKIE['key']) ) {
+    $id = $_COOKIE['id'];
+    $key = $_COOKIE['key'];
+
+    $row = App::get('db')->selectRow("admin", "id", "$id");
+    if ($key === hash('sha256', $row[0]['username'])) {
+        $_SESSION['isLogged'] = true;
+    }
   }
-  // if (checkSession()) {
-  //   view('home');
-  // } else {
-  //   view('landing');
-  // }
+
+  if(!isset($_SESSION["isLogged"])){
+    redirectView('landing');
+  } else{
+    redirectView('home');
+  }
 }
 
 function checkSessionAndRedirect()

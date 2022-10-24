@@ -1,3 +1,15 @@
+<?php
+
+if(isset($_GET["error"])){
+  echo "
+  <script>
+      alert('Username atau password salah!');
+  </script>
+  ";
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,23 +22,23 @@
 <body>
   <section class="shadow-2xl">
     <div class="leftBox">
-      <h1>Suki Mebel</h1>
+        <img class="logo" src="../assets/img/logo.png">
     </div>
     <div class="rightBox">
       <div class="formBox">
         <h2>Login</h2>
-        <form action="">
+        <form action="../core/process/login.php" method="post">
           <div class="inputBox">
             <span>Username</span>
-            <input type="text" name="username">
+            <input type="text" name="username" required>
           </div>
           <div class="inputBox">
             <span>Password</span>
-            <input type="text" name="password">
+            <input type="password" name="password" required>
           </div>
           <div class="remember">
             <label for="remember">
-              <input type="checkbox" name="remember"> Remember me
+              <input type="checkbox" name="remember" id="remember"> Remember me
             </label>
           </div>
           <div class="inputBox">
