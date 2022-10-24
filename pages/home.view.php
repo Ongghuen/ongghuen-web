@@ -6,7 +6,7 @@
 
     <section>
       <?php
-
+      require '../core/core.php';
       $lists = App::get('db')->selectAll("test");
       foreach ($lists as $list):
       ?>
@@ -19,7 +19,7 @@
       <button class="btn btn-default">
         Okay
       </button>
-      <a href="core/process/logout.php" class="link">
+      <a href="../core/process/logout.php" class="link">
         <button class="btn btn-default">Logout</button>
       </a>
     </div>

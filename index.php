@@ -20,7 +20,7 @@ require 'core/helpers/functions.php';
 require 'core/process/checkSession.php';
 require 'core/core.php';
 
-checkSessionAndView();
+checkCookieAndSession();
 
 ?>
 
