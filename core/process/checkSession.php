@@ -7,20 +7,20 @@ function checkSession()
 
 function checkCookieAndSession()
 {
-  if (isset($_COOKIE['id']) && isset($_COOKIE['key']) ) {
+  if (isset($_COOKIE['id']) && isset($_COOKIE['key'])) {
     $id = $_COOKIE['id'];
     $key = $_COOKIE['key'];
 
     $row = App::get('db')->selectRow("admin", "id", "$id");
     if ($key === hash('sha256', $row[0]['username'])) {
-        $_SESSION['isLogged'] = true;
+      $_SESSION['isLogged'] = true;
     }
   }
 
-  if(!isset($_SESSION["isLogged"])){
-    redirectView('landing');
-  } else{
-    redirectView('home');
+  if (!isset($_SESSION["isLogged"])) {
+    redirectView('index');
+  } else {
+    redirectView('index');
   }
 }
 

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Suki - Sumber Rezeki</title>
-    <link rel="stylesheet" href="../styles/landing2.css">
+    <link rel="stylesheet" href="../styles/index.css">
     <link rel="icon" href="../assets/images/icon.png" sizes="32x32" />
     <link rel="icon" href="../assets/images/icon.png" sizes="192x192" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
@@ -19,11 +19,11 @@
 <body>
     <div class="anjay">
         <video autoplay loop muted plays-inline class="back-video">
-            <source src="./assets/video/video2.mp4" type="video/mp4" />
+            <source src="../assets/video/video2.mp4" type="video/mp4" />
         </video>
 
         <nav>
-            <img src="./assets/images/logo2.png" class="logo2" />
+            <img src="../assets/images/logo2.png" class="logo2" />
             <!-- <ul>
           <li><a href="">Home</a></li>
           <li><a href="">Services</a></li>
@@ -78,7 +78,7 @@
             <br />
             <a href="#" class="btn anim">Download App</a>
         </div>
-        <img src="./assets/images/iniaja.png" class="feature-img anim" />
+        <img src="../assets/images/iniaja.png" class="feature-img anim" />
     </div>
 
     <div class="cobaja">
@@ -105,7 +105,7 @@
                     <div class="card-wrap">
                         <div class="card" data-card="">
                             <div class="card-content z-index">
-                                <img src="./img/design-icon.png" class="icon" alt="" />
+                                <img src="../assets/images/quality.png" class="icon" alt="" />
                                 <h3 class="title-sm">Quality Furniture</h3>
                                 <p class="text">
                                     Kami menyediakan berbagai macam furniture kebutuhan anda
@@ -119,7 +119,7 @@
                     <div class="card-wrap">
                         <div class="card" data-card="">
                             <div class="card-content z-index">
-                                <img src="./img/code-icon.png" class="icon" alt="" />
+                                <img src="../assets/images/custom.png" class="icon" alt="" />
                                 <h3 class="title-sm">Custom Furniture</h3>
                                 <p class="text">
                                     Kami selalu siap dan bersedia untuk membuatkan model
@@ -133,7 +133,7 @@
                     <div class="card-wrap">
                         <div class="card" data-card="">
                             <div class="card-content z-index">
-                                <img src="./img/app-icon.png" class="icon" alt="" />
+                                <img src="../assets/images/delivery.png" class="icon" alt="" />
                                 <h3 class="title-sm">Fast delivery</h3>
                                 <p class="text">
                                     Para customer tidak perlu bingung dalam mengirim barang
@@ -148,6 +148,102 @@
             </div>
         </section>
     </div>
+
+
+    <footer class="footer">
+        <div class="container">
+            <div class="grid-4">
+                <div class="grid-4-col footer-about">
+                    <h3 class="title-sm">About</h3>
+                    <p class="text">
+                        Suki - Mebel Sumber Rezeki merupakan toko yang bergerak pada
+                        bidang furniture. Produk kami berani bersaing dengan produk
+                        furniture lainya.
+                    </p>
+                </div>
+
+                <div class="grid-4-col footer-links">
+                    <h3 class="title-sm">Links</h3>
+                    <ul>
+                        <li>
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li>
+                            <a href="contact-us.html">Contact Us</a>
+                        </li>
+                        <li>
+                            <a href="login.html">Admin Login</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="grid-4-col footer-links">
+                    <h3 class="title-sm">Services</h3>
+                    <ul>
+                        <li>
+                            <a href="#">Quiality Furnitre</a>
+                        </li>
+                        <li>
+                            <a href="#">Custom Furniture</a>
+                        </li>
+                        <li>
+                            <a href="#">Fast Delivery</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="grid-4-col footer-newstletter">
+                    <h3 class="title-sm">Subscribe</h3>
+                    <p class="text">
+                        Anda ingin mendapatkan berita terbaru mengenai produk kami,
+                        langgganan sekarang.
+                    </p>
+                    <div class="footer-input-wrap">
+                        <input type="email" class="footer-input" placeholder="Email" />
+                        <a href="#" class="input-arrow">
+                            <i class="fas fa-angle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bottom-footer">
+                <div class="copyright">
+                    <p class="text">
+                        Copyright&copy;2022 All rights reserved | Made by
+                        <span>Suki App</span>
+                    </p>
+                </div>
+
+                <div class="followme-wrap">
+                    <div class="followme">
+                        <h3>Follow me</h3>
+                        <span class="footer-line"></span>
+                        <div class="social-media">
+                            <a href="#">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="back-btn-wrap">
+                        <a href="#" class="back-btn">
+                            <i class="fas fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>
