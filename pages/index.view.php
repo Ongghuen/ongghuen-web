@@ -6,44 +6,43 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Suki - Sumber Rezeki</title>
-    <link rel="stylesheet" href="../styles/index.css">
-    <link rel="icon" href="../assets/images/icon.png" sizes="32x32" />
-    <link rel="icon" href="../assets/images/icon.png" sizes="192x192" />
+    <link rel="icon" href="images/icon.png" sizes="32x32" />
+    <link rel="icon" href="images/icon.png" sizes="192x192" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/brands.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/fontawesome.min.css" />
     <link rel="apple-touch-icon" href="images/icon.png" />
     <meta name="msapplication-TileImage" content="images/icon.png" />
+    <link rel="stylesheet" href="../styles/index.css" />
 </head>
 
 <body>
-    <div class="anjay">
+    <nav>
+        <img src="../assets/images/logo2.png" class="logo2" />
+        <!-- <ul>
+        <li><a href="">Home</a></li>
+        <li><a href="">Services</a></li>
+        <li><a href="">Privacy</a></li>
+        <li><a href="">Document</a></li>
+      </ul> -->
+        <div>
+            <a href="/web/pages/index.view.php" class="login-btn">Home</a>
+            <!-- <a href="contact-us.html" class="login-btn">Contact Us</a> -->
+            <a href="/web/pages/login.view.php" class="login-btn">Login</a>
+            <a href="#" class="btn">Download App</a>
+        </div>
+    </nav>
+    <section class="anjay">
         <video autoplay loop muted plays-inline class="back-video">
             <source src="../assets/video/video2.mp4" type="video/mp4" />
         </video>
-
-        <nav>
-            <img src="../assets/images/logo2.png" class="logo2" />
-            <!-- <ul>
-          <li><a href="">Home</a></li>
-          <li><a href="">Services</a></li>
-          <li><a href="">Privacy</a></li>
-          <li><a href="">Document</a></li>
-        </ul> -->
-            <div>
-                <a href="/web/index.php" class="login-btn">Home</a>
-                <a href="/web/pages/contact-us.view.php" class="login-btn">Contact Us</a>
-                <a href="/web/pages/login.view.php" class="login-btn">Login</a>
-                <a href="#" class="btn">Download App</a>
-            </div>
-        </nav>
         <div class="content-atas anim">
             <h1 class="anim">Suki App</h1>
             <a href="#">Pelayanan Anda Adalah Prioritas Kami</a>
         </div>
-    </div>
+    </section>
 
-    <div class="hero">
+    <section class="hero">
         <!-- <nav> -->
         <!-- <img src="images/logo2.png" class="logo" /> -->
         <!-- <ul>
@@ -79,18 +78,17 @@
             <a href="#" class="btn anim">Download App</a>
         </div>
         <img src="../assets/images/iniaja.png" class="feature-img anim" />
-    </div>
+    </section>
 
-    <div class="cobaja">
-        <section class="services section" id="services">
-            <div class="container">
-                <div class="section-header">
-                    <h3 class="title">Our Services</h3>
-                    <p class="text">Berikut layanan yang bisa anda dapatkan di Suki</p>
-                </div>
+    <section class="cobaaja services section" id="services">
+        <div class="container">
+            <div class="section-header">
+                <h3 class="title">Our Services</h3>
+                <p class="text">Berikut layanan yang bisa anda dapatkan di Suki</p>
+            </div>
 
-                <div class="cards">
-                    <!-- <div class="card-wrap">
+            <div class="cards">
+                <!-- <div class="card-wrap">
             <div class="card" data-card="">
               <div class="card-content z-index">
                 <img src="./img/design-icon.png" class="icon" alt="" />
@@ -102,53 +100,166 @@
               </div>
             </div>
           </div> -->
-                    <div class="card-wrap">
-                        <div class="card" data-card="">
-                            <div class="card-content z-index">
-                                <img src="../assets/images/quality.png" class="icon" alt="" />
-                                <h3 class="title-sm">Quality Furniture</h3>
-                                <p class="text">
-                                    Kami menyediakan berbagai macam furniture kebutuhan anda
-                                    dengan kualitas terbaik dan berani bersaing dengan merek
-                                    produk furniture lainya.
-                                </p>
-                            </div>
+                <div class="card-wrap">
+                    <div class="card" data-card="">
+                        <div class="card-content z-index">
+                            <img src="../assets//images/quality.png" class="icon" alt="" />
+                            <h3 class="title-sm">Quality Furniture</h3>
+                            <p class="text">
+                                Kami menyediakan berbagai macam furniture kebutuhan anda
+                                dengan kualitas terbaik dan berani bersaing dengan merek
+                                produk furniture lainya.
+                            </p>
                         </div>
                     </div>
+                </div>
 
-                    <div class="card-wrap">
-                        <div class="card" data-card="">
-                            <div class="card-content z-index">
-                                <img src="../assets/images/custom.png" class="icon" alt="" />
-                                <h3 class="title-sm">Custom Furniture</h3>
-                                <p class="text">
-                                    Kami selalu siap dan bersedia untuk membuatkan model
-                                    furniture yang anda inginkan. Tim kami siap memberikan
-                                    kebutuhan yang anda inginkan.
-                                </p>
-                            </div>
+                <div class="card-wrap">
+                    <div class="card" data-card="">
+                        <div class="card-content z-index">
+                            <img src="../assets/images/custom.png" class="icon" alt="" />
+                            <h3 class="title-sm">Custom Furniture</h3>
+                            <p class="text">
+                                Kami selalu siap dan bersedia untuk membuatkan model furniture
+                                yang anda inginkan. Tim kami siap memberikan kebutuhan yang
+                                anda inginkan.
+                            </p>
                         </div>
                     </div>
+                </div>
 
-                    <div class="card-wrap">
-                        <div class="card" data-card="">
-                            <div class="card-content z-index">
-                                <img src="../assets/images/delivery.png" class="icon" alt="" />
-                                <h3 class="title-sm">Fast delivery</h3>
-                                <p class="text">
-                                    Para customer tidak perlu bingung dalam mengirim barang
-                                    mereka yang telah dibeli. Suki siap melayani pengiriman
-                                    barang anda hingga sampai tepat didepan rumah anda dengan
-                                    secepat kilat.
-                                </p>
-                            </div>
+                <div class="card-wrap">
+                    <div class="card" data-card="">
+                        <div class="card-content z-index">
+                            <img src="../assets/images/delivery.png" class="icon" alt="" />
+                            <h3 class="title-sm">Fast delivery</h3>
+                            <p class="text">
+                                Para customer tidak perlu bingung dalam mengirim barang mereka
+                                yang telah dibeli. Suki siap melayani pengiriman barang anda
+                                hingga sampai tepat didepan rumah anda dengan secepat kilat.
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
 
+    <section class="gallery gallery-bg">
+        <div class="content-gallery anim">
+            <h2 class="title">Photo Gallery</h2>
+        </div>
+        <input class="input-anjay" type="radio" name="Photos" id="check1" checked />
+        <input class="input-anjay" type="radio" name="Photos" id="check2" />
+        <input class="input-anjay" type="radio" name="Photos" id="check3" />
+        <input class="input-anjay" type="radio" name="Photos" id="check4" />
+        <input class="input-anjay" type="radio" name="Photos" id="check5" />
+
+        <div class="container-photo">
+            <div class="menunya">
+                <label for="check1">All Photo</label>
+                <label for="check2">Kursi</label>
+                <label for="check3">Kasur</label>
+                <label for="check4">Lemari</label>
+                <label for="check5">Meja</label>
+            </div>
+
+            <div class="photo-gallery">
+                <div class="pic kasur">
+                    <img src="../assets/images/kasur.jpeg" />
+                </div>
+                <div class="pic kasur">
+                    <img src="../assets/images/kasur2.jpg" />
+                </div>
+                <div class="pic lemari">
+                    <img src="../assets/images/lemari.png" />
+                </div>
+                <div class="pic lemari">
+                    <img src="../assets/images/lemari2.jpg" />
+                </div>
+                <div class="pic kursi">
+                    <img src="../assets/images/kursi.jpeg" />
+                </div>
+                <div class="pic kursi">
+                    <img src="../assets/images/kursi2.jpg" />
+                </div>
+                <div class="pic meja">
+                    <img src="../assets/images/meja.jpeg" />
+                </div>
+                <div class="pic meja">
+                    <img src="../assets/images/meja2.jpg" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact bg-contact">
+        <div class="content-contact anim">
+            <h2 class="title">Contact Us</h2>
+            <!-- <p>
+          Jika anda ingin mengirim pesan kepada kami, anda bisa menggunakan
+          fitur contact form berikut
+        </p> -->
+        </div>
+        <div class="container-contact anim">
+            <div class="contactinfo">
+                <div class="box">
+                    <div class="icon-contact">
+                        <i class="fa-solid fa-map-location-dot"></i>
+                    </div>
+                    <div class="text-contact">
+                        <h3>Address</h3>
+                        <p>Jl. Pahlawan 1 No.228 Jember - Sumberasih</p>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="icon-contact"><i class="fa-solid fa-phone"></i></div>
+                    <div class="text-contact">
+                        <h3>Phone</h3>
+                        <p>081 231 897 839</p>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="icon-contact"><i class="fa-solid fa-envelope"></i></div>
+                    <div class="text-contact">
+                        <h3>Email</h3>
+                        <p>suki@com.id</p>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="icon-contact"><i class="fa-solid fa-link"></i></div>
+                    <div class="text-contact">
+                        <h3>Web</h3>
+                        <p>sukuapp.co.id</p>
+                    </div>
+                </div>
+            </div>
+
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3949.4235048790615!2d113.7209983146976!3d-8.160015494126558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd695b617d8f623%3A0xf6c4437632474338!2sState%20Polytechnic%20of%20Jember!5e0!3m2!1sen!2sid!4v1666341633806!5m2!1sen!2sid" width="400" height="300" style="border: 0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+            <!-- <div class="contactForm">
+          <form>
+            <h2>Send Message</h2>
+            <div class="inputBox">
+              <input type="text" name="" required="required" />
+              <span>Full Name</span>
+            </div>
+            <div class="inputBox">
+              <input type="text" name="" required="required" />
+              <span>Email</span>
+            </div>
+            <div class="inputBox">
+              <textarea required="required"></textarea>
+              <span>Type Your Message....</span>
+            </div>
+
+            <div class="inputbox">
+              <input type="submit" name="" value="Send" />
+            </div>
+          </form>
+        </div> -->
+        </div>
+    </section>
 
     <footer class="footer">
         <div class="container">
