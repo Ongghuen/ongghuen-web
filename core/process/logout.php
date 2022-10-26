@@ -5,4 +5,4 @@
   session_unset();
   session_destroy();
 
-  redirectView("landing");
+  redirectView("index");
