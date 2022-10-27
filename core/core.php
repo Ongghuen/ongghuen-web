@@ -12,3 +12,4 @@ $config = [
 ];
 
 App::bind('db', new QueryBuilder(Connection::make($config)));
+App::bind('api', new ApiQueryBuilder(Connection::make($config)));
