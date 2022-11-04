@@ -21,7 +21,6 @@ require 'core/process/checkSession.php';
 require 'core/core.php';
 
 checkCookieAndSession();
-
 ?>
 
 </html>
