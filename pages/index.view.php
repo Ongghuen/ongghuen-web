@@ -26,9 +26,10 @@
         <li><a href="">Document</a></li>
       </ul> -->
         <div>
-            <a href="/web/pages/index.view.php" class="login-btn">Home</a>
+            <a href="./index.view.php" class="login-btn">Home</a>
+            <a href="./dashboard.view.php" class="login-btn">Dashboard</a>
             <!-- <a href="contact-us.html" class="login-btn">Contact Us</a> -->
-            <a href="/web/pages/login.view.php" class="login-btn">Login</a>
+            <a href="./login.view.php" class="login-btn">Login</a>
             <a href="#" class="btn">Download App</a>
         </div>
     </nav>
