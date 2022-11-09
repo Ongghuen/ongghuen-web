@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/fontawesome.min.css" />
     <link rel="apple-touch-icon" href="images/icon.png" />
     <meta name="msapplication-TileImage" content="images/icon.png" />
-    <link rel="stylesheet" href="../styles/index.css" />
+    <link rel="stylesheet" href="../assets/css/index.css" />
 </head>
 
 <body>
