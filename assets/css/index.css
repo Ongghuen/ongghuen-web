@@ -9,7 +9,7 @@
 .hero {
   width: 100%;
   min-height: 100vh;
-  background-image: url(../assets/images/background.jpeg);
+  background-image: url(../images/background.jpeg);
   background-position: center;
   background-size: cover;
   padding: 10px 10%;
@@ -240,7 +240,7 @@ nav ul li a {
 .cobaaja {
   width: 100%;
   min-height: 100vh;
-  background-image: url(../assets/images/yagatau.jpg);
+  background-image: url(../images/yagatau.jpg);
   background-position: center;
   background-size: cover;
   /* padding: 10px 10%; */
@@ -435,7 +435,7 @@ nav ul li a {
 .bg-contact {
   width: 100%;
   min-height: 100vh;
-  background-image: url(../assets/images/background2.jpg);
+  background-image: url(../images/background2.jpg);
   background-position: center;
   background-size: cover;
   padding: 10px 10%;
@@ -586,7 +586,7 @@ textarea {
 .gallery-bg {
   width: 100%;
   min-height: 100vh;
-  background-image: url(../assets/images/gallery-bg.jpeg);
+  background-image: url(../images/gallery-bg.jpeg);
   background-position: center;
   background-size: cover;
   padding: 10px 10%;
