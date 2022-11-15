@@ -12,6 +12,24 @@
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 -->
+<?php
+require("./koneksi.php");
+session_start();
+error_reporting(1);
+
+if (isset($_POST['add-user'])) {
+  $userNama = $_POST['txt_nama'];
+  $userNoHp = $_POST['txt_nohp'];
+  $userMail = $_POST['txt_mail'];
+  $userUser = $_POST['txt_user'];
+  $userPw = $_POST['txt_pw'];
+
+  $query    = "INSERT INTO `tb_user` (`id`, `avatar`, `nama`, `nohp`, `email`, `username`, `password`, `level`) VALUES (NULL, '', '$userNama', '$userNoHp', '$userMail', '$userUser', '$userPw', '1')";
+  $result   = mysqli_query($koneksi, $query);
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -213,7 +231,7 @@
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <!-- <div class="ms-md-auto pe-md-3 d-flex align-items-center"> -->
-            <!-- <div class="input-group">
+          <!-- <div class="input-group">
               <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
               <input type="text" class="form-control" placeholder="Type here..." />
             </div> -->
@@ -234,7 +252,7 @@
                 </div>
               </a>
             </li>
-            
+
             <li class="nav-item px-3 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-white font-weight-bold px-0">
                 <span class="d-sm-inline d-none">Halo, Ragnar Lothbrok</span>
@@ -270,495 +288,607 @@
       </div>
     </nav>
     <!-- End Navbar -->
+
+
+
     <div class="container-fluid py-4">
       <div class="row">
         <div class="col-12">
           <div class="card mb-4">
             <div class="card-header pb-0">
-              <h6>Authors table</h6>
-            </div>
-            <div class="card-body px-0 pt-0 pb-2">
-              <div class="table-responsive p-0">
-                <table class="table align-items-center mb-0">
-                  <thead>
-                    <tr>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                        Author
-                      </th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                        Function
-                      </th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                        Status
-                      </th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                        Employed
-                      </th>
-                      <th class="text-secondary opacity-7"></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1" />
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">John Michael</h6>
-                            <p class="text-xs text-secondary mb-0">
-                              john@creative-tim.com
-                            </p>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">Manager</p>
-                        <p class="text-xs text-secondary mb-0">
-                          Organization
-                        </p>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-success">Online</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
-                      </td>
-                      <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          Edit
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <img src="../assets/img/team-3.jpg" class="avatar avatar-sm me-3" alt="user2" />
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Alexa Liras</h6>
-                            <p class="text-xs text-secondary mb-0">
-                              alexa@creative-tim.com
-                            </p>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">
-                          Programator
-                        </p>
-                        <p class="text-xs text-secondary mb-0">Developer</p>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-secondary">Offline</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">11/01/19</span>
-                      </td>
-                      <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          Edit
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <img src="../assets/img/team-4.jpg" class="avatar avatar-sm me-3" alt="user3" />
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Laurent Perrier</h6>
-                            <p class="text-xs text-secondary mb-0">
-                              laurent@creative-tim.com
-                            </p>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">Executive</p>
-                        <p class="text-xs text-secondary mb-0">Projects</p>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-success">Online</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">19/09/17</span>
-                      </td>
-                      <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          Edit
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <img src="../assets/img/team-3.jpg" class="avatar avatar-sm me-3" alt="user4" />
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Michael Levi</h6>
-                            <p class="text-xs text-secondary mb-0">
-                              michael@creative-tim.com
-                            </p>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">
-                          Programator
-                        </p>
-                        <p class="text-xs text-secondary mb-0">Developer</p>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-success">Online</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">24/12/08</span>
-                      </td>
-                      <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          Edit
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user5" />
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Richard Gran</h6>
-                            <p class="text-xs text-secondary mb-0">
-                              richard@creative-tim.com
-                            </p>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">Manager</p>
-                        <p class="text-xs text-secondary mb-0">Executive</p>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-secondary">Offline</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">04/10/21</span>
-                      </td>
-                      <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          Edit
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2 py-1">
-                          <div>
-                            <img src="../assets/img/team-4.jpg" class="avatar avatar-sm me-3" alt="user6" />
-                          </div>
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Miriam Eric</h6>
-                            <p class="text-xs text-secondary mb-0">
-                              miriam@creative-tim.com
-                            </p>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">
-                          Programtor
-                        </p>
-                        <p class="text-xs text-secondary mb-0">Developer</p>
-                      </td>
-                      <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-secondary">Offline</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">14/09/20</span>
-                      </td>
-                      <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          Edit
-                        </a>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+              <div class="d-flex align-items-center">
+                <h6>Users table</h6>
+                <button class="btn btn-success btn-sm ms-auto " data-modal-target="#modal-add">
+                  Add User
+                </button>
+              </div>
+              <div class="card-body px-0 pt-0 pb-2">
+                <div class="table-responsive p-0">
+                  <table class="table align-items-center mb-0">
+                    <thead>
+                      <tr>
+
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                          No
+                        </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                          Avatar
+                        </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                          Name
+                        </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                          No Hp
+                        </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                          Email
+                        </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                          Username
+                        </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                          Password
+                        </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                          Actions
+                        </th>
+                      </tr>
+                    </thead>
+                    <?php
+                    $query  = "SELECT id, nama, nohp, email, username, password  FROM tb_user WHERE level = '1' order by nama asc";
+                    $result = mysqli_query($koneksi, $query);
+                    $no     = 1;
+
+                    while ($row = mysqli_fetch_array($result)) {
+                      $userUserId   = $row['id'];
+                      $userName   = $row['nama'];
+                      $userPhone  = $row['nohp'];
+                      $userEmail  = $row['email'];
+                      $userUserName  = $row['username'];
+                      $userPassword  = $row['password'];
+                    ?>
+                      <tbody>
+
+                        <tr>
+                          <td class="align-middle text-center">
+                            <span class="text-secondary text-xs font-weight-bold"><?php echo $no; ?></span>
+                          </td>
+                          <td class="align-middle text-center">
+                            <img src="../assets/img/team-3.jpg" class="avatar avatar-sm me-2" alt="user1" />
+                          </td>
+                          <td class="align-middle text-center">
+                            <span class="text-secondary text-xs font-weight-bold"><?php echo $userName; ?></span>
+                          </td>
+                          <td class="align-middle text-center">
+                            <span class="text-secondary text-xs font-weight-bold"><?php echo $userPhone; ?></span>
+                          </td>
+                          <td class="align-middle text-center">
+                            <span class="text-secondary text-xs font-weight-bold"><?php echo $userEmail; ?></span>
+                          </td>
+                          <td class="align-middle text-center">
+                            <span class="text-secondary text-xs font-weight-bold"><?php echo $userUserName; ?></span>
+                          </td>
+                          <td class="align-middle text-center">
+                            <span class="text-secondary text-xs font-weight-bold"><?php echo $userPassword; ?></span>
+                          </td>
+                          <td class="align-middle text-center">
+                            <button class="btn btn-dark btn-sm ms-auto" value="<?php echo $row['id']; ?>" onclick="<?php echo $row['id']; ?>" data-modal-target="#modal">Edit</button>
+                            <button class="btn btn-danger btn-sm ms-auto" data-modal-target="#modal-delete">Delete</button>
+
+                          </td>
+
+                        </tr>
+                        <!-- <tr>
+                        <td></td>
+                        <td></td>
+                        <td>></td>
+                        <td>
+                          <a href="edit.php?id=<?php echo $row['id']; ?>" class="btn btn-info btn-circle  <?php echo $dis; ?>" onClick="confirmModal('edit.php?&id=<?php echo $row['id']; ?>');"><i class="fas fa-pen"></i>
+                        <td>
+                          <a href="hapus.php?id=<?php echo $row['id']; ?>" class="btn btn-danger btn-circle <?php echo $dis; ?>" onClick="confirmModal('hapus.php?&id=<?php echo $row['id']; ?>');" data-toggle="modal" data-target="#hapusModal"><i class="fas fa-trash"></i>
+                        </td>
+                      </tr> -->
+                      <?php
+                      $no++;
+                    } ?>
+                      </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>
         </div>
+
+        <!-- Pop up Delete -->
+
+        <div class="modal-delete" id="modal-delete">
+          <div class="modal-header-delete">
+            <h2 class="delete">Warning</h2>
+            <button data-close-delete class="close-btn-delete">&times;</button>
+
+            <div class="modal-body-delete">
+              <div class="row">
+
+                <p class="delete">
+                  Yakin dek mau ngehapus data orang? dosah loh dek
+                </p>
+
+              </div>
+              <div class="align-middle text-center">
+                <button class="btn btn-success btn-sm ms-auto">Hapus</button>
+                <button class="btn btn-danger btn-sm ms-auto" data-close-delete>Close</button>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+        <style>
+          .modal-delete {
+            position: fixed;
+            left: 0;
+            top: 0;
+            background: rgb(0, 0, 0, 0.6);
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease-in-out;
+          }
+
+          .modal-body-delete {
+            padding: 10px;
+            bottom: 10px;
+          }
+
+          .modal-header-delete {
+            background: white;
+            width: 560px;
+            max-width: 90%;
+            padding: 20px;
+            border-radius: 4x;
+            position: relative;
+            transform: translateY(-100);
+            transition: all 0.3s ease-in-out;
+          }
+
+          .btn-open {
+            background: black;
+            padding: 10px 40px;
+            color: white;
+            border-radius: 5px;
+            font-size: 15px;
+            cursor: pointer;
+          }
+
+          p.delete {
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: center;
+          }
+
+          h2.delete {
+            text-align: center;
+            padding-bottom: 15px;
+            font-weight: 200;
+          }
+
+          .modal-header-delete button.close-btn-delete {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            font-size: 32px;
+            background: none;
+            outline: none;
+            border: none;
+            cursor: pointer;
+          }
+
+          .modal-header-delete button.close-btn-delete:hover {
+            color: #6b46c1;
+          }
+
+          .active-delete {
+            opacity: 1;
+            pointer-events: auto;
+          }
+
+          .modal-delete.active-delete .modal-header-delete {
+            transform: translateY(0px);
+          }
+        </style>
+        <script>
+          const openModalDelete = document.querySelectorAll("[data-modal-target]");
+          const closeModalDelete = document.querySelectorAll(
+            "[data-close-delete]"
+          );
+
+          openModalDelete.forEach((button) => {
+            button.addEventListener("click", () => {
+              const modal = document.querySelector(button.dataset.modalTarget);
+              openModal(modal);
+            });
+          });
+
+          closeModalDelete.forEach((button) => {
+            button.addEventListener("click", () => {
+              const modal = button.closest(".modal-delete");
+              closeModal(modal);
+            });
+          });
+
+          function openModal(modal) {
+            if (modal == null) return;
+            modal.classList.add("active-delete");
+          }
+
+          function closeModal(modal) {
+            if (modal == null) return;
+            modal.classList.remove("active-delete");
+          }
+        </script>
+        <!-- end Pop up Delete -->
+
+
+
+        <!-- Pop up Add -->
+
+        <div class="modal-add" id="modal-add">
+          <div class="modal-header-add">
+            <h2 class="add">Add Form</h2>
+            <button data-close-add class="close-btn-add">&times;</button>
+
+            <div class="modal-body-add">
+              <form class="hahahha" id="form" action="users.view.php" method="post">
+
+                <div class="form-group">
+                  <label for="example-text-input" class="form-control-label">Name</label>
+                  <input class="form-control" type="text" value="" placeholder="Enter Name" name="txt_nama" id="txt_nama" required />
+
+                </div>
+
+
+                <div class="form-group">
+                  <label for="example-text-input" class="form-control-label">No Hp</label>
+                  <input class="form-control" type="text" value="" placeholder="Enter No Hp" name="txt_nohp" id="txt_nohp" required />
+
+                </div>
+
+
+                <div class="form-group">
+                  <label for="example-text-input" class="form-control-label">Email</label>
+                  <input class="form-control" type="email" value="" placeholder="Enter Email" name="txt_mail" id="txt_mail" required />
+
+                </div>
+
+
+                <div class="form-group">
+                  <label for="example-text-input" class="form-control-label">Username</label>
+                  <input class="form-control" type="text" value="" placeholder="Enter Username" name="txt_user" id="txt_user" required />
+
+                </div>
+
+                <div class="form-group">
+                  <label for="example-text-input" class="form-control-label">Password</label>
+                  <input class="form-control" type="password" value="" placeholder="Enter Password" name="txt_pw" id="txt_pw" required />
+
+                </div>
+
+                <div class="align-middle text-center">
+                  <button class="btn btn-success btn-sm ms-auto" type="submit" value="submit" name="add-user">Add</button>
+                  <button class="btn btn-danger btn-sm ms-auto" data-close-add>Close</button>
+                </div>
+
+
+              </form>
+            </div>
+          </div>
+        </div>
+        <style>
+          .modal-add {
+            position: fixed;
+            left: 0;
+            top: 0;
+            background: rgb(0, 0, 0, 0.6);
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease-in-out;
+          }
+
+          .modal-body-add {
+            padding: 10px;
+            bottom: 10px;
+          }
+
+          .modal-header-add {
+            background: white;
+            width: 560px;
+            max-width: 90%;
+            padding: 20px;
+            border-radius: 4px;
+            position: relative;
+            transform: translateY(-100);
+            transition: all 0.3s ease-in-out;
+          }
+
+          .btn-open {
+            background: black;
+            padding: 10px 40px;
+            color: white;
+            border-radius: 5px;
+            font-size: 15px;
+            cursor: pointer;
+          }
+
+          p.add {
+            line-height: 1.6;
+            margin-bottom: 20px;
+          }
+
+          h2.add {
+            text-align: center;
+            padding-bottom: 15px;
+            font-weight: 200;
+          }
+
+          .modal-header-add button.close-btn-add {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            font-size: 32px;
+            background: none;
+            outline: none;
+            border: none;
+            cursor: pointer;
+          }
+
+          .modal-header-add button.close-btn-add:hover {
+            color: #6b46c1;
+          }
+
+          .active-add {
+            opacity: 1;
+            pointer-events: auto;
+          }
+
+          .modal-add.active-add .modal-header-add {
+            transform: translateY(0px);
+          }
+        </style>
+        <script>
+          const openModalAdd = document.querySelectorAll("[data-modal-target]");
+          const closeModalAdd = document.querySelectorAll(
+            "[data-close-add]"
+          );
+
+          openModalAdd.forEach((button) => {
+            button.addEventListener("click", () => {
+              const modal = document.querySelector(button.dataset.modalTarget);
+              openModal(modal);
+            });
+          });
+
+          closeModalAdd.forEach((button) => {
+            button.addEventListener("click", () => {
+              const modal = button.closest(".modal-add");
+              closeModal(modal);
+            });
+          });
+
+          function openModal(modal) {
+            if (modal == null) return;
+            modal.classList.add("active-add");
+          }
+
+          function closeModal(modal) {
+            if (modal == null) return;
+            modal.classList.remove("active-add");
+          }
+        </script>
+        <!-- end Pop up Add -->
+
+
+        <!-- Pop up Edit -->
+
+        <div class="modal-anjay" id="modal">
+          <div class="modal-header-anjay">
+            <h2 class="anjay">Edit Form</h2>
+            <button data-close-button class="close-btn">&times;</button>
+
+            <div class="modal-body">
+              <div class="row">
+
+                <div class="form-group">
+                  <label for="example-text-input" class="form-control-label">Name</label>
+                  <input class="form-control" type="text" value="" placeholder="Enter Name" />
+                </div>
+
+
+                <div class="form-group">
+                  <label for="example-text-input" class="form-control-label">No Hp</label>
+                  <input class="form-control" type="text" value="" placeholder="Enter No Hp" />
+                </div>
+
+
+                <div class="form-group">
+                  <label for="example-text-input" class="form-control-label">Email</label>
+                  <input class="form-control" type="email" value="" placeholder="Enter Email" />
+                </div>
+
+
+                <div class="form-group">
+                  <label for="example-text-input" class="form-control-label">Username</label>
+                  <input class="form-control" type="text" value="" placeholder="Enter Username" />
+                </div>
+
+                <div class="form-group">
+                  <label for="example-text-input" class="form-control-label">Password</label>
+                  <input class="form-control" type="password" value="" placeholder="Enter Password" />
+                </div>
+
+              </div>
+              <div class="align-middle text-center">
+                <button class="btn btn-success btn-sm ms-auto">Edit</button>
+                <button class="btn btn-danger btn-sm ms-auto" data-close-button>Close</button>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+        <style>
+          .modal-anjay {
+            position: fixed;
+            left: 0;
+            top: 0;
+            background: rgb(0, 0, 0, 0.6);
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease-in-out;
+          }
+
+          .modal-body {
+            padding: 10px;
+            bottom: 10px;
+          }
+
+          .modal-header-anjay {
+            background: white;
+            width: 560px;
+            max-width: 90%;
+            padding: 20px;
+            border-radius: 4x;
+            position: relative;
+            transform: translateY(-100);
+            transition: all 0.3s ease-in-out;
+          }
+
+          .btn-open {
+            background: black;
+            padding: 10px 40px;
+            color: white;
+            border-radius: 5px;
+            font-size: 15px;
+            cursor: pointer;
+          }
+
+          p.anjay {
+            line-height: 1.6;
+            margin-bottom: 20px;
+          }
+
+          h2.anjay {
+            text-align: center;
+            padding-bottom: 15px;
+            font-weight: 200;
+          }
+
+          .modal-header-anjay button.close-btn {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            font-size: 32px;
+            background: none;
+            outline: none;
+            border: none;
+            cursor: pointer;
+          }
+
+          .modal-header-anjay button.close-btn:hover {
+            color: #6b46c1;
+          }
+
+          .active-anjay {
+            opacity: 1;
+            pointer-events: auto;
+          }
+
+          .modal-anjay.active-anjay .modal-header-anjay {
+            transform: translateY(0px);
+          }
+        </style>
+        <script>
+          const openModalButtons = document.querySelectorAll("[data-modal-target]");
+          const closeModalButtons = document.querySelectorAll(
+            "[data-close-button]"
+          );
+
+          openModalButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+              const modal = document.querySelector(button.dataset.modalTarget);
+              openModal(modal);
+            });
+          });
+
+          closeModalButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+              const modal = button.closest(".modal-anjay");
+              closeModal(modal);
+            });
+          });
+
+          function openModal(modal) {
+            if (modal == null) return;
+            modal.classList.add("active-anjay");
+          }
+
+          function closeModal(modal) {
+            if (modal == null) return;
+            modal.classList.remove("active-anjay");
+          }
+        </script>
+        <!-- end Pop up Edit -->
+
+
+
+
+        <footer class="footer pt-3">
+          <div class="container-fluid">
+            <div class="row align-items-center justify-content-lg-between">
+              <div class="col-lg-6 mb-lg-0 mb-4">
+                <div class="copyright text-center text-sm text-muted text-lg-start">
+                  ©
+                  <script>
+                    document.write(new Date().getFullYear());
+                  </script>
+                  , made with <i class="fa fa-heart"></i> by
+                  <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
+                  for a better web.
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+                  <li class="nav-item">
+                    <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Creative Tim</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted" target="_blank">About Us</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="https://www.creative-tim.com/blog" class="nav-link text-muted" target="_blank">Blog</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted" target="_blank">License</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </footer>
       </div>
-      <div class="row">
-        <div class="col-12">
-          <div class="card mb-4">
-            <div class="card-header pb-0">
-              <h6>Projects table</h6>
-            </div>
-            <div class="card-body px-0 pt-0 pb-2">
-              <div class="table-responsive p-0">
-                <table class="table align-items-center justify-content-center mb-0">
-                  <thead>
-                    <tr>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                        Project
-                      </th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                        Budget
-                      </th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                        Status
-                      </th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">
-                        Completion
-                      </th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2">
-                          <div>
-                            <img src="../assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm rounded-circle me-2" alt="spotify" />
-                          </div>
-                          <div class="my-auto">
-                            <h6 class="mb-0 text-sm">Spotify</h6>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-sm font-weight-bold mb-0">$2,500</p>
-                      </td>
-                      <td>
-                        <span class="text-xs font-weight-bold">working</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <div class="d-flex align-items-center justify-content-center">
-                          <span class="me-2 text-xs font-weight-bold">60%</span>
-                          <div>
-                            <div class="progress">
-                              <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%"></div>
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="align-middle">
-                        <button class="btn btn-link text-secondary mb-0">
-                          <i class="fa fa-ellipsis-v text-xs"></i>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2">
-                          <div>
-                            <img src="../assets/img/small-logos/logo-invision.svg" class="avatar avatar-sm rounded-circle me-2" alt="invision" />
-                          </div>
-                          <div class="my-auto">
-                            <h6 class="mb-0 text-sm">Invision</h6>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-sm font-weight-bold mb-0">$5,000</p>
-                      </td>
-                      <td>
-                        <span class="text-xs font-weight-bold">done</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <div class="d-flex align-items-center justify-content-center">
-                          <span class="me-2 text-xs font-weight-bold">100%</span>
-                          <div>
-                            <div class="progress">
-                              <div class="progress-bar bg-gradient-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="align-middle">
-                        <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false">
-                          <i class="fa fa-ellipsis-v text-xs"></i>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2">
-                          <div>
-                            <img src="../assets/img/small-logos/logo-jira.svg" class="avatar avatar-sm rounded-circle me-2" alt="jira" />
-                          </div>
-                          <div class="my-auto">
-                            <h6 class="mb-0 text-sm">Jira</h6>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-sm font-weight-bold mb-0">$3,400</p>
-                      </td>
-                      <td>
-                        <span class="text-xs font-weight-bold">canceled</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <div class="d-flex align-items-center justify-content-center">
-                          <span class="me-2 text-xs font-weight-bold">30%</span>
-                          <div>
-                            <div class="progress">
-                              <div class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="30" style="width: 30%"></div>
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="align-middle">
-                        <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false">
-                          <i class="fa fa-ellipsis-v text-xs"></i>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2">
-                          <div>
-                            <img src="../assets/img/small-logos/logo-slack.svg" class="avatar avatar-sm rounded-circle me-2" alt="slack" />
-                          </div>
-                          <div class="my-auto">
-                            <h6 class="mb-0 text-sm">Slack</h6>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-sm font-weight-bold mb-0">$1,000</p>
-                      </td>
-                      <td>
-                        <span class="text-xs font-weight-bold">canceled</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <div class="d-flex align-items-center justify-content-center">
-                          <span class="me-2 text-xs font-weight-bold">0%</span>
-                          <div>
-                            <div class="progress">
-                              <div class="progress-bar bg-gradient-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="0" style="width: 0%"></div>
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="align-middle">
-                        <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false">
-                          <i class="fa fa-ellipsis-v text-xs"></i>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2">
-                          <div>
-                            <img src="../assets/img/small-logos/logo-webdev.svg" class="avatar avatar-sm rounded-circle me-2" alt="webdev" />
-                          </div>
-                          <div class="my-auto">
-                            <h6 class="mb-0 text-sm">Webdev</h6>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-sm font-weight-bold mb-0">$14,000</p>
-                      </td>
-                      <td>
-                        <span class="text-xs font-weight-bold">working</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <div class="d-flex align-items-center justify-content-center">
-                          <span class="me-2 text-xs font-weight-bold">80%</span>
-                          <div>
-                            <div class="progress">
-                              <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="80" style="width: 80%"></div>
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="align-middle">
-                        <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false">
-                          <i class="fa fa-ellipsis-v text-xs"></i>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="d-flex px-2">
-                          <div>
-                            <img src="../assets/img/small-logos/logo-xd.svg" class="avatar avatar-sm rounded-circle me-2" alt="xd" />
-                          </div>
-                          <div class="my-auto">
-                            <h6 class="mb-0 text-sm">Adobe XD</h6>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <p class="text-sm font-weight-bold mb-0">$2,300</p>
-                      </td>
-                      <td>
-                        <span class="text-xs font-weight-bold">done</span>
-                      </td>
-                      <td class="align-middle text-center">
-                        <div class="d-flex align-items-center justify-content-center">
-                          <span class="me-2 text-xs font-weight-bold">100%</span>
-                          <div>
-                            <div class="progress">
-                              <div class="progress-bar bg-gradient-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="align-middle">
-                        <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false">
-                          <i class="fa fa-ellipsis-v text-xs"></i>
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <footer class="footer pt-3">
-        <div class="container-fluid">
-          <div class="row align-items-center justify-content-lg-between">
-            <div class="col-lg-6 mb-lg-0 mb-4">
-              <div class="copyright text-center text-sm text-muted text-lg-start">
-                ©
-                <script>
-                  document.write(new Date().getFullYear());
-                </script>
-                , made with <i class="fa fa-heart"></i> by
-                <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
-                for a better web.
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Creative Tim</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted" target="_blank">About Us</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/blog" class="nav-link text-muted" target="_blank">Blog</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted" target="_blank">License</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </footer>
-    </div>
   </main>
   <div class="fixed-plugin">
     <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
