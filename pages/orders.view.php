@@ -270,6 +270,55 @@
       </div>
     </nav>
     <!-- End Navbar -->
+    <div class="card shadow-lg mx-4 mt-3">
+      <div class="card-body">
+        <div class="row gx-4">
+          <div class="dropdown col-auto">
+            <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-3" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+              Month
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <li><a class="dropdown-item" href="#">January</a></li>
+              <li><a class="dropdown-item" href="#">February</a></li>
+              <li><a class="dropdown-item" href="#">March</a></li>
+              <li><a class="dropdown-item" href="#">April</a></li>
+              <li><a class="dropdown-item" href="#">May</a></li>
+              <li><a class="dropdown-item" href="#">June</a></li>
+              <li><a class="dropdown-item" href="#">July</a></li>
+              <li><a class="dropdown-item" href="#">August</a></li>
+              <li><a class="dropdown-item" href="#">September</a></li>
+              <li><a class="dropdown-item" href="#">October</a></li>
+              <li><a class="dropdown-item" href="#">November</a></li>
+              <li><a class="dropdown-item" href="#">December</a></li>
+            </ul>
+          </div>
+          <div class="dropdown col-auto">
+            <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-4" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+              Year
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <li><a class="dropdown-item" href="#">2020</a></li>
+              <li><a class="dropdown-item" href="#">2021</a></li>
+              <li><a class="dropdown-item" href="#">2022</a></li>
+              <li><a class="dropdown-item" href="#">2023</a></li>
+              <li><a class="dropdown-item" href="#">2024</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
+            <div class="nav-wrapper position-relative end-0">
+            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+              <div class="input-group">
+                <input type="text" class="form-control ms-4" placeholder="Type here..." aria-label="Type here..." aria-describedby="button-addon2">
+                <button class="btn btn-outline-dark mb-0" type="button" id="button-addon2">
+                  <i class="fas fa-search" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="container-fluid py-4">
       <div class="row">
         <div class="col-12">
