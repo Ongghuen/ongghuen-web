@@ -20078,7 +20078,8 @@ hr.horizontal.gray-light {
   border-bottom-color: #e9ecef;
 }
 .table > :not(:first-child) {
-  border-top: 1px solid currentColor;
+  border-top: 0.1px solid;
+  border-color: #67748e40;
 }
 .timeline {
   position: relative;
