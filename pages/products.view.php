@@ -568,7 +568,7 @@ if (isset($_POST['add-product'])) {
                         <select class="form-control" name="kategori" required>
                           <?php
                           require("./koneksi.php");
-                          echo "<option value=$row[id]>$row[kategori]</option>";
+                          // echo "<option value=$row[id]>$row[kategori]</option>";
                           $query = mysqli_query($koneksi, "select * from tb_kategori order by nama asc") or die(mysqli_error($koneksi));
                           while ($row = mysqli_fetch_array($query)) {
                             echo "<option value=$row[id]> $row[nama]</option>";

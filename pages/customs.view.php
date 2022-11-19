@@ -550,7 +550,7 @@ if (isset($_POST['add-custom'])) {
                         <select class="form-control" name="kategori" required>
 
                           <?php
-                          echo "<option value=$row[id]>$row[kategori]</option>";
+                          // echo "<option value=$row[id]>$row[kategori]</option>";
                           $query = mysqli_query($koneksi, "select * from tb_kategori") or die(mysqli_error($koneksi));
                           while ($row = mysqli_fetch_array($query)) {
                             echo "<option value=$row[id]> $row[nama]</option>";
@@ -563,9 +563,8 @@ if (isset($_POST['add-custom'])) {
                       <div class="form-group">
                         <label for="bahan">Bahan</label>
                         <select class="form-control" name="bahan" required>
-                          <option><?= $customBahan ?></option>
                           <?php
-                          echo "";
+                          //  echo "<option value=$row[id]> $row[bahan]</option>";
                           $query = mysqli_query($koneksi, "select * from tb_bahan") or die(mysqli_error($koneksi));
                           while ($row = mysqli_fetch_array($query)) {
                             echo "<option value=$row[id]> $row[bahan]</option>";
