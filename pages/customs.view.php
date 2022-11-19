@@ -1,22 +1,18 @@
-<!--
-=========================================================
-* Argon Dashboard 2 - v2.0.4
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://www.creative-tim.com/license)
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
 <?php
 require("./koneksi.php");
 session_start();
-?>
+if (isset($_POST['add-custom'])) {
+  $namacustom = $_POST['txt_nama'];
+  $kategoricustom = $_POST['txt_kategori'];
+  $bahancustom = $_POST['txt_bahan'];
+  $detailcustom = $_POST['txt_detail'];
 
+
+
+  $query    = "INSERT INTO `tb_custom` (`id`, `image`,`nama`,`kategori`, `bahan`, `detail`) VALUES (NULL, '', '$namacustom','$kategoricustom', '$bahancustom', '$detailcustom')";
+  $result   = mysqli_query($koneksi, $query);
+}
+?>
 
 
 <!DOCTYPE html>
@@ -319,13 +315,13 @@ session_start();
                         Image
                       </th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                        Name
+                        Kategori
                       </th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                         Bahan
                       </th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                        Deskripsi
+                        Detail
                       </th>
                       <!-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                         Password
@@ -343,7 +339,7 @@ session_start();
                     </tr>
                   </thead>
                   <?php
-                  $query  = "SELECT tb_custom.nama, tb_bahan.bahan, tb_custom.deskripsi FROM tb_custom JOIN tb_bahan WHERE tb_bahan.id = tb_custom.bahan";
+                  $query  = "SELECT tb_custom.id, tb_custom.nama, tb_kategori.nama AS kategori, tb_bahan.bahan AS bahan, tb_custom.detail FROM tb_custom INNER JOIN tb_bahan ON tb_custom.bahan=tb_bahan.id INNER JOIN tb_kategori ON tb_custom.kategori=tb_kategori.id;";
                   $result = mysqli_query($koneksi, $query);
                   $no     = 1;
                   // if ($sesLvl == 1) {
@@ -352,9 +348,11 @@ session_start();
                   //   $dis = "disabled";
                   // }
                   while ($row = mysqli_fetch_array($result)) {
+                    $customid = $row['id'];
                     $customName   = $row['nama'];
-                    $customtBahan  = $row['bahan'];
-                    $customDeskripsi  = $row['deskripsi'];
+                    $customKategori  = $row['kategori'];
+                    $customBahan  = $row['bahan'];
+                    $customDetail = $row['detail'];
                   ?>
                     <tbody>
 
@@ -378,530 +376,565 @@ session_start();
                           <span class="text-secondary text-xs font-weight-bold"><?php echo $customName; ?></span>
                         </td>
                         <td class="align-middle text-center">
-                          <span class="text-secondary text-xs font-weight-bold"><?php echo $customtBahan; ?></span>
+                          <span class="text-secondary text-xs font-weight-bold"><?php echo $customKategori; ?></span>
                         </td>
                         <td class="align-middle text-center">
-                          <span class="text-secondary text-xs font-weight-bold"><?php echo $customDeskripsi; ?></span>
+                          <span class="text-secondary text-xs font-weight-bold"><?php echo $customBahan; ?></span>
                         </td>
                         <td class="align-middle text-center">
-                          <button class="btn btn-dark btn-sm ms-auto" value="<?php echo $row['id']; ?>" onclick="<?php echo $row['id']; ?>" data-modal-target="#modal">Edit</button>
-                          <button class="btn btn-danger btn-sm ms-auto" data-modal-target="#modal-delete">Delete</button>
+                          <span class="text-secondary text-xs font-weight-bold"><?php echo $customDetail; ?></span>
+                        </td>
+                        <td class="align-middle text-center">
+                          <button class="btn btn-dark btn-sm ms-auto" data-modal-target="#modal-edit<?= $row['id'] ?>">Edit</button>
+                          <button class="btn btn-danger btn-sm ms-auto" data-modal-target="#modal-delete<?= $row['id'] ?>">Delete</button>
                         </td>
 
                       </tr>
-                      <!-- <tr>
-                        <td></td>
-                        <td></td>
-                        <td>></td>
-                        <td>
-                          <a href="edit.php?id=<?php echo $row['id']; ?>" class="btn btn-info btn-circle  <?php echo $dis; ?>" onClick="confirmModal('edit.php?&id=<?php echo $row['id']; ?>');"><i class="fas fa-pen"></i>
-                        <td>
-                          <a href="hapus.php?id=<?php echo $row['id']; ?>" class="btn btn-danger btn-circle <?php echo $dis; ?>" onClick="confirmModal('hapus.php?&id=<?php echo $row['id']; ?>');" data-toggle="modal" data-target="#hapusModal"><i class="fas fa-trash"></i>
-                        </td>
-                      </tr> -->
-                    <?php
+
+                      <!-- Pop up Delete -->
+
+                      <div class="modal-delete" id="modal-delete<?= $row['id'] ?>">
+                        <div class="modal-header-delete">
+                          <h2 class="delete">Warning</h2>
+                          <!-- <button data-close-delete class="close-btn-delete">&times;</button> -->
+
+                          <div class="modal-body-delete">
+                            <div class="row">
+
+                              <p class="delete">
+                                Yakin dek mau ngehapus data orang? dosah loh dek
+                              </p>
+
+                            </div>
+                            <div></div>
+                            <div></div>
+                            <form class="yayyay" action="hapus_custom.php" method="post">
+                              <div class="align-middle text-center">
+                                <a class="btn btn-danger btn-sm ms-auto" href="hapus_custom.php?id=<?php echo $row['id']; ?>">Delete</a>
+
+                                <button class="btn btn-success btn-sm ms-auto" name="submit" data-close-delete>Close</button>
+                                <!-- <button class="btn btn-danger btn-sm ms-auto" href="hapus_user.php?id=<?php echo $row['id']; ?>" data-close-delete>Close</button> -->
+                            </form>
+                          </div>
+
+
+                        </div>
+                      </div>
+              </div>
+
+
+              <style>
+                .modal-delete {
+                  position: fixed;
+                  left: 0;
+                  top: 0;
+                  background: rgb(0, 0, 0, 0.6);
+                  height: 100%;
+                  width: 100%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  opacity: 0;
+                  pointer-events: none;
+                  transition: all 0.3s ease-in-out;
+                  z-index: 1;
+                }
+
+                .modal-body-delete {
+                  padding: 10px;
+                  bottom: 10px;
+                }
+
+                .modal-header-delete {
+                  background: white;
+                  width: 560px;
+                  max-width: 90%;
+                  padding: 20px;
+                  border-radius: 4x;
+                  position: relative;
+                  transform: translateY(-100);
+                  transition: all 0.3s ease-in-out;
+                }
+
+                .btn-open {
+                  background: black;
+                  padding: 10px 40px;
+                  color: white;
+                  border-radius: 5px;
+                  font-size: 15px;
+                  cursor: pointer;
+                }
+
+                p.delete {
+                  line-height: 1.6;
+                  margin-bottom: 20px;
+                  text-align: center;
+                }
+
+                h2.delete {
+                  text-align: center;
+                  padding-bottom: 15px;
+                  font-weight: 200;
+                }
+
+                .modal-header-delete button.close-btn-delete {
+                  position: absolute;
+                  right: 10px;
+                  top: 10px;
+                  font-size: 32px;
+                  background: none;
+                  outline: none;
+                  border: none;
+                  cursor: pointer;
+                }
+
+                .modal-header-delete button.close-btn-delete:hover {
+                  color: #6b46c1;
+                }
+
+                .active-delete {
+                  opacity: 1;
+                  pointer-events: auto;
+                }
+
+                .modal-delete.active-delete .modal-header-delete {
+                  transform: translateY(0px);
+                }
+              </style>
+              <script>
+                const openModalDelete = document.querySelectorAll("[data-modal-target]");
+                const closeModalDelete = document.querySelectorAll(
+                  "[data-close-delete]"
+                );
+
+                openModalDelete.forEach((button) => {
+                  button.addEventListener("click", () => {
+                    const modal = document.querySelector(button.dataset.modalTarget);
+                    openModal(modal);
+                  });
+                });
+
+                closeModalDelete.forEach((button) => {
+                  button.addEventListener("click", () => {
+                    const modal = button.closest(".modal-delete");
+                    closeModal(modal);
+                  });
+                });
+
+                function openModal(modal) {
+                  if (modal == null) return;
+                  modal.classList.add("active-delete");
+                }
+
+                function closeModal(modal) {
+                  if (modal == null) return;
+                  modal.classList.remove("active-delete");
+                }
+              </script>
+              <!-- end Pop up Delete -->
+
+              <!-- Pop up Edit -->
+
+              <div class="modal-edit" id="modal-edit<?= $row['id'] ?>">
+                <div class="modal-header-edit">
+                  <h2 class="edit">Edit Form</h2>
+                  <div class="modal-body-edit">
+                    <form action="edit_custom.php?id=<?= $row['id'] ?>" method="post">
+                      <div class="form-group">
+                        <label for="example-text-input" class="form-control-label">Name</label>
+                        <input class="form-control" name="nama" type="text" value="<?= $row['nama'] ?>" placeholder="Enter Nama" required />
+                      </div>
+
+                      <div class="form-group">
+                        <label for="kategori">Kategori</label>
+                        <select class="form-control" name="kategori" required>
+
+                          <?php
+                          echo "<option value=$row[id]>$row[kategori]</option>";
+                          $query = mysqli_query($koneksi, "select * from tb_kategori") or die(mysqli_error($koneksi));
+                          while ($row = mysqli_fetch_array($query)) {
+                            echo "<option value=$row[id]> $row[nama]</option>";
+                          }
+                          ?>
+                        </select>
+                      </div>
+
+
+                      <div class="form-group">
+                        <label for="bahan">Bahan</label>
+                        <select class="form-control" name="bahan" required>
+                          <option><?= $customBahan ?></option>
+                          <?php
+                          echo "";
+                          $query = mysqli_query($koneksi, "select * from tb_bahan") or die(mysqli_error($koneksi));
+                          while ($row = mysqli_fetch_array($query)) {
+                            echo "<option value=$row[id]> $row[bahan]</option>";
+                          }
+                          ?>
+                        </select>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Detail</label>
+                        <textarea class="form-control" name="detail" id="exampleFormControlTextarea1" rows="5"><?= $customDetail ?></textarea>
+                      </div>
+
+
+
+                      <div class="align-middle text-center">
+                        <button class="btn btn-success btn-sm ms-auto" name="submit">Edit</button>
+                        <button class="btn btn-danger btn-sm ms-auto" type="submit" name="close" data-close-button-edit>Close</button>
+                        <!-- <a class="btn btn-danger btn-sm ms-auto" type="submit" data-close-button-edit>Close</a> -->
+                      </div>
+                    </form>
+
+                  </div>
+                </div>
+              </div>
+
+              <style>
+                .modal-edit {
+                  position: fixed;
+                  left: 0;
+                  top: 0;
+                  background: rgb(0, 0, 0, 0.6);
+                  height: 100%;
+                  width: 100%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  opacity: 0;
+                  pointer-events: none;
+                  transition: all 0.3s ease-in-out;
+                  z-index: 1;
+                }
+
+                .modal-body-edit {
+                  padding: 10px;
+                  bottom: 10px;
+                }
+
+                .modal-header-edit {
+                  background: white;
+                  width: 560px;
+                  max-width: 90%;
+                  padding: 20px;
+                  border-radius: 4x;
+                  position: relative;
+                  transform: translateY(-100);
+                  transition: all 0.3s ease-in-out;
+                }
+
+                .btn-open-edit {
+                  background: black;
+                  padding: 10px 40px;
+                  color: white;
+                  border-radius: 5px;
+                  font-size: 15px;
+                  cursor: pointer;
+                }
+
+                p.edit {
+                  line-height: 1.6;
+                  margin-bottom: 20px;
+                }
+
+                h2.edit {
+                  text-align: center;
+                  padding-bottom: 15px;
+                  font-weight: 200;
+                }
+
+                .modal-header-edit button.close-btn-edit {
+                  position: absolute;
+                  right: 10px;
+                  top: 10px;
+                  font-size: 32px;
+                  background: none;
+                  outline: none;
+                  border: none;
+                  cursor: pointer;
+                }
+
+                .modal-header-edit button.close-btn-edit:hover {
+                  color: #6b46c1;
+                }
+
+                .active-edit {
+                  opacity: 1;
+                  pointer-events: auto;
+                }
+
+                .modal-edit.active-edit .modal-header-edit {
+                  transform: translateY(0px);
+                }
+              </style>
+              <script>
+                const openModalButtons = document.querySelectorAll("[data-modal-target]");
+                const closeModalButtons = document.querySelectorAll(
+                  "[data-close-button-edit]"
+                );
+
+                openModalButtons.forEach((button) => {
+                  button.addEventListener("click", () => {
+                    const modal = document.querySelector(button.dataset.modalTarget);
+                    openModal(modal);
+                  });
+                });
+
+                closeModalButtons.forEach((button) => {
+                  button.addEventListener("click", () => {
+                    const modal = button.closest(".modal-edit");
+                    closeModal(modal);
+                  });
+                });
+
+                function openModal(modal) {
+                  if (modal == null) return;
+                  modal.classList.add("active-edit");
+                }
+
+                function closeModal(modal) {
+                  if (modal == null) return;
+                  modal.classList.remove("active-edit");
+                }
+              </script>
+              <!-- end Pop up Edit -->
+
+            <?php
                     $no++;
                   } ?>
-                    </tbody>
-                </table>
-              </div>
+            </tbody>
+            </table>
             </div>
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- Pop up Delete -->
 
-      <div class="modal-delete" id="modal-delete">
-        <div class="modal-header-delete">
-          <h2 class="delete">Warning</h2>
-          <button data-close-delete class="close-btn-delete">&times;</button>
+    <!-- Pop up Add -->
 
-          <div class="modal-body-delete">
-            <div class="row">
+    <div class="modal-add" id="modal-add">
+      <div class="modal-header-add">
+        <h2 class="add">Add Form</h2>
+        <!-- <button data-close-add class="close-btn-add">&times;</button> -->
 
-              <p class="delete">
-                Yakin dek mau ngehapus data orang? dosah loh dek
-              </p>
+        <div class="modal-body-add">
+          <form class="hahahhaaaa" id="form" action="" method="post">
+
+            <div class="form-group">
+              <label for="example-text-input" class="form-control-label">Name</label>
+              <input class="form-control" type="text" placeholder="Enter Name" name="txt_nama" required />
 
             </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Kategori</label>
+              <select class="form-control" name="txt_kategori" required>
+                <?php
+                require("./koneksi.php");
+                // echo "<option value=$row[id]> Pilih Kategori $row[nama]</option>";
+                $query = mysqli_query($koneksi, "select * from tb_kategori") or die(mysqli_error($koneksi));
+                while ($row = mysqli_fetch_array($query)) {
+                  echo "<option value=$row[id]> $row[nama]</option>";
+                }
+                ?>
+
+              </select>
+            </div>
+
+
+            <div class="form-group">
+              <label for="exampleFormControlSelect1">Bahan</label>
+
+
+              <select class="form-control" name="txt_bahan" required>
+                <?php
+                require("./koneksi.php");
+                // echo "<option value=$row[id]> Pilih Kategori $row[nama]</option>";
+                $query = mysqli_query($koneksi, "select * from tb_bahan") or die(mysqli_error($koneksi));
+                while ($row = mysqli_fetch_array($query)) {
+                  echo "<option value=$row[id]> $row[bahan]</option>";
+                }
+                ?>
+
+              </select>
+
+
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">Detail</label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" name="txt_detail" placeholder="Enter Detail" rows="5"></textarea>
+            </div>
+
+
+
+
+
+
+
+
+
+
             <div class="align-middle text-center">
-              <button class="btn btn-success btn-sm ms-auto">Hapus</button>
-              <button class="btn btn-danger btn-sm ms-auto" data-close-delete>Close</button>
+              <button class="btn btn-success btn-sm ms-auto" type="submit" name="add-custom">Add</button>
+              <button class="btn btn-danger btn-sm ms-auto" data-close-add>Close</button>
             </div>
 
 
-          </div>
+          </form>
         </div>
       </div>
-      <style>
-        .modal-delete {
-          position: fixed;
-          left: 0;
-          top: 0;
-          background: rgb(0, 0, 0, 0.6);
-          height: 100%;
-          width: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          opacity: 0;
-          pointer-events: none;
-          transition: all 0.3s ease-in-out;
-        }
+    </div>
+    <style>
+      .modal-add {
+        position: fixed;
+        left: 0;
+        top: 0;
+        background: rgb(0, 0, 0, 0.6);
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.3s ease-in-out;
+      }
 
-        .modal-body-delete {
-          padding: 10px;
-          bottom: 10px;
-        }
+      .modal-body-add {
+        padding: 10px;
+        bottom: 10px;
+      }
 
-        .modal-header-delete {
-          background: white;
-          width: 560px;
-          max-width: 90%;
-          padding: 20px;
-          border-radius: 4x;
-          position: relative;
-          transform: translateY(-100);
-          transition: all 0.3s ease-in-out;
-        }
+      .modal-header-add {
+        background: white;
+        width: 560px;
+        max-width: 90%;
+        padding: 20px;
+        border-radius: 4px;
+        position: relative;
+        transform: translateY(-100);
+        transition: all 0.3s ease-in-out;
+      }
 
-        .btn-open {
-          background: black;
-          padding: 10px 40px;
-          color: white;
-          border-radius: 5px;
-          font-size: 15px;
-          cursor: pointer;
-        }
+      .btn-open {
+        background: black;
+        padding: 10px 40px;
+        color: white;
+        border-radius: 5px;
+        font-size: 15px;
+        cursor: pointer;
+      }
 
-        p.delete {
-          line-height: 1.6;
-          margin-bottom: 20px;
-          text-align: center;
-        }
+      p.add {
+        line-height: 1.6;
+        margin-bottom: 20px;
+      }
 
-        h2.delete {
-          text-align: center;
-          padding-bottom: 15px;
-          font-weight: 200;
-        }
+      h2.add {
+        text-align: center;
+        padding-bottom: 15px;
+        font-weight: 200;
+      }
 
-        .modal-header-delete button.close-btn-delete {
-          position: absolute;
-          right: 10px;
-          top: 10px;
-          font-size: 32px;
-          background: none;
-          outline: none;
-          border: none;
-          cursor: pointer;
-        }
+      .modal-header-add button.close-btn-add {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        font-size: 32px;
+        background: none;
+        outline: none;
+        border: none;
+        cursor: pointer;
+      }
 
-        .modal-header-delete button.close-btn-delete:hover {
-          color: #6b46c1;
-        }
+      .modal-header-add button.close-btn-add:hover {
+        color: #6b46c1;
+      }
 
-        .active-delete {
-          opacity: 1;
-          pointer-events: auto;
-        }
+      .active-add {
+        opacity: 1;
+        pointer-events: auto;
+      }
 
-        .modal-delete.active-delete .modal-header-delete {
-          transform: translateY(0px);
-        }
-      </style>
-      <script>
-        const openModalDelete = document.querySelectorAll("[data-modal-target]");
-        const closeModalDelete = document.querySelectorAll(
-          "[data-close-delete]"
-        );
+      .modal-add.active-add .modal-header-add {
+        transform: translateY(0px);
+      }
+    </style>
+    <script>
+      const openModalAdd = document.querySelectorAll("[data-modal-target]");
+      const closeModalAdd = document.querySelectorAll(
+        "[data-close-add]"
+      );
 
-        openModalDelete.forEach((button) => {
-          button.addEventListener("click", () => {
-            const modal = document.querySelector(button.dataset.modalTarget);
-            openModal(modal);
-          });
+      openModalAdd.forEach((button) => {
+        button.addEventListener("click", () => {
+          const modal = document.querySelector(button.dataset.modalTarget);
+          openModal(modal);
         });
+      });
 
-        closeModalDelete.forEach((button) => {
-          button.addEventListener("click", () => {
-            const modal = button.closest(".modal-delete");
-            closeModal(modal);
-          });
+      closeModalAdd.forEach((button) => {
+        button.addEventListener("click", () => {
+          const modal = button.closest(".modal-add");
+          closeModal(modal);
         });
+      });
 
-        function openModal(modal) {
-          if (modal == null) return;
-          modal.classList.add("active-delete");
-        }
+      function openModal(modal) {
+        if (modal == null) return;
+        modal.classList.add("active-add");
+      }
 
-        function closeModal(modal) {
-          if (modal == null) return;
-          modal.classList.remove("active-delete");
-        }
-      </script>
-      <!-- end Pop up Delete -->
+      function closeModal(modal) {
+        if (modal == null) return;
+        modal.classList.remove("active-add");
+      }
+    </script>
+    <!-- end Pop up Add -->
 
 
 
-      <!-- Pop up Add -->
 
-      <div class="modal-add" id="modal-add">
-        <div class="modal-header-add">
-          <h2 class="add">Add Form</h2>
-          <button data-close-add class="close-btn-add">&times;</button>
 
-          <div class="modal-body-add">
-            <form class="hahahha" id="form" action="users.view.php" method="post">
 
-              <div class="form-group">
-                <label for="example-text-input" class="form-control-label">Name</label>
-                <input class="form-control" type="text" value="" placeholder="Enter Name" name="txt_nama" id="txt_nama" required />
 
-              </div>
-
-
-              <div class="form-group">
-                <label for="example-text-input" class="form-control-label">Bahan</label>
-                <input class="form-control" type="text" value="" placeholder="Enter Bahan" name="txt_nohp" id="txt_nohp" required />
-
-              </div>
-
-
-              <div class="form-group">
-                <label for="example-text-input" class="form-control-label">Deskripsi</label>
-                <input class="form-control" type="email" value="" placeholder="Enter Deskripsi" name="txt_mail" id="txt_mail" required />
-
-              </div>
-
-
-              <!-- <div class="form-group">
-                <label for="example-text-input" class="form-control-label">Kategori</label>
-                <input class="form-control" type="text" value="" placeholder="Enter Kategori" name="txt_user" id="txt_user" required />
-
-              </div> -->
-
-              <!-- <div class="form-group">
-                <label for="example-text-input" class="form-control-label">Password</label>
-                <input class="form-control" type="password" value="" placeholder="Enter Password" name="txt_pw" id="txt_pw" required />
-
-              </div> -->
-
-              <div class="align-middle text-center">
-                <button class="btn btn-success btn-sm ms-auto" type="submit" value="submit" name="add-user">Add</button>
-                <button class="btn btn-danger btn-sm ms-auto" data-close-add>Close</button>
-              </div>
-
-
-            </form>
-          </div>
-        </div>
-      </div>
-      <style>
-        .modal-add {
-          position: fixed;
-          left: 0;
-          top: 0;
-          background: rgb(0, 0, 0, 0.6);
-          height: 100%;
-          width: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          opacity: 0;
-          pointer-events: none;
-          transition: all 0.3s ease-in-out;
-        }
-
-        .modal-body-add {
-          padding: 10px;
-          bottom: 10px;
-        }
-
-        .modal-header-add {
-          background: white;
-          width: 560px;
-          max-width: 90%;
-          padding: 20px;
-          border-radius: 4px;
-          position: relative;
-          transform: translateY(-100);
-          transition: all 0.3s ease-in-out;
-        }
-
-        .btn-open {
-          background: black;
-          padding: 10px 40px;
-          color: white;
-          border-radius: 5px;
-          font-size: 15px;
-          cursor: pointer;
-        }
-
-        p.add {
-          line-height: 1.6;
-          margin-bottom: 20px;
-        }
-
-        h2.add {
-          text-align: center;
-          padding-bottom: 15px;
-          font-weight: 200;
-        }
-
-        .modal-header-add button.close-btn-add {
-          position: absolute;
-          right: 10px;
-          top: 10px;
-          font-size: 32px;
-          background: none;
-          outline: none;
-          border: none;
-          cursor: pointer;
-        }
-
-        .modal-header-add button.close-btn-add:hover {
-          color: #6b46c1;
-        }
-
-        .active-add {
-          opacity: 1;
-          pointer-events: auto;
-        }
-
-        .modal-add.active-add .modal-header-add {
-          transform: translateY(0px);
-        }
-      </style>
-      <script>
-        const openModalAdd = document.querySelectorAll("[data-modal-target]");
-        const closeModalAdd = document.querySelectorAll(
-          "[data-close-add]"
-        );
-
-        openModalAdd.forEach((button) => {
-          button.addEventListener("click", () => {
-            const modal = document.querySelector(button.dataset.modalTarget);
-            openModal(modal);
-          });
-        });
-
-        closeModalAdd.forEach((button) => {
-          button.addEventListener("click", () => {
-            const modal = button.closest(".modal-add");
-            closeModal(modal);
-          });
-        });
-
-        function openModal(modal) {
-          if (modal == null) return;
-          modal.classList.add("active-add");
-        }
-
-        function closeModal(modal) {
-          if (modal == null) return;
-          modal.classList.remove("active-add");
-        }
-      </script>
-      <!-- end Pop up Add -->
-
-
-      <!-- Pop up Edit -->
-
-      <div class="modal-anjay" id="modal">
-        <div class="modal-header-anjay">
-          <h2 class="anjay">Edit Form</h2>
-          <button data-close-button class="close-btn">&times;</button>
-
-          <div class="modal-body-add">
-            <form class="hahahha" id="form" action="users.view.php" method="post">
-
-              <div class="form-group">
-                <label for="example-text-input" class="form-control-label">Name</label>
-                <input class="form-control" type="text" value="" placeholder="Enter Name" name="txt_nama" id="txt_nama" required />
-
-              </div>
-
-
-              <div class="form-group">
-                <label for="example-text-input" class="form-control-label">Bahan</label>
-                <input class="form-control" type="text" value="" placeholder="Enter Bahan" name="txt_nohp" id="txt_nohp" required />
-
-              </div>
-
-
-              <div class="form-group">
-                <label for="example-text-input" class="form-control-label">Deskripsi</label>
-                <input class="form-control" type="email" value="" placeholder="Enter Deskripsi" name="txt_mail" id="txt_mail" required />
-
-              </div>
-
-
-              <!-- <div class="form-group">
-                <label for="example-text-input" class="form-control-label">Kategori</label>
-                <input class="form-control" type="text" value="" placeholder="Enter Kategori" name="txt_user" id="txt_user" required />
-
-              </div> -->
-
-              <!-- <div class="form-group">
-                <label for="example-text-input" class="form-control-label">Password</label>
-                <input class="form-control" type="password" value="" placeholder="Enter Password" name="txt_pw" id="txt_pw" required />
-
-              </div> -->
-              <div class="align-middle text-center">
-                <button class="btn btn-success btn-sm ms-auto" type="submit" value="submit" name="add-user">Add</button>
-                <button class="btn btn-danger btn-sm ms-auto" data-close-button>Close</button>
-              </div>
-
-
-          </div>
-        </div>
-      </div>
-      <style>
-        .modal-anjay {
-          position: fixed;
-          left: 0;
-          top: 0;
-          background: rgb(0, 0, 0, 0.6);
-          height: 100%;
-          width: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          opacity: 0;
-          pointer-events: none;
-          transition: all 0.3s ease-in-out;
-        }
-
-        .modal-body {
-          padding: 10px;
-          bottom: 10px;
-        }
-
-        .modal-header-anjay {
-          background: white;
-          width: 560px;
-          max-width: 90%;
-          padding: 20px;
-          border-radius: 4x;
-          position: relative;
-          transform: translateY(-100);
-          transition: all 0.3s ease-in-out;
-        }
-
-        .btn-open {
-          background: black;
-          padding: 10px 40px;
-          color: white;
-          border-radius: 5px;
-          font-size: 15px;
-          cursor: pointer;
-        }
-
-        p.anjay {
-          line-height: 1.6;
-          margin-bottom: 20px;
-        }
-
-        h2.anjay {
-          text-align: center;
-          padding-bottom: 15px;
-          font-weight: 200;
-        }
-
-        .modal-header-anjay button.close-btn {
-          position: absolute;
-          right: 10px;
-          top: 10px;
-          font-size: 32px;
-          background: none;
-          outline: none;
-          border: none;
-          cursor: pointer;
-        }
-
-        .modal-header-anjay button.close-btn:hover {
-          color: #6b46c1;
-        }
-
-        .active-anjay {
-          opacity: 1;
-          pointer-events: auto;
-        }
-
-        .modal-anjay.active-anjay .modal-header-anjay {
-          transform: translateY(0px);
-        }
-      </style>
-      <script>
-        const openModalButtons = document.querySelectorAll("[data-modal-target]");
-        const closeModalButtons = document.querySelectorAll(
-          "[data-close-button]"
-        );
-
-        openModalButtons.forEach((button) => {
-          button.addEventListener("click", () => {
-            const modal = document.querySelector(button.dataset.modalTarget);
-            openModal(modal);
-          });
-        });
-
-        closeModalButtons.forEach((button) => {
-          button.addEventListener("click", () => {
-            const modal = button.closest(".modal-anjay");
-            closeModal(modal);
-          });
-        });
-
-        function openModal(modal) {
-          if (modal == null) return;
-          modal.classList.add("active-anjay");
-        }
-
-        function closeModal(modal) {
-          if (modal == null) return;
-          modal.classList.remove("active-anjay");
-        }
-      </script>
-      <!-- end Pop up Edit -->
-
-
-
-
-      <footer class="footer pt-3">
-        <div class="container-fluid">
-          <div class="row align-items-center justify-content-lg-between">
-            <div class="col-lg-6 mb-lg-0 mb-4">
-              <div class="copyright text-center text-sm text-muted text-lg-start">
-                ©
-                <script>
-                  document.write(new Date().getFullYear());
-                </script>
-                , made with <i class="fa fa-heart"></i> by
-                <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
-                for a better web.
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Creative Tim</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted" target="_blank">About Us</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/blog" class="nav-link text-muted" target="_blank">Blog</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted" target="_blank">License</a>
-                </li>
-              </ul>
+    <footer class="footer pt-3">
+      <div class="container-fluid">
+        <div class="row align-items-center justify-content-lg-between">
+          <div class="col-lg-6 mb-lg-0 mb-4">
+            <div class="copyright text-center text-sm text-muted text-lg-start">
+              ©
+              <script>
+                document.write(new Date().getFullYear());
+              </script>
+              , made with <i class="fa fa-heart"></i> by
+              <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
+              for a better web.
             </div>
           </div>
+          <div class="col-lg-6">
+            <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+              <li class="nav-item">
+                <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Creative Tim</a>
+              </li>
+              <li class="nav-item">
+                <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted" target="_blank">About Us</a>
+              </li>
+              <li class="nav-item">
+                <a href="https://www.creative-tim.com/blog" class="nav-link text-muted" target="_blank">Blog</a>
+              </li>
+              <li class="nav-item">
+                <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted" target="_blank">License</a>
+              </li>
+            </ul>
+          </div>
         </div>
-      </footer>
+      </div>
+    </footer>
     </div>
   </main>
   <div class="fixed-plugin">

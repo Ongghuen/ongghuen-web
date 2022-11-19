@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 11, 2022 at 11:45 AM
+-- Generation Time: Nov 19, 2022 at 04:33 AM
 -- Server version: 10.4.25-MariaDB
--- PHP Version: 8.1.10
+-- PHP Version: 7.4.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -50,17 +50,18 @@ CREATE TABLE `tb_custom` (
   `id` int(2) NOT NULL,
   `image` varchar(1) NOT NULL,
   `nama` varchar(50) NOT NULL,
+  `kategori` int(2) NOT NULL,
   `bahan` int(2) NOT NULL,
-  `deskripsi` varchar(1000) NOT NULL
+  `detail` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tb_custom`
 --
 
-INSERT INTO `tb_custom` (`id`, `image`, `nama`, `bahan`, `deskripsi`) VALUES
-(1, '', 'Meja Makan Pak Rumpoko', 1, 'isi detail mengenai ukuran dan lain2'),
-(2, '', 'Pager Rumah Pak Tony', 2, 'isi detail mengenai ukuran dan lain2');
+INSERT INTO `tb_custom` (`id`, `image`, `nama`, `kategori`, `bahan`, `detail`) VALUES
+(6, '', 'Meja Ilham cuy', 4, 1, 'anjay cuy hhhaa y'),
+(8, '', 'kasur Pengantin', 4, 1, 'wkwkwkwk buat ewe');
 
 -- --------------------------------------------------------
 
@@ -79,7 +80,9 @@ CREATE TABLE `tb_kategori` (
 
 INSERT INTO `tb_kategori` (`id`, `nama`) VALUES
 (1, 'Kursi'),
-(2, 'Meja');
+(2, 'Meja'),
+(3, 'Lemari'),
+(4, 'Kasur');
 
 -- --------------------------------------------------------
 
@@ -101,8 +104,10 @@ CREATE TABLE `tb_product` (
 --
 
 INSERT INTO `tb_product` (`id`, `image`, `nama`, `harga`, `qty`, `kategori`) VALUES
-(1, '', 'Kursi Gaming', '5.000.000', 50, 1),
-(2, '', 'Meja Gaming', '4.000.000', 100, 2);
+(20, '', 'Meja Makan', '500000', 50, 3),
+(28, '', 'Meja Gaming', '1.200.000', 12, 3),
+(29, '', 'Kursi Gaming', '800.000', 8, 3),
+(32, '', 'kasur Pengantin', '650.000', 40, 4);
 
 -- --------------------------------------------------------
 
@@ -145,11 +150,13 @@ CREATE TABLE `tb_user` (
 --
 
 INSERT INTO `tb_user` (`id`, `avatar`, `nama`, `nohp`, `email`, `username`, `password`, `level`) VALUES
-(1, '', 'Ilham Ibnu Ahmad', '081231897839', 'ilham@gmail.com', 'ilham23', 'ilham23', 1),
-(2, '', 'Rijal Khoirul Anam', '089668834494', 'khoirulrijal@gmail.com', 'khoirul', '123', 1),
-(3, '', 'Raihan Achmad', '085607743539', 'raihanachmad@gmail.com', 'raihan123', 'raihan123', 1),
-(4, '', 'Daffa Afiifi', '085607745689', 'dafaaaaja@gmail.com', 'daffa123', 'daffa123', 1),
-(5, '', 'Shilmia', '086543234798', 'shilmi@gmail.com', 'Shilmia', 'shilmia123', 1);
+(19, '', 'Ilham Ibnu Ahmad', '081231897839', 'ilham@gmail.com', 'ilham123', 'ilham123', 1),
+(20, '', 'Raihan Achmad Fimansyah', '085607743539', 'raihan@gmail.com', 'raihan123', 'raihan123', 1),
+(21, '', 'Daffa Afifi Syahrony', '089668834494', 'daffa@gmail.com', 'daffa123', 'daffa123', 1),
+(22, '', 'Babylina Vindarosita', '086756345009', 'lina@gmail.com', 'lina123', 'lina123', 1),
+(23, '', 'Shilmia Madina', '08411234567', 'adin@gmail.com', 'adin123', 'admin123', 1),
+(25, '', 'Faisal Oktabrian', '085678345123', 'faisal@gmail.com', 'faisal123', 'faisal123', 1),
+(28, '', 'Fidinova Ika Putri SangAdji ', '087654345678', 'fidin@gmail.com', 'fidin123', 'fidin123', 1);
 
 -- --------------------------------------------------------
 
@@ -179,27 +186,28 @@ INSERT INTO `test` (`id`, `nama`, `harga`) VALUES
 -- Indexes for table `tb_bahan`
 --
 ALTER TABLE `tb_bahan`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
 -- Indexes for table `tb_custom`
 --
 ALTER TABLE `tb_custom`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `bahan` (`bahan`);
+  ADD KEY `bahan` (`bahan`) USING BTREE,
+  ADD KEY `kategori` (`kategori`);
 
 --
 -- Indexes for table `tb_kategori`
 --
 ALTER TABLE `tb_kategori`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
 -- Indexes for table `tb_product`
 --
 ALTER TABLE `tb_product`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `kategori` (`kategori`);
+  ADD KEY `kategori` (`kategori`) USING BTREE;
 
 --
 -- Indexes for table `tb_role`
@@ -234,19 +242,19 @@ ALTER TABLE `tb_bahan`
 -- AUTO_INCREMENT for table `tb_custom`
 --
 ALTER TABLE `tb_custom`
-  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tb_kategori`
 --
 ALTER TABLE `tb_kategori`
-  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tb_product`
 --
 ALTER TABLE `tb_product`
-  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `tb_role`
@@ -258,7 +266,7 @@ ALTER TABLE `tb_role`
 -- AUTO_INCREMENT for table `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `test`
@@ -274,7 +282,8 @@ ALTER TABLE `test`
 -- Constraints for table `tb_custom`
 --
 ALTER TABLE `tb_custom`
-  ADD CONSTRAINT `tb_custom_ibfk_1` FOREIGN KEY (`bahan`) REFERENCES `tb_bahan` (`id`);
+  ADD CONSTRAINT `tb_custom_ibfk_1` FOREIGN KEY (`bahan`) REFERENCES `tb_bahan` (`id`),
+  ADD CONSTRAINT `tb_custom_ibfk_2` FOREIGN KEY (`kategori`) REFERENCES `tb_kategori` (`id`);
 
 --
 -- Constraints for table `tb_product`
