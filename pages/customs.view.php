@@ -273,6 +273,70 @@ if (isset($_POST['add-custom'])) {
       </div>
     </nav>
     <!-- End Navbar -->
+
+    <div class="card shadow-lg mx-4 mt-3">
+      <div class="card-body">
+        <div class="row gx-4">
+          <div class="dropdown col-auto">
+            <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-3" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+              Sort
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <li><a class="dropdown-item" href="#">No</a></li>
+              <li><a class="dropdown-item" href="#">Name</a></li>
+
+
+            </ul>
+          </div>
+          <div class="dropdown col-auto">
+            <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-3" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+              Kategori
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <li><a class="dropdown-item" href="#">Kasur</a></li>
+              <li><a class="dropdown-item" href="#">Lemari</a></li>
+              <li><a class="dropdown-item" href="#">Meja</a></li>
+              <li><a class="dropdown-item" href="#">Kursi</a></li>
+
+            </ul>
+          </div>
+          <div class="dropdown col-auto">
+            <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-3" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+              Bahan
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <li><a class="dropdown-item" href="#">Kayu</a></li>
+              <li><a class="dropdown-item" href="#">Besi</a></li>
+
+            </ul>
+          </div>
+          <div class="dropdown col-auto">
+            <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-4" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+              By
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <li><a class="dropdown-item" href="#">Asc (A-Z)</a></li>
+              <li><a class="dropdown-item" href="#">Desc (Z-A)</a></li>
+
+            </ul>
+          </div>
+          <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
+            <div class="nav-wrapper position-relative end-0">
+              <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                <div class="input-group">
+                  <input type="text" class="form-control ms-4" placeholder="Type here..." aria-label="Type here..." aria-describedby="button-addon2">
+                  <button class="btn bg-gradient-dark  mb-0" type="button" id="button-addon2">
+                    <i class="fas fa-search" aria-hidden="true"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
     <div class="container-fluid py-4">
       <div class="row">
         <div class="col-12">
