@@ -276,42 +276,57 @@ if (isset($_POST['add-user'])) {
     <!-- End Navbar -->
 
     <div class="card shadow-lg mx-4 mt-3">
-      <div class="card-body">
-        <div class="row gx-4">
-          <div class="dropdown col-auto">
-            <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-3" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-              Sort
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <li><a class="dropdown-item" href="#">No</a></li>
-              <li><a class="dropdown-item" href="#">Name</a></li>
-            </ul>
-          </div>
-          <div class="dropdown col-auto">
-            <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-4" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-              By
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <li><a class="dropdown-item" href="#">Asc (A-Z)</a></li>
-              <li><a class="dropdown-item" href="#">Desc (Z-A)</a></li>
+      <form class="ahahah" action="" method="post">
+        <div class="card-body">
+          <div class="row gx-4">
 
-            </ul>
-          </div>
-          <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
-            <div class="nav-wrapper position-relative end-0">
-              <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                <div class="input-group">
-                  <input type="text" class="form-control ms-4" placeholder="Type here..." aria-label="Type here..." aria-describedby="button-addon2">
-                  <button class="btn bg-gradient-dark  mb-0" type="button" id="button-addon2">
-                    <i class="fas fa-search" aria-hidden="true"></i>
-                  </button>
-                </div>
-              </div>
+
+            <div class="dropdown col-auto">
+
+
+
+              <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-3" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                Sort
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <button class="dropdown-item" name="urutnama" type="submit">Name</button>
+              </ul>
+
             </div>
+
+
+            <div class="dropdown col-auto">
+
+              <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-4" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                By
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <button class="dropdown-item" name="urutinasc" type="submit">Asc (A-Z)</button>
+                <button class="dropdown-item" name="urutindesc" type="submit">Desc (Z-A)</button>
+
+
+              </ul>
+
+            </div>
+      </form>
+
+
+      <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
+        <div class="nav-wrapper position-relative end-0">
+          <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+            <form class="input-group" action="" method="post">
+              <div class="input-group">
+                <input type="text" class="form-control ms-4" name="data" id="search_text" placeholder="Type here..." aria-label="Type here..." aria-describedby="button-addon2">
+                <button class="btn bg-gradient-dark mb-0" type="submit" name="caridata" id="button-addon2">
+                  <i class="fas fa-search" aria-hidden="true"></i>
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
+
 
 
 
@@ -359,9 +374,23 @@ if (isset($_POST['add-user'])) {
                       </tr>
                     </thead>
                     <?php
-                    $query  = "SELECT id, nama, nohp, email, username, password  FROM tb_user WHERE level = '1' order by nama asc";
-                    $result = mysqli_query($koneksi, $query);
-                    $no     = 1;
+                    if (isset($_POST['caridata'])) {
+                      $caringab = ("SELECT id, nama, nohp, email, username, password  FROM tb_user WHERE level = '1' and nama LIKE '" . $_POST['data'] . "%'");
+                      $result   = mysqli_query($koneksi, $caringab);
+                    } elseif (isset($_POST['urutnama'])) {
+                      $urutnama = ("SELECT id, nama, nohp, email, username, password  FROM tb_user WHERE level = '1' order by nama asc ");
+                      $result   = mysqli_query($koneksi, $urutnama);
+                    } elseif (isset($_POST['urutinasc'])) {
+                      $urutasc = ("SELECT id, nama, nohp, email, username, password  FROM tb_user WHERE level = '1' order by nama asc ");
+                      $result   = mysqli_query($koneksi, $urutasc);
+                    } elseif (isset($_POST['urutindesc'])) {
+                      $urutdesc = ("SELECT id, nama, nohp, email, username, password  FROM tb_user WHERE level = '1' order by nama desc ");
+                      $result   = mysqli_query($koneksi, $urutdesc);
+                    } else {
+                      $tampilngab = ("SELECT id, nama, nohp, email, username, password  FROM tb_user WHERE level = '1'");
+                      $result   = mysqli_query($koneksi, $tampilngab);
+                    }
+                    $no = 1;
 
                     while ($row = mysqli_fetch_array($result)) {
                       $userUserId   = $row['id'];
