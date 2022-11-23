@@ -1,15 +1,20 @@
 <?php
 require("./koneksi.php");
 session_start();
+error_reporting(1);
 if (isset($_POST['add-custom'])) {
   $namacustom = $_POST['txt_nama'];
   $kategoricustom = $_POST['txt_kategori'];
   $bahancustom = $_POST['txt_bahan'];
   $detailcustom = $_POST['txt_detail'];
 
+  $foto = $_FILES['foto']['name'];
+  $file_tmp = $_FILES['foto']['tmp_name'];
+  move_uploaded_file($file_tmp, '../foto/custom/' . $foto);
 
 
-  $query    = "INSERT INTO `tb_custom` (`id`, `image`,`nama`,`kategori`, `bahan`, `detail`) VALUES (NULL, '', '$namacustom','$kategoricustom', '$bahancustom', '$detailcustom')";
+
+  $query    = "INSERT INTO `tb_custom` (`id`, `foto`,`nama`,`kategori`, `bahan`, `detail`) VALUES (NULL, '$foto', '$namacustom','$kategoricustom', '$bahancustom', '$detailcustom')";
   $result   = mysqli_query($koneksi, $query);
 }
 ?>
@@ -273,68 +278,86 @@ if (isset($_POST['add-custom'])) {
       </div>
     </nav>
     <!-- End Navbar -->
-
     <div class="card shadow-lg mx-4 mt-3">
       <div class="card-body">
         <div class="row gx-4">
-          <div class="dropdown col-auto">
-            <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-3" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-              Sort
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <li><a class="dropdown-item" href="#">No</a></li>
-              <li><a class="dropdown-item" href="#">Name</a></li>
 
+          <div class="dropdown col-auto">
+            <form action="" method="post">
+              <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-3" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                Sort
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <button class="dropdown-item" name="urutnama" type="submit">Name</button>
+              </ul>
+            </form>
+          </div>
+
+          <div class="dropdown col-auto">
+            <form action="" method="post">
+              <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-3" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                Kategori
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <button class="dropdown-item" value="kasur" name="tampilkategori" type="submit">Kasur</button>
+                <button class="dropdown-item" value="lemari" name="tampilkategori" type="submit">Lemari</button>
+                <button class="dropdown-item" value="meja" name="tampilkategori" type="submit">Meja</button>
+                <button class="dropdown-item" value="kursi" name="tampilkategori" type="submit">Kursi</button>
+              </ul>
+            </form>
+
+          </div>
+
+          <div class="dropdown col-auto">
+            <form action="" method="post">
+              <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-3" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                Bahan
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <button class="dropdown-item" value="kayu" name="tampilbahan" type="submit">Kayu</button>
+                <button class="dropdown-item" value="besi" name="tampilbahan" type="submit">Besi</button>
+
+              </ul>
+            </form>
+
+          </div>
+
+
+
+          <div class="dropdown col-auto">
+            <form action="" method="post">
+
+              <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-4" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                By
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <button class="dropdown-item" name="urutasc" type="submit">Asc (A-Z)</button>
+                <button class="dropdown-item" name="urutdesc" type="submit">Desc (Z-A)</button>
+            </form>
 
             </ul>
-          </div>
-          <div class="dropdown col-auto">
-            <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-3" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-              Kategori
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <li><a class="dropdown-item" href="#">Kasur</a></li>
-              <li><a class="dropdown-item" href="#">Lemari</a></li>
-              <li><a class="dropdown-item" href="#">Meja</a></li>
-              <li><a class="dropdown-item" href="#">Kursi</a></li>
 
-            </ul>
           </div>
-          <div class="dropdown col-auto">
-            <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-3" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-              Bahan
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <li><a class="dropdown-item" href="#">Kayu</a></li>
-              <li><a class="dropdown-item" href="#">Besi</a></li>
 
-            </ul>
-          </div>
-          <div class="dropdown col-auto">
-            <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-4" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-              By
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <li><a class="dropdown-item" href="#">Asc (A-Z)</a></li>
-              <li><a class="dropdown-item" href="#">Desc (Z-A)</a></li>
-
-            </ul>
-          </div>
           <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
             <div class="nav-wrapper position-relative end-0">
               <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                <div class="input-group">
-                  <input type="text" class="form-control ms-4" placeholder="Type here..." aria-label="Type here..." aria-describedby="button-addon2">
-                  <button class="btn bg-gradient-dark  mb-0" type="button" id="button-addon2">
-                    <i class="fas fa-search" aria-hidden="true"></i>
-                  </button>
-                </div>
+                <form class="input-group" action="" method="post">
+                  <div class="input-group">
+                    <input type="text" class="form-control ms-4" name="data" placeholder="Type here..." aria-label="Type here..." aria-describedby="button-addon2">
+                    <button class="btn bg-gradient-dark  mb-0" type="submit" name="caridata" id="button-addon2">
+                      <i class="fas fa-search" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+
+
 
 
     <div class="container-fluid py-4">
@@ -406,8 +429,31 @@ if (isset($_POST['add-custom'])) {
                     </tr>
                   </thead>
                   <?php
-                  $query  = "SELECT tb_custom.id, tb_custom.nama, tb_kategori.nama AS kategori, tb_bahan.bahan AS bahan, tb_custom.detail FROM tb_custom INNER JOIN tb_bahan ON tb_custom.bahan=tb_bahan.id INNER JOIN tb_kategori ON tb_custom.kategori=tb_kategori.id;";
-                  $result = mysqli_query($koneksi, $query);
+                  if (isset($_POST['caridata'])) {
+                    $caringab = ("SELECT tb_custom.id,tb_custom.foto, tb_custom.nama, tb_kategori.nama AS kategori, tb_bahan.bahan AS bahan, tb_custom.detail FROM tb_custom INNER JOIN tb_bahan ON tb_custom.bahan=tb_bahan.id INNER JOIN tb_kategori ON tb_custom.kategori=tb_kategori.id where tb_custom.nama LIKE '" . $_POST['data'] . "%'");
+                    $result   = mysqli_query($koneksi, $caringab);
+                  } elseif (isset($_POST['urutnama'])) {
+                    $urutnama = ("SELECT tb_custom.id,tb_custom.foto, tb_custom.nama, tb_kategori.nama AS kategori, tb_bahan.bahan AS bahan, tb_custom.detail FROM tb_custom INNER JOIN tb_bahan ON tb_custom.bahan=tb_bahan.id INNER JOIN tb_kategori ON tb_custom.kategori=tb_kategori.id order by tb_custom.nama asc");
+                    $result   = mysqli_query($koneksi, $urutnama);
+                  } elseif (isset($_POST['urutasc'])) {
+                    $urutasc = ("SELECT tb_custom.id, tb_custom.foto,tb_custom.nama, tb_kategori.nama AS kategori, tb_bahan.bahan AS bahan, tb_custom.detail FROM tb_custom INNER JOIN tb_bahan ON tb_custom.bahan=tb_bahan.id INNER JOIN tb_kategori ON tb_custom.kategori=tb_kategori.id order by tb_custom.nama asc");
+                    $result   = mysqli_query($koneksi, $urutasc);
+                  } elseif (isset($_POST['urutdesc'])) {
+                    $urutdesc = ("SELECT tb_custom.id,tb_custom.foto, tb_custom.nama, tb_kategori.nama AS kategori, tb_bahan.bahan AS bahan, tb_custom.detail FROM tb_custom INNER JOIN tb_bahan ON tb_custom.bahan=tb_bahan.id INNER JOIN tb_kategori ON tb_custom.kategori=tb_kategori.id order by tb_custom.nama desc");
+                    $result   = mysqli_query($koneksi, $urutdesc);
+                  } elseif (isset($_POST['tampilkategori'])) {
+                    $kategori = ("SELECT tb_custom.id, tb_custom.foto, tb_custom.nama, tb_kategori.nama AS kategori, tb_bahan.bahan AS bahan, tb_custom.detail FROM tb_custom INNER JOIN tb_bahan ON tb_custom.bahan=tb_bahan.id INNER JOIN tb_kategori ON tb_custom.kategori=tb_kategori.id where tb_kategori.nama = '" . $_POST['tampilkategori'] . "'");
+                    $result   = mysqli_query($koneksi, $kategori);
+                  } elseif (isset($_POST['tampilbahan'])) {
+                    $bahan = ("SELECT tb_custom.id, tb_custom.foto, tb_custom.nama, tb_kategori.nama AS kategori, tb_bahan.bahan AS bahan, tb_custom.detail FROM tb_custom INNER JOIN tb_bahan ON tb_custom.bahan=tb_bahan.id INNER JOIN tb_kategori ON tb_custom.kategori=tb_kategori.id where tb_bahan.bahan = '" . $_POST['tampilbahan'] . "'");
+                    $result   = mysqli_query($koneksi, $bahan);
+                  } else {
+                    $query  = "SELECT tb_custom.id, tb_custom.foto, tb_custom.nama, tb_kategori.nama AS kategori, tb_bahan.bahan AS bahan, tb_custom.detail FROM tb_custom INNER JOIN tb_bahan ON tb_custom.bahan=tb_bahan.id INNER JOIN tb_kategori ON tb_custom.kategori=tb_kategori.id order by tb_custom.nama asc";
+                    $result = mysqli_query($koneksi, $query);
+                  }
+
+
+
                   $no     = 1;
                   // if ($sesLvl == 1) {
                   //   $dis = "";
@@ -416,6 +462,7 @@ if (isset($_POST['add-custom'])) {
                   // }
                   while ($row = mysqli_fetch_array($result)) {
                     $customid = $row['id'];
+                    $customFoto = $row['foto'];
                     $customName   = $row['nama'];
                     $customKategori  = $row['kategori'];
                     $customBahan  = $row['bahan'];
@@ -428,7 +475,7 @@ if (isset($_POST['add-custom'])) {
                           <span class="text-secondary text-xs font-weight-bold"><?php echo $no; ?></span>
                         </td>
                         <td class="align-middle text-center">
-                          <img src="../assets/img/team-3.jpg" class="avatar avatar-sm me-3" alt="user1" />
+                          <img src="../foto/custom/<?php echo $customFoto; ?>" class="avatar avatar-sm me-2" alt="user1" />
                         </td>
                         <!-- <td class="align-middle text-center">
                           <div class="d-flex px-2 py-1">
@@ -449,7 +496,8 @@ if (isset($_POST['add-custom'])) {
                           <span class="text-secondary text-xs font-weight-bold"><?php echo $customBahan; ?></span>
                         </td>
                         <td class="align-middle text-center">
-                          <span class="text-secondary text-xs font-weight-bold"><?php echo $customDetail; ?></span>
+                          <button class="btn btn-secondary btn-sm px-3 py-1 me-1 mt-3" data-modal-target="#modal-detail<?= $row['id'] ?>">Cek Detail</button>
+                          <!-- <span class="text-secondary text-xs font-weight-bold" ><?php echo $customDetail; ?></span> -->
                         </td>
                         <td class="align-middle text-center">
                           <button class="btn btn-dark btn-sm ms-auto" data-modal-target="#modal-edit<?= $row['id'] ?>">Edit</button>
@@ -457,6 +505,138 @@ if (isset($_POST['add-custom'])) {
                         </td>
 
                       </tr>
+
+
+                      <!-- Pop up Detail -->
+
+                      <div class="modal-detail" id="modal-detail<?= $row['id'] ?>">
+                        <div class="modal-header-detail">
+                          <h2 class="detail">Detail Form</h2>
+                          <div class="modal-body-detail">
+                            <form class="anjasmara" action="edit_custom.php?id=<?= $row['id'] ?>" method="post">
+                              <div class="form-group">
+                                <label for="exampleFormControlTextarea1">Detail</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" maxlength="500" rows="5"><?= $customDetail ?></textarea>
+                              </div>
+                              <div class="align-middle text-center">
+                                <button class="btn btn-danger btn-sm ms-auto" type="submit" name="close" data-close-button-detail>Close</button>
+                                <!-- <a class="btn btn-danger btn-sm ms-auto" type="submit" data-close-button-edit>Close</a> -->
+                              </div>
+                            </form>
+
+                          </div>
+                        </div>
+                      </div>
+
+                      <style>
+                        .modal-detail {
+                          position: fixed;
+                          left: 0;
+                          top: 0;
+                          background: rgb(0, 0, 0, 0.6);
+                          height: 100%;
+                          width: 100%;
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                          opacity: 0;
+                          pointer-events: none;
+                          transition: all 0.3s ease-in-out;
+                          z-index: 1;
+                        }
+
+                        .modal-body-detail {
+                          padding: 10px;
+                          bottom: 10px;
+                        }
+
+                        .modal-header-detail {
+                          background: white;
+                          width: 560px;
+                          max-width: 90%;
+                          padding: 20px;
+                          border-radius: 4x;
+                          position: relative;
+                          transform: translateY(-100);
+                          transition: all 0.3s ease-in-out;
+                        }
+
+                        .btn-open-detail {
+                          background: black;
+                          padding: 10px 40px;
+                          color: white;
+                          border-radius: 5px;
+                          font-size: 15px;
+                          cursor: pointer;
+                        }
+
+                        p.detail {
+                          line-height: 1.6;
+                          margin-bottom: 20px;
+                        }
+
+                        h2.detail {
+                          text-align: center;
+                          padding-bottom: 15px;
+                          font-weight: 200;
+                        }
+
+                        .modal-header-detail button.close-btn-detail {
+                          position: absolute;
+                          right: 10px;
+                          top: 10px;
+                          font-size: 32px;
+                          background: none;
+                          outline: none;
+                          border: none;
+                          cursor: pointer;
+                        }
+
+                        .modal-header-detail button.close-btn-detail:hover {
+                          color: #6b46c1;
+                        }
+
+                        .active-detail {
+                          opacity: 1;
+                          pointer-events: auto;
+                        }
+
+                        .modal-detail.active-detail .modal-header-detail {
+                          transform: translateY(0px);
+                        }
+                      </style>
+                      <script>
+                        const openModalButtons = document.querySelectorAll("[data-modal-target]");
+                        const closeModalButtons = document.querySelectorAll(
+                          "[data-close-button-detail]"
+                        );
+
+                        openModalButtons.forEach((button) => {
+                          button.addEventListener("click", () => {
+                            const modal = document.querySelector(button.dataset.modalTarget);
+                            openModal(modal);
+                          });
+                        });
+
+                        closeModalButtons.forEach((button) => {
+                          button.addEventListener("click", () => {
+                            const modal = button.closest(".modal-detail");
+                            closeModal(modal);
+                          });
+                        });
+
+                        function openModal(modal) {
+                          if (modal == null) return;
+                          modal.classList.add("active-detail");
+                        }
+
+                        function closeModal(modal) {
+                          if (modal == null) return;
+                          modal.classList.remove("active-detail");
+                        }
+                      </script>
+                      <!-- end Pop up Detail -->
+
 
                       <!-- Pop up Delete -->
 
@@ -606,10 +786,16 @@ if (isset($_POST['add-custom'])) {
                 <div class="modal-header-edit">
                   <h2 class="edit">Edit Form</h2>
                   <div class="modal-body-edit">
-                    <form action="edit_custom.php?id=<?= $row['id'] ?>" method="post">
+                    <form action="edit_custom.php?id=<?= $row['id'] ?>" method="post" enctype="multipart/form-data">
                       <div class="form-group">
                         <label for="example-text-input" class="form-control-label">Name</label>
                         <input class="form-control" name="nama" type="text" value="<?= $row['nama'] ?>" placeholder="Enter Nama" required />
+                      </div>
+
+                      <div class="form-group">
+                        <label class="custom-file-label" for="customFileLang">Upload Photo</label>
+                        <input type="file" class="form-control" name="foto">
+
                       </div>
 
                       <div class="form-group">
@@ -787,13 +973,20 @@ if (isset($_POST['add-custom'])) {
         <!-- <button data-close-add class="close-btn-add">&times;</button> -->
 
         <div class="modal-body-add">
-          <form class="hahahhaaaa" id="form" action="" method="post">
+          <form class="hahahhaaaa" id="form" action="" method="post" enctype="multipart/form-data">
 
             <div class="form-group">
               <label for="example-text-input" class="form-control-label">Name</label>
               <input class="form-control" type="text" placeholder="Enter Name" name="txt_nama" required />
 
             </div>
+
+            <div class="form-group">
+              <label class="custom-file-label" for="customFileLang">Upload Photo</label>
+              <input type="file" class="form-control" name="foto" require>
+
+            </div>
+
 
             <div class="form-group">
               <label for="exampleFormControlSelect1">Kategori</label>
