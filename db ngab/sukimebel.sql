@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 19, 2022 at 04:33 AM
+-- Generation Time: Nov 23, 2022 at 01:52 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 7.4.30
 
@@ -48,7 +48,7 @@ INSERT INTO `tb_bahan` (`id`, `bahan`) VALUES
 
 CREATE TABLE `tb_custom` (
   `id` int(2) NOT NULL,
-  `image` varchar(1) NOT NULL,
+  `foto` varchar(250) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `kategori` int(2) NOT NULL,
   `bahan` int(2) NOT NULL,
@@ -59,9 +59,11 @@ CREATE TABLE `tb_custom` (
 -- Dumping data for table `tb_custom`
 --
 
-INSERT INTO `tb_custom` (`id`, `image`, `nama`, `kategori`, `bahan`, `detail`) VALUES
-(6, '', 'Meja Ilham cuy', 4, 1, 'anjay cuy hhhaa y'),
-(8, '', 'kasur Pengantin', 4, 1, 'wkwkwkwk buat ewe');
+INSERT INTO `tb_custom` (`id`, `foto`, `nama`, `kategori`, `bahan`, `detail`) VALUES
+(9, 'icon_register.png', 'Kursi ngab', 1, 1, 'anjas'),
+(10, 'anony.jpeg', 'kasur Pengantinn', 1, 1, 'ppp'),
+(11, 'foto3.jfif', 'Lemari dosen', 1, 1, 'ahaah'),
+(12, 'RARS_18+.svg.png', 'ahah', 1, 1, 'aa');
 
 -- --------------------------------------------------------
 
@@ -92,9 +94,9 @@ INSERT INTO `tb_kategori` (`id`, `nama`) VALUES
 
 CREATE TABLE `tb_product` (
   `id` int(2) NOT NULL,
-  `image` varchar(1) NOT NULL,
+  `foto` varchar(250) NOT NULL,
   `nama` varchar(50) NOT NULL,
-  `harga` varchar(12) NOT NULL,
+  `harga` int(12) NOT NULL,
   `qty` int(3) NOT NULL,
   `kategori` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -103,11 +105,9 @@ CREATE TABLE `tb_product` (
 -- Dumping data for table `tb_product`
 --
 
-INSERT INTO `tb_product` (`id`, `image`, `nama`, `harga`, `qty`, `kategori`) VALUES
-(20, '', 'Meja Makan', '500000', 50, 3),
-(28, '', 'Meja Gaming', '1.200.000', 12, 3),
-(29, '', 'Kursi Gaming', '800.000', 8, 3),
-(32, '', 'kasur Pengantin', '650.000', 40, 4);
+INSERT INTO `tb_product` (`id`, `foto`, `nama`, `harga`, `qty`, `kategori`) VALUES
+(38, 'anony.jpeg', 'Meja Belajarr', 25000, 20, 4),
+(39, 'icon_login.png', 'Kursi Belajarr', 50000, 50, 4);
 
 -- --------------------------------------------------------
 
@@ -136,7 +136,7 @@ INSERT INTO `tb_role` (`id`, `nama`) VALUES
 
 CREATE TABLE `tb_user` (
   `id` int(2) NOT NULL,
-  `avatar` varchar(1) NOT NULL,
+  `foto` varchar(250) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `nohp` varchar(13) NOT NULL,
   `email` varchar(50) NOT NULL,
@@ -149,34 +149,11 @@ CREATE TABLE `tb_user` (
 -- Dumping data for table `tb_user`
 --
 
-INSERT INTO `tb_user` (`id`, `avatar`, `nama`, `nohp`, `email`, `username`, `password`, `level`) VALUES
-(19, '', 'Ilham Ibnu Ahmad', '081231897839', 'ilham@gmail.com', 'ilham123', 'ilham123', 1),
-(20, '', 'Raihan Achmad Fimansyah', '085607743539', 'raihan@gmail.com', 'raihan123', 'raihan123', 1),
-(21, '', 'Daffa Afifi Syahrony', '089668834494', 'daffa@gmail.com', 'daffa123', 'daffa123', 1),
-(22, '', 'Babylina Vindarosita', '086756345009', 'lina@gmail.com', 'lina123', 'lina123', 1),
-(23, '', 'Shilmia Madina', '08411234567', 'adin@gmail.com', 'adin123', 'admin123', 1),
-(25, '', 'Faisal Oktabrian', '085678345123', 'faisal@gmail.com', 'faisal123', 'faisal123', 1),
-(28, '', 'Fidinova Ika Putri SangAdji ', '087654345678', 'fidin@gmail.com', 'fidin123', 'fidin123', 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `test`
---
-
-CREATE TABLE `test` (
-  `id` int(11) NOT NULL,
-  `nama` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `harga` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `test`
---
-
-INSERT INTO `test` (`id`, `nama`, `harga`) VALUES
-(3, 'sayang sayang sayang', 100000),
-(4, 'cantik tapi sayang... sayang <3', 99999);
+INSERT INTO `tb_user` (`id`, `foto`, `nama`, `nohp`, `email`, `username`, `password`, `level`) VALUES
+(57, 'bjorka.jpg', 'Ilham Ibnu Ahmad', '085607743539', 'ilham@gmail.com', 'ilham123', 'ilham123', 1),
+(58, 'icon_login.png', 'Fidinova Ika Putri SangAdji', '081231897839', 'fidin@gmail.com', 'fidin123', 'fidin123', 1),
+(59, 'RARS_18+.svg.png', 'Sugeng Budisaputra', '085678345123', 'sugeng@gmail.com', 'sugeng123', 'sugeng123', 1),
+(61, 'anony.jpeg', 'anony', '085607743539', 'bjirkangab@gmail.com', '123', '123', 1);
 
 --
 -- Indexes for dumped tables
@@ -223,12 +200,6 @@ ALTER TABLE `tb_user`
   ADD KEY `level` (`level`);
 
 --
--- Indexes for table `test`
---
-ALTER TABLE `test`
-  ADD PRIMARY KEY (`id`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -242,7 +213,7 @@ ALTER TABLE `tb_bahan`
 -- AUTO_INCREMENT for table `tb_custom`
 --
 ALTER TABLE `tb_custom`
-  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tb_kategori`
@@ -254,7 +225,7 @@ ALTER TABLE `tb_kategori`
 -- AUTO_INCREMENT for table `tb_product`
 --
 ALTER TABLE `tb_product`
-  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `tb_role`
@@ -266,13 +237,7 @@ ALTER TABLE `tb_role`
 -- AUTO_INCREMENT for table `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
-
---
--- AUTO_INCREMENT for table `test`
---
-ALTER TABLE `test`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- Constraints for dumped tables
