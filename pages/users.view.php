@@ -20,7 +20,6 @@ if (isset($_POST['add-user'])) {
 ?>
 
 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,7 +42,13 @@ if (isset($_POST['add-user'])) {
 </head>
 
 <body class="g-sidenav-show bg-gray-100">
-  <div class="min-height-300 bg-primary position-absolute w-100"></div>
+  <div class="position-absolute w-100 min-height-300 top-0" style="
+        background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/profile-layout-header.jpg');
+        background-position-y: 50%;
+      ">
+    <span class="mask bg-primary opacity-6"></span>
+  </div>
+  <div class="min-height-300 position-absolute w-100"></div>
   <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4" id="sidenav-main">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
@@ -454,7 +459,7 @@ if (isset($_POST['add-user'])) {
                               <form action="edit_user.php?id=<?= $row['id'] ?>" method="post" enctype="multipart/form-data">
                                 <div class="form-group">
                                   <label for="example-text-input" class="form-control-label">Name</label>
-                                  <input class="form-control" name="nama" type="text" value="<?= $row['nama'] ?>" placeholder="Enter Name" required />
+                                  <input class="form-control" name="nama" type="text" value="<?= $row['nama'] ?>" maxlength="30" placeholder="Enter Name" required />
                                 </div>
 
 
@@ -466,24 +471,24 @@ if (isset($_POST['add-user'])) {
 
                                 <div class="form-group">
                                   <label for="example-text-input" class="form-control-label">No Hp</label>
-                                  <input class="form-control" name="nohp" type="text" value="<?= $row['nohp'] ?>" placeholder="Enter No Hp" required />
+                                  <input class="form-control" name="nohp" type="text" value="<?= $row['nohp'] ?>" oninput="this.value = this.value.replace(/[^\d]+/, '').replace(/(\..*?)\..*/g, '$1');" maxlength="12" placeholder="Enter No Hp" required />
                                 </div>
 
 
                                 <div class="form-group">
                                   <label for="example-text-input" class="form-control-label">Email</label>
-                                  <input class="form-control" name="email" type="email" value="<?= $row['email'] ?>" placeholder="Enter Email" required />
+                                  <input class="form-control" name="email" type="email" value="<?= $row['email'] ?>" maxlength="30" placeholder="Enter Email" required />
                                 </div>
 
 
                                 <div class="form-group">
                                   <label for="example-text-input" class="form-control-label">Username</label>
-                                  <input class="form-control" name="username" type="text" value="<?= $row['username'] ?>" placeholder="Enter Username" required />
+                                  <input class="form-control" name="username" type="text" value="<?= $row['username'] ?>" maxlength="30" placeholder="Enter Username" required />
                                 </div>
 
                                 <div class="form-group">
                                   <label for="example-text-input" class="form-control-label">Password</label>
-                                  <input class="form-control" name="password" type="password" value="<?= $row['password'] ?>" placeholder="Enter Password" required />
+                                  <input class="form-control" name="password" type="password" value="<?= $row['password'] ?>" maxlength="30" placeholder="Enter Password" required />
                                 </div>
 
 
@@ -512,7 +517,7 @@ if (isset($_POST['add-user'])) {
                             opacity: 0;
                             pointer-events: none;
                             transition: all 0.3s ease-in-out;
-                            z-index: 1;
+                            z-index: 10000;
                           }
 
                           .modal-body-edit {
@@ -654,7 +659,8 @@ if (isset($_POST['add-user'])) {
                     opacity: 0;
                     pointer-events: none;
                     transition: all 0.3s ease-in-out;
-                    z-index: 1;
+                    z-index: 10000;
+
                   }
 
                   .modal-body-delete {
@@ -774,7 +780,7 @@ if (isset($_POST['add-user'])) {
 
               <div class="form-group">
                 <label for="example-text-input" class="form-control-label">Name</label>
-                <input class="form-control" type="text" value="" placeholder="Enter Name" name="txt_nama" id="txt_nama" required />
+                <input class="form-control" type="text" value="" placeholder="Enter Name" maxlength="30" name="txt_nama" id="txt_nama" required />
 
               </div>
 
@@ -785,30 +791,29 @@ if (isset($_POST['add-user'])) {
               </div>
 
 
-
               <div class="form-group">
                 <label for="example-text-input" class="form-control-label">No Hp</label>
-                <input class="form-control" type="text" value="" placeholder="Enter No Hp" name="txt_nohp" id="txt_nohp" required />
+                <input class="form-control" type="text" value="" placeholder="Enter No Hp" oninput="this.value = this.value.replace(/[^\d]+/, '').replace(/(\..*?)\..*/g, '$1');" maxlength="12" name="txt_nohp" id="txt_nohp" required />
 
               </div>
 
 
               <div class="form-group">
                 <label for="example-text-input" class="form-control-label">Email</label>
-                <input class="form-control" type="email" value="" placeholder="Enter Email" name="txt_mail" id="txt_mail" required />
+                <input class="form-control" type="email" value="" placeholder="Enter Email" maxlength="30" name="txt_mail" id="txt_mail" required />
 
               </div>
 
 
               <div class="form-group">
                 <label for="example-text-input" class="form-control-label">Username</label>
-                <input class="form-control" type="text" value="" placeholder="Enter Username" name="txt_user" id="txt_user" required />
+                <input class="form-control" type="text" value="" placeholder="Enter Username" maxlength="30" name="txt_user" id="txt_user" required />
 
               </div>
 
               <div class="form-group">
                 <label for="example-text-input" class="form-control-label">Password</label>
-                <input class="form-control" type="password" value="" placeholder="Enter Password" name="txt_pw" id="txt_pw" required />
+                <input class="form-control" type="password" value="" placeholder="Enter Password" maxlength="30" name="txt_pw" id="txt_pw" required />
 
               </div>
 
@@ -836,6 +841,7 @@ if (isset($_POST['add-user'])) {
           opacity: 0;
           pointer-events: none;
           transition: all 0.3s ease-in-out;
+          z-index: 10000;
         }
 
         .modal-body-add {

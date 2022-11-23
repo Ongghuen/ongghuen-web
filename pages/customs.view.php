@@ -42,14 +42,19 @@ if (isset($_POST['add-custom'])) {
 </head>
 
 <body class="g-sidenav-show bg-gray-100">
-  <div class="min-height-300 bg-primary position-absolute w-100"></div>
+  <div class="position-absolute w-100 min-height-300 top-0" style="
+        background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/profile-layout-header.jpg');
+        background-position-y: 50%;
+      ">
+    <span class="mask bg-primary opacity-6"></span>
+  </div>
+  <div class="min-height-300 position-absolute w-100"></div>
   <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4" id="sidenav-main">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand m-0" href="/pages/dashboard.html">
+      <a class="navbar-brand m-0" href="./dashboard.view.php">
         <img src="../assets/images/icon.png" class="navbar-brand-img h-100" alt="main_logo" />
-        <span class="ms-1 font-weight-bold">Suki Dashboard</span>
-      </a>
+        <span class="ms-1 font-weight-bold">Suki Dashboard</span>     </a>
     </div>
     <hr class="horizontal dark mt-0" />
     <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
@@ -542,7 +547,7 @@ if (isset($_POST['add-custom'])) {
                           opacity: 0;
                           pointer-events: none;
                           transition: all 0.3s ease-in-out;
-                          z-index: 1;
+                          z-index: 10000;
                         }
 
                         .modal-body-detail {
@@ -684,7 +689,7 @@ if (isset($_POST['add-custom'])) {
                   opacity: 0;
                   pointer-events: none;
                   transition: all 0.3s ease-in-out;
-                  z-index: 1;
+                  z-index: 10000;
                 }
 
                 .modal-body-delete {
@@ -789,7 +794,7 @@ if (isset($_POST['add-custom'])) {
                     <form action="edit_custom.php?id=<?= $row['id'] ?>" method="post" enctype="multipart/form-data">
                       <div class="form-group">
                         <label for="example-text-input" class="form-control-label">Name</label>
-                        <input class="form-control" name="nama" type="text" value="<?= $row['nama'] ?>" placeholder="Enter Nama" required />
+                        <input class="form-control" name="nama" type="text" value="<?= $row['nama'] ?>" maxlength="30" placeholder="Enter Nama" required />
                       </div>
 
                       <div class="form-group">
@@ -828,7 +833,7 @@ if (isset($_POST['add-custom'])) {
 
                       <div class="form-group">
                         <label for="exampleFormControlTextarea1">Detail</label>
-                        <textarea class="form-control" name="detail" id="exampleFormControlTextarea1" rows="5"><?= $customDetail ?></textarea>
+                        <textarea class="form-control" name="detail" id="exampleFormControlTextarea1" maxlength="500" rows="5"><?= $customDetail ?></textarea>
                       </div>
 
 
@@ -858,7 +863,7 @@ if (isset($_POST['add-custom'])) {
                   opacity: 0;
                   pointer-events: none;
                   transition: all 0.3s ease-in-out;
-                  z-index: 1;
+                  z-index: 10000;
                 }
 
                 .modal-body-edit {
@@ -977,7 +982,7 @@ if (isset($_POST['add-custom'])) {
 
             <div class="form-group">
               <label for="example-text-input" class="form-control-label">Name</label>
-              <input class="form-control" type="text" placeholder="Enter Name" name="txt_nama" required />
+              <input class="form-control" type="text" placeholder="Enter Name" maxlength="30" name="txt_nama" required />
 
             </div>
 
@@ -1025,7 +1030,7 @@ if (isset($_POST['add-custom'])) {
 
             <div class="form-group">
               <label for="exampleFormControlTextarea1">Detail</label>
-              <textarea class="form-control" id="exampleFormControlTextarea1" name="txt_detail" placeholder="Enter Detail" rows="5"></textarea>
+              <textarea class="form-control" id="exampleFormControlTextarea1" name="txt_detail" maxlength="500" placeholder="Enter Detail" rows="5"></textarea>
             </div>
 
 
@@ -1061,6 +1066,7 @@ if (isset($_POST['add-custom'])) {
         opacity: 0;
         pointer-events: none;
         transition: all 0.3s ease-in-out;
+        z-index: 10000;
       }
 
       .modal-body-add {
@@ -1154,12 +1160,6 @@ if (isset($_POST['add-custom'])) {
       }
     </script>
     <!-- end Pop up Add -->
-
-
-
-
-
-
 
     <footer class="footer pt-3">
       <div class="container-fluid">

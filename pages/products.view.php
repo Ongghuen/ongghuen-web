@@ -43,14 +43,19 @@ if (isset($_POST['add-product'])) {
 </head>
 
 <body class="g-sidenav-show bg-gray-100">
-  <div class="min-height-300 bg-primary position-absolute w-100"></div>
+  <div class="position-absolute w-100 min-height-300 top-0" style="
+        background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/profile-layout-header.jpg');
+        background-position-y: 50%;
+      ">
+    <span class="mask bg-primary opacity-6"></span>
+  </div>
+  <div class="min-height-300 position-absolute w-100"></div>
   <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4" id="sidenav-main">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand m-0" href="/pages/dashboard.html">
+      <a class="navbar-brand m-0" href="./dashboard.view.php">
         <img src="../assets/images/icon.png" class="navbar-brand-img h-100" alt="main_logo" />
-        <span class="ms-1 font-weight-bold">Suki Dashboard</span>
-      </a>
+        <span class="ms-1 font-weight-bold">Suki Dashboard</span> </a>
     </div>
     <hr class="horizontal dark mt-0" />
     <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
@@ -560,7 +565,7 @@ if (isset($_POST['add-product'])) {
                   opacity: 0;
                   pointer-events: none;
                   transition: all 0.3s ease-in-out;
-                  z-index: 1;
+                  z-index: 10000;
                 }
 
                 .modal-body-delete {
@@ -665,7 +670,7 @@ if (isset($_POST['add-product'])) {
                     <form action="edit_product.php?id=<?= $row['id'] ?>" method="post" enctype="multipart/form-data">
                       <div class="form-group">
                         <label for="example-text-input" class="form-control-label">Name</label>
-                        <input class="form-control" name="nama" type="text" value="<?= $row['nama'] ?>" placeholder="Enter Nama" required />
+                        <input class="form-control" name="nama" type="text" value="<?= $row['nama'] ?>" maxlength="30" placeholder="Enter Nama" required />
                       </div>
 
                       <div class="form-group">
@@ -677,13 +682,13 @@ if (isset($_POST['add-product'])) {
 
                       <div class="form-group">
                         <label for="example-text-input" class="form-control-label">Harga</label>
-                        <input class="form-control" name="harga" type="text" value="<?= $row['harga'] ?>" placeholder="Enter harga" required />
+                        <input class="form-control" name="harga" type="text" value="<?= $row['harga'] ?>" oninput="this.value = this.value.replace(/[^\d]+/, '').replace(/(\..*?)\..*/g, '$1');" maxlength="8" placeholder="Enter harga" required />
                       </div>
 
 
                       <div class="form-group">
                         <label for="example-text-input" class="form-control-label">Qty</label>
-                        <input class="form-control" name="qty" type="text" value="<?= $row['qty'] ?>" placeholder="Enter Qty" required />
+                        <input class="form-control" name="qty" type="text" value="<?= $row['qty'] ?>" oninput="this.value = this.value.replace(/[^\d]+/, '').replace(/(\..*?)\..*/g, '$1');" maxlength="4" placeholder="Enter Qty" required />
                       </div>
 
 
@@ -732,7 +737,7 @@ if (isset($_POST['add-product'])) {
                   opacity: 0;
                   pointer-events: none;
                   transition: all 0.3s ease-in-out;
-                  z-index: 1;
+                  z-index: 10000;
                 }
 
                 .modal-body-edit {
@@ -850,7 +855,7 @@ if (isset($_POST['add-product'])) {
 
             <div class="form-group">
               <label for="example-text-input" class="form-control-label">Name</label>
-              <input class="form-control" type="text" placeholder="Enter Name" name="txt_nama" required />
+              <input class="form-control" type="text" placeholder="Enter Name" maxlength="30" name="txt_nama" required />
 
             </div>
 
@@ -863,14 +868,14 @@ if (isset($_POST['add-product'])) {
 
             <div class="form-group">
               <label for="example-text-input" class="form-control-label">Harga</label>
-              <input class="form-control" type="text" placeholder="Enter Harga" name="txt_harga" required />
+              <input class="form-control" type="text" placeholder="Enter Harga" oninput="this.value = this.value.replace(/[^\d]+/, '').replace(/(\..*?)\..*/g, '$1');" maxlength="8" name="txt_harga" required />
 
             </div>
 
 
             <div class="form-group">
               <label for="example-text-input" class="form-control-label">Qty</label>
-              <input class="form-control" type="text" placeholder="Enter Qty" name="txt_qty" required />
+              <input class="form-control" type="text" placeholder="Enter Qty" oninput="this.value = this.value.replace(/[^\d]+/, '').replace(/(\..*?)\..*/g, '$1');" maxlength="4" name="txt_qty" required />
             </div>
 
 
@@ -917,6 +922,7 @@ if (isset($_POST['add-product'])) {
         opacity: 0;
         pointer-events: none;
         transition: all 0.3s ease-in-out;
+        z-index: 10000;
       }
 
       .modal-body-add {

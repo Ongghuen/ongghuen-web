@@ -34,14 +34,19 @@
 </head>
 
 <body class="g-sidenav-show bg-gray-100">
-  <div class="min-height-300 bg-primary position-absolute w-100"></div>
+  <div class="position-absolute w-100 min-height-300 top-0" style="
+        background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/profile-layout-header.jpg');
+        background-position-y: 50%;
+      ">
+    <span class="mask bg-primary opacity-6"></span>
+  </div>
+  <div class="min-height-300 position-absolute w-100"></div>
   <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4" id="sidenav-main">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href="./dashboard.view.php">
         <img src="../assets/images/icon.png" class="navbar-brand-img h-100" alt="main_logo" />
-        <span class="ms-1 font-weight-bold">Suki Dashboard</span>
-      </a>
+        <span class="ms-1 font-weight-bold">Suki Dashboard</span> </a>
     </div>
     <hr class="horizontal dark mt-0" />
     <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
@@ -213,7 +218,7 @@
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <!-- <div class="ms-md-auto pe-md-3 d-flex align-items-center"> -->
-            <!-- <div class="input-group">
+          <!-- <div class="input-group">
               <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
               <input type="text" class="form-control" placeholder="Type here..." />
             </div> -->
@@ -234,7 +239,7 @@
                 </div>
               </a>
             </li>
-            
+
             <li class="nav-item px-3 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-white font-weight-bold px-0">
                 <span class="d-sm-inline d-none">Halo, Ragnar Lothbrok</span>
@@ -306,14 +311,14 @@
           </div>
           <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
             <div class="nav-wrapper position-relative end-0">
-            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-              <div class="input-group">
-                <input type="text" class="form-control ms-4" placeholder="Type here..." aria-label="Type here..." aria-describedby="button-addon2">
-                <button class="btn btn-outline-dark mb-0" type="button" id="button-addon2">
-                  <i class="fas fa-search" aria-hidden="true"></i>
-                </button>
+              <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                <div class="input-group">
+                  <input type="text" class="form-control ms-4" placeholder="Type here..." aria-label="Type here..." aria-describedby="button-addon2">
+                  <button class="btn btn-outline-dark mb-0" type="button" id="button-addon2">
+                    <i class="fas fa-search" aria-hidden="true"></i>
+                  </button>
+                </div>
               </div>
-            </div>
             </div>
           </div>
         </div>
@@ -355,178 +360,168 @@
                         </th>
                       </tr>
                     </thead>
-                      <tbody>
-                        <tr>
-                          <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">#00001</span>
-                          </td>
-                          <td class="align-middle text-center text-sm">
-                            <span class="badge badge-sm bg-gradient-danger"
-                              >Cancelled</span
-                            >
-                          </td>
-                          <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">Daffa Afifi Syahrony</span>
-                          </td>
-                          <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">Sumbersari, Jember</span>
-                          </td>
-                          <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">19-11-2022</span>
-                          </td>
-                          <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">20-11-2022</span>
-                          </td>
-                          <td class="align-middle text-center text-sm ms-auto">
-                            <button type="button" class="btn btn-secondary btn-sm px-3 py-1 me-1 mt-3">Detail</button>
-                            <button type="button" class="btn btn-secondary btn-sm px-3 py-1 mt-3">Update</button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">#00002</span>
-                          </td>
-                          <td class="align-middle text-center text-sm">
-                            <span class="badge badge-sm bg-gradient-warning px-3"
-                              >Pending</span
-                            >
-                          </td>
-                          <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">Ilham Ibnu Ahmad</span>
-                          </td>
-                          <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">Texas, Probolinggo</span>
-                          </td>
-                          <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">20-11-2022</span>
-                          </td>
-                          <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">21-11-2022</span>
-                          </td>
-                          <td class="align-middle text-center text-sm ms-auto">
-                            <button type="button" class="btn btn-secondary btn-sm px-3 py-1 me-1 mt-3">Detail</button>
-                            <button type="button" class="btn btn-secondary btn-sm px-3 py-1 mt-3">Update</button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">#00003</span>
-                          </td>
-                          <td class="align-middle text-center text-sm">
-                            <span class="badge badge-sm bg-gradient-info px-4"
-                              >Move</span
-                            >
-                          </td>
-                          <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">Raihan Achmad</span>
-                          </td>
-                          <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">Tokyo, Bondowoso</span>
-                          </td>
-                          <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">21-11-2022</span>
-                          </td>
-                          <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">22-11-2022</span>
-                          </td>
-                          <td class="align-middle text-center text-sm ms-auto">
-                            <button type="button" class="btn btn-secondary btn-sm px-3 py-1 me-1 mt-3">Detail</button>
-                            <button type="button" class="btn btn-secondary btn-sm px-3 py-1 mt-3">Update</button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">#00004</span>
-                          </td>
-                          <td class="align-middle text-center text-sm">
-                            <span class="badge badge-sm bg-gradient-success px-4"
-                              >Done</span
-                            >
-                          </td>
-                          <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">Shilmia Madina</span>
-                          </td>
-                          <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">Besuki, Situbondo</span>
-                          </td>
-                          <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">22-11-2022</span>
-                          </td>
-                          <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">23-11-2022</span>
-                          </td>
-                          <td class="align-middle text-center text-sm ms-auto">
-                            <button type="button" class="btn btn-secondary btn-sm px-3 py-1 me-1 mt-3">Detail</button>
-                            <button type="button" class="btn btn-secondary btn-sm px-3 py-1 mt-3">Update</button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">#00005</span>
-                          </td>
-                          <td class="align-middle text-center text-sm">
-                            <span class="badge badge-sm bg-gradient-warning px-3"
-                              >Pending</span
-                            >
-                          </td>
-                          <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">Babylina Vindarosita</span>
-                          </td>
-                          <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">Denver, Sumenep</span>
-                          </td>
-                          <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">23-11-2022</span>
-                          </td>
-                          <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">24-11-2022</span>
-                          </td>
-                          <td class="align-middle text-center text-sm ms-auto">
-                            <button type="button" class="btn btn-secondary btn-sm px-3 py-1 me-1 mt-3">Detail</button>
-                            <button type="button" class="btn btn-secondary btn-sm px-3 py-1 mt-3">Update</button>
-                          </td>
-                        </tr>
-                      </tbody>
+                    <tbody>
+                      <tr>
+                        <td class="align-middle text-center">
+                          <span class="text-secondary text-xs font-weight-bold">#00001</span>
+                        </td>
+                        <td class="align-middle text-center text-sm">
+                          <span class="badge badge-sm bg-gradient-danger">Cancelled</span>
+                        </td>
+                        <td class="align-middle text-center">
+                          <span class="text-secondary text-xs font-weight-bold">Daffa Afifi Syahrony</span>
+                        </td>
+                        <td class="align-middle text-center">
+                          <span class="text-secondary text-xs font-weight-bold">Sumbersari, Jember</span>
+                        </td>
+                        <td class="align-middle text-center">
+                          <span class="text-secondary text-xs font-weight-bold">19-11-2022</span>
+                        </td>
+                        <td class="align-middle text-center">
+                          <span class="text-secondary text-xs font-weight-bold">20-11-2022</span>
+                        </td>
+                        <td class="align-middle text-center text-sm ms-auto">
+                          <button type="button" class="btn btn-secondary btn-sm px-3 py-1 me-1 mt-3">Detail</button>
+                          <button type="button" class="btn btn-secondary btn-sm px-3 py-1 mt-3">Update</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="align-middle text-center">
+                          <span class="text-secondary text-xs font-weight-bold">#00002</span>
+                        </td>
+                        <td class="align-middle text-center text-sm">
+                          <span class="badge badge-sm bg-gradient-warning px-3">Pending</span>
+                        </td>
+                        <td class="align-middle text-center">
+                          <span class="text-secondary text-xs font-weight-bold">Ilham Ibnu Ahmad</span>
+                        </td>
+                        <td class="align-middle text-center">
+                          <span class="text-secondary text-xs font-weight-bold">Texas, Probolinggo</span>
+                        </td>
+                        <td class="align-middle text-center">
+                          <span class="text-secondary text-xs font-weight-bold">20-11-2022</span>
+                        </td>
+                        <td class="align-middle text-center">
+                          <span class="text-secondary text-xs font-weight-bold">21-11-2022</span>
+                        </td>
+                        <td class="align-middle text-center text-sm ms-auto">
+                          <button type="button" class="btn btn-secondary btn-sm px-3 py-1 me-1 mt-3">Detail</button>
+                          <button type="button" class="btn btn-secondary btn-sm px-3 py-1 mt-3">Update</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="align-middle text-center">
+                          <span class="text-secondary text-xs font-weight-bold">#00003</span>
+                        </td>
+                        <td class="align-middle text-center text-sm">
+                          <span class="badge badge-sm bg-gradient-info px-4">Move</span>
+                        </td>
+                        <td class="align-middle text-center">
+                          <span class="text-secondary text-xs font-weight-bold">Raihan Achmad</span>
+                        </td>
+                        <td class="align-middle text-center">
+                          <span class="text-secondary text-xs font-weight-bold">Tokyo, Bondowoso</span>
+                        </td>
+                        <td class="align-middle text-center">
+                          <span class="text-secondary text-xs font-weight-bold">21-11-2022</span>
+                        </td>
+                        <td class="align-middle text-center">
+                          <span class="text-secondary text-xs font-weight-bold">22-11-2022</span>
+                        </td>
+                        <td class="align-middle text-center text-sm ms-auto">
+                          <button type="button" class="btn btn-secondary btn-sm px-3 py-1 me-1 mt-3">Detail</button>
+                          <button type="button" class="btn btn-secondary btn-sm px-3 py-1 mt-3">Update</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="align-middle text-center">
+                          <span class="text-secondary text-xs font-weight-bold">#00004</span>
+                        </td>
+                        <td class="align-middle text-center text-sm">
+                          <span class="badge badge-sm bg-gradient-success px-4">Done</span>
+                        </td>
+                        <td class="align-middle text-center">
+                          <span class="text-secondary text-xs font-weight-bold">Shilmia Madina</span>
+                        </td>
+                        <td class="align-middle text-center">
+                          <span class="text-secondary text-xs font-weight-bold">Besuki, Situbondo</span>
+                        </td>
+                        <td class="align-middle text-center">
+                          <span class="text-secondary text-xs font-weight-bold">22-11-2022</span>
+                        </td>
+                        <td class="align-middle text-center">
+                          <span class="text-secondary text-xs font-weight-bold">23-11-2022</span>
+                        </td>
+                        <td class="align-middle text-center text-sm ms-auto">
+                          <button type="button" class="btn btn-secondary btn-sm px-3 py-1 me-1 mt-3">Detail</button>
+                          <button type="button" class="btn btn-secondary btn-sm px-3 py-1 mt-3">Update</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="align-middle text-center">
+                          <span class="text-secondary text-xs font-weight-bold">#00005</span>
+                        </td>
+                        <td class="align-middle text-center text-sm">
+                          <span class="badge badge-sm bg-gradient-warning px-3">Pending</span>
+                        </td>
+                        <td class="align-middle text-center">
+                          <span class="text-secondary text-xs font-weight-bold">Babylina Vindarosita</span>
+                        </td>
+                        <td class="align-middle text-center">
+                          <span class="text-secondary text-xs font-weight-bold">Denver, Sumenep</span>
+                        </td>
+                        <td class="align-middle text-center">
+                          <span class="text-secondary text-xs font-weight-bold">23-11-2022</span>
+                        </td>
+                        <td class="align-middle text-center">
+                          <span class="text-secondary text-xs font-weight-bold">24-11-2022</span>
+                        </td>
+                        <td class="align-middle text-center text-sm ms-auto">
+                          <button type="button" class="btn btn-secondary btn-sm px-3 py-1 me-1 mt-3">Detail</button>
+                          <button type="button" class="btn btn-secondary btn-sm px-3 py-1 mt-3">Update</button>
+                        </td>
+                      </tr>
+                    </tbody>
                   </table>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      <footer class="footer pt-3">
-        <div class="container-fluid">
-          <div class="row align-items-center justify-content-lg-between">
-            <div class="col-lg-6 mb-lg-0 mb-4">
-              <div class="copyright text-center text-sm text-muted text-lg-start">
-                ©
-                <script>
-                  document.write(new Date().getFullYear());
-                </script>
-                , made with <i class="fa fa-heart"></i> by
-                <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
-                for a better web.
+        <footer class="footer pt-3">
+          <div class="container-fluid">
+            <div class="row align-items-center justify-content-lg-between">
+              <div class="col-lg-6 mb-lg-0 mb-4">
+                <div class="copyright text-center text-sm text-muted text-lg-start">
+                  ©
+                  <script>
+                    document.write(new Date().getFullYear());
+                  </script>
+                  , made with <i class="fa fa-heart"></i> by
+                  <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
+                  for a better web.
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+                  <li class="nav-item">
+                    <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Creative Tim</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted" target="_blank">About Us</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="https://www.creative-tim.com/blog" class="nav-link text-muted" target="_blank">Blog</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted" target="_blank">License</a>
+                  </li>
+                </ul>
               </div>
             </div>
-            <div class="col-lg-6">
-              <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Creative Tim</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted" target="_blank">About Us</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/blog" class="nav-link text-muted" target="_blank">Blog</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted" target="_blank">License</a>
-                </li>
-              </ul>
-            </div>
           </div>
-        </div>
-      </footer>
-    </div>
+        </footer>
+      </div>
   </main>
   <div class="fixed-plugin">
     <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
