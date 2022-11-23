@@ -1,17 +1,23 @@
 <?php
 require("./koneksi.php");
 session_start();
+error_reporting(1);
 if (isset($_POST['add-product'])) {
   $nama = $_POST['txt_nama'];
   $harga = $_POST['txt_harga'];
   $qty = $_POST['txt_qty'];
   $kategori = $_POST['txt_kategori'];
 
+  $foto = $_FILES['foto']['name'];
+  $file_tmp = $_FILES['foto']['tmp_name'];
+  move_uploaded_file($file_tmp, '../foto/product/' . $foto);
 
-  $query    = "INSERT INTO `tb_product` (`id`, `image`,`nama`, `harga`, `qty`, `kategori`) VALUES (NULL, '', '$nama', '$harga', '$qty','$kategori')";
+
+  $query    = "INSERT INTO `tb_product` (`id`, `foto`,`nama`, `harga`, `qty`, `kategori`) VALUES (NULL, '$foto', '$nama', '$harga', '$qty','$kategori')";
   $result   = mysqli_query($koneksi, $query);
 }
 ?>
+
 
 
 
@@ -278,56 +284,78 @@ if (isset($_POST['add-product'])) {
     <div class="card shadow-lg mx-4 mt-3">
       <div class="card-body">
         <div class="row gx-4">
-          <div class="dropdown col-auto">
-            <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-3" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-              Sort
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <li><a class="dropdown-item" href="#">No</a></li>
-              <li><a class="dropdown-item" href="#">Name</a></li>
-              <li><a class="dropdown-item" href="#">Harga</a></li>
-              <li><a class="dropdown-item" href="#">Qty</a></li>
 
-            </ul>
-          </div>
           <div class="dropdown col-auto">
-            <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-3" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-              Kategori
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <li><a class="dropdown-item" href="#">Kasur</a></li>
-              <li><a class="dropdown-item" href="#">Lemari</a></li>
-              <li><a class="dropdown-item" href="#">Meja</a></li>
-              <li><a class="dropdown-item" href="#">Kursi</a></li>
+            <form class="" action="" method="post">
+              <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-3" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                Sort
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <button class="dropdown-item" name="urutnama" type="submit">Name</button>
+                <button class="dropdown-item" name="urutharga" type="submit">Harga</button>
+                <button class="dropdown-item" name="urutqty" type="submit">Qty</button>
 
-            </ul>
-          </div>
-          <div class="dropdown col-auto">
-            <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-4" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-              By
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <li><a class="dropdown-item" href="#">Asc (A-Z)</a></li>
-              <li><a class="dropdown-item" href="#">Desc (Z-A)</a></li>
+              </ul>
+            </form>
 
-            </ul>
           </div>
+
+
+          <form class="row gx-4 dropdown col-auto" action="" method="post">
+            <div class="dropdown col-auto">
+
+              <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-3" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                Kategori
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <button class="dropdown-item" value="kasur" name="tampilkategori" type="submit">Kasur</button>
+                <button class="dropdown-item" value="lemari" name="tampilkategori" type="submit">Lemari</button>
+                <button class="dropdown-item" value="meja" name="tampilkategori" type="submit">Meja</button>
+                <button class="dropdown-item" value="kursi" name="tampilkategori" type="submit">Kursi</button>
+              </ul>
+
+
+            </div>
+          </form>
+
+
+          <form class="row gx-4 dropdown col-auto" action="" method="post">
+            <div class="dropdown col-auto">
+
+              <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-3" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                By
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <button class="dropdown-item" name="namaasc" type="submit"> Nama Asc (A-Z)</button>
+                <button class="dropdown-item" name="namadesc" type="submit"> Nama Desc (Z-A)</button>
+                <button class="dropdown-item" name="hargaasc" type="submit">Harga Asc (A-Z)</button>
+                <button class="dropdown-item" name="hargadesc" type="submit">Harga Desc (Z-A)</button>
+                <button class="dropdown-item" name="qtyasc" type="submit">Qty Asc (A-Z)</button>
+                <button class="dropdown-item" name="qtydesc" type="submit">Qty Desc (Z-A)</button>
+
+              </ul>
+
+
+            </div>
+          </form>
+
           <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
             <div class="nav-wrapper position-relative end-0">
               <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                <div class="input-group">
-                  <input type="text" class="form-control ms-4" placeholder="Type here..." aria-label="Type here..." aria-describedby="button-addon2">
-                  <button class="btn bg-gradient-dark  mb-0" type="button" id="button-addon2">
-                    <i class="fas fa-search" aria-hidden="true"></i>
-                  </button>
-                </div>
+                <form class="input-group" action="" method="post">
+                  <div class="input-group">
+                    <input type="text" class="form-control ms-4" name="data" placeholder="Type here..." aria-label="Type here..." aria-describedby="button-addon2">
+                    <button class="btn bg-gradient-dark  mb-0" name="caridata" type="submit" id="button-addon2">
+                      <i class="fas fa-search" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
 
 
 
@@ -400,16 +428,50 @@ if (isset($_POST['add-product'])) {
                     </tr>
                   </thead>
                   <?php
-                  $query  = "SELECT tb_product.id, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.nama asc";
-                  $result = mysqli_query($koneksi, $query);
+                  if (isset($_POST['caridata'])) {
+                    $caringab = ("SELECT tb_product.id,tb_product.foto, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id and tb_product.nama LIKE '" . $_POST['data'] . "%'");
+                    $result   = mysqli_query($koneksi, $caringab);
+                  } elseif (isset($_POST['tampilkategori'])) {
+                    $tampilkategori = ("SELECT tb_product.id,tb_product.foto, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id and tb_kategori.nama =  '" . $_POST['tampilkategori'] . "'");
+                    $result   = mysqli_query($koneksi, $tampilkategori);
+                  } elseif (isset($_POST['urutnama'])) {
+                    $urutkannama = ("SELECT tb_product.id, tb_product.foto, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.nama asc");
+                    $result   = mysqli_query($koneksi, $urutkannama);
+                  } elseif (isset($_POST['urutharga'])) {
+                    $urutkanharga = ("SELECT tb_product.id, tb_product.foto, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.harga asc");
+                    $result   = mysqli_query($koneksi, $urutkanharga);
+                  } elseif (isset($_POST['urutqty'])) {
+                    $urutkanqty = ("SELECT tb_product.id, tb_product.foto, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.qty asc");
+                    $result   = mysqli_query($koneksi, $urutkanqty);
+                  } elseif (isset($_POST['namaasc'])) {
+                    $namaasc = ("SELECT tb_product.id,tb_product.foto, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.nama asc");
+                    $result   = mysqli_query($koneksi, $namaasc);
+                  } elseif (isset($_POST['namadesc'])) {
+                    $namadesc = ("SELECT tb_product.id,tb_product.foto, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.nama desc");
+                    $result   = mysqli_query($koneksi, $namadesc);
+                  } elseif (isset($_POST['hargaasc'])) {
+                    $hargaasc = ("SELECT tb_product.id, tb_product.foto, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.harga asc");
+                    $result   = mysqli_query($koneksi, $hargaasc);
+                  } elseif (isset($_POST['hargadesc'])) {
+                    $hargadesc = ("SELECT tb_product.id, tb_product.foto, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.harga desc");
+                    $result   = mysqli_query($koneksi, $hargadesc);
+                  } elseif (isset($_POST['qtyasc'])) {
+                    $qtyasc = ("SELECT tb_product.id, tb_product.foto, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.qty asc");
+                    $result   = mysqli_query($koneksi, $qtyasc);
+                  } elseif (isset($_POST['qtydesc'])) {
+                    $qtydesc = ("SELECT tb_product.id, tb_product.foto, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.qty desc");
+                    $result   = mysqli_query($koneksi, $qtydesc);
+                  } else {
+                    $query  = "SELECT tb_product.id,tb_product.foto, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.nama asc";
+                    $result = mysqli_query($koneksi, $query);
+                  }
+
                   $no     = 1;
-                  // if ($sesLvl == 1) {
-                  //   $dis = "";
-                  // } else {
-                  //   $dis = "disabled";
-                  // }
+
+
                   while ($row = mysqli_fetch_array($result)) {
                     $productId = $row['id'];
+                    $productFoto = $row['foto'];
                     $productName   = $row['nama'];
                     $productHarga  = $row['harga'];
                     $productQty  = $row['qty'];
@@ -422,7 +484,7 @@ if (isset($_POST['add-product'])) {
                           <span class="text-secondary text-xs font-weight-bold"><?php echo $no; ?></span>
                         </td>
                         <td class="align-middle text-center">
-                          <img src="../assets/img/team-3.jpg" class="avatar avatar-sm me-3" alt="user1" />
+                          <img src="../foto/product/<?php echo $productFoto; ?>" class="avatar avatar-sm me-2" alt="user1" />
                         </td>
                         <!-- <td class="align-middle text-center">
                           <div class="d-flex px-2 py-1">
@@ -600,11 +662,18 @@ if (isset($_POST['add-product'])) {
                 <div class="modal-header-edit">
                   <h2 class="edit">Edit Form</h2>
                   <div class="modal-body-edit">
-                    <form action="edit_product.php?id=<?= $row['id'] ?>" method="post">
+                    <form action="edit_product.php?id=<?= $row['id'] ?>" method="post" enctype="multipart/form-data">
                       <div class="form-group">
                         <label for="example-text-input" class="form-control-label">Name</label>
                         <input class="form-control" name="nama" type="text" value="<?= $row['nama'] ?>" placeholder="Enter Nama" required />
                       </div>
+
+                      <div class="form-group">
+                        <label class="custom-file-label" for="customFileLang">Upload Photo</label>
+                        <input type="file" class="form-control" name="foto">
+
+                      </div>
+
 
                       <div class="form-group">
                         <label for="example-text-input" class="form-control-label">Harga</label>
@@ -777,11 +846,17 @@ if (isset($_POST['add-product'])) {
         <!-- <button data-close-add class="close-btn-add">&times;</button> -->
 
         <div class="modal-body-add">
-          <form class="hahahhaaaa" id="form" action="" method="post">
+          <form class="hahahhaaaa" id="form" action="" method="post" enctype="multipart/form-data">
 
             <div class="form-group">
               <label for="example-text-input" class="form-control-label">Name</label>
               <input class="form-control" type="text" placeholder="Enter Name" name="txt_nama" required />
+
+            </div>
+
+            <div class="form-group">
+              <label class="custom-file-label" for="customFileLang">Upload Photo</label>
+              <input type="file" class="form-control" name="foto" required>
 
             </div>
 
