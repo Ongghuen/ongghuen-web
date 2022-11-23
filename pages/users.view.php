@@ -10,10 +10,15 @@ if (isset($_POST['add-user'])) {
   $userUser = $_POST['txt_user'];
   $userPw = $_POST['txt_pw'];
 
-  $query    = "INSERT INTO `tb_user` (`id`, `avatar`, `nama`, `nohp`, `email`, `username`, `password`, `level`) VALUES (NULL, '', '$userNama', '$userNoHp', '$userMail', '$userUser', '$userPw', '1')";
+  $foto = $_FILES['foto']['name'];
+  $file_tmp = $_FILES['foto']['tmp_name'];
+  move_uploaded_file($file_tmp, '../foto/user/' . $foto);
+
+  $query    = "INSERT INTO tb_user SET foto = '$foto', nama =  '$userNama', nohp = '$userNoHp', email = '$userMail', username = '$userUser', password = '$userPw', level = '1'";
   $result   = mysqli_query($koneksi, $query);
 }
 ?>
+
 
 
 <!DOCTYPE html>
@@ -378,26 +383,28 @@ if (isset($_POST['add-user'])) {
                       </tr>
                     </thead>
                     <?php
+                    error_reporting(1);
                     if (isset($_POST['caridata'])) {
-                      $caringab = ("SELECT id, nama, nohp, email, username, password  FROM tb_user WHERE level = '1' and nama LIKE '" . $_POST['data'] . "%'");
+                      $caringab = ("SELECT id, foto, nama, nohp, email, username, password  FROM tb_user WHERE level = '1' and nama LIKE '" . $_POST['data'] . "%'");
                       $result   = mysqli_query($koneksi, $caringab);
                     } elseif (isset($_POST['urutnama'])) {
-                      $urutnama = ("SELECT id, nama, nohp, email, username, password  FROM tb_user WHERE level = '1' order by nama asc ");
+                      $urutnama = ("SELECT id, foto, nama, nohp, email, username, password  FROM tb_user WHERE level = '1' order by nama asc ");
                       $result   = mysqli_query($koneksi, $urutnama);
                     } elseif (isset($_POST['urutinasc'])) {
-                      $urutasc = ("SELECT id, nama, nohp, email, username, password  FROM tb_user WHERE level = '1' order by nama asc ");
+                      $urutasc = ("SELECT id, foto, nama, nohp, email, username, password  FROM tb_user WHERE level = '1' order by nama asc ");
                       $result   = mysqli_query($koneksi, $urutasc);
                     } elseif (isset($_POST['urutindesc'])) {
-                      $urutdesc = ("SELECT id, nama, nohp, email, username, password  FROM tb_user WHERE level = '1' order by nama desc ");
+                      $urutdesc = ("SELECT id, foto, nama, nohp, email, username, password  FROM tb_user WHERE level = '1' order by nama desc ");
                       $result   = mysqli_query($koneksi, $urutdesc);
                     } else {
-                      $tampilngab = ("SELECT id, nama, nohp, email, username, password  FROM tb_user WHERE level = '1'");
+                      $tampilngab = ("SELECT id, foto, nama, nohp, email, username, password  FROM tb_user WHERE level = '1'");
                       $result   = mysqli_query($koneksi, $tampilngab);
                     }
                     $no = 1;
 
                     while ($row = mysqli_fetch_array($result)) {
                       $userUserId   = $row['id'];
+                      $userFoto  = $row['foto'];
                       $userName   = $row['nama'];
                       $userPhone  = $row['nohp'];
                       $userEmail  = $row['email'];
@@ -411,7 +418,7 @@ if (isset($_POST['add-user'])) {
                             <span class="text-secondary text-xs font-weight-bold"><?php echo $no; ?></span>
                           </td>
                           <td class="align-middle text-center">
-                            <img src="../assets/img/team-3.jpg" class="avatar avatar-sm me-2" alt="user1" />
+                            <img src="../foto/user/<?php echo $userFoto; ?>" class="avatar avatar-sm me-2" alt="user1" />
                           </td>
                           <td class="align-middle text-center">
                             <span class="text-secondary text-xs font-weight-bold"><?php echo $userName; ?></span>
@@ -444,10 +451,17 @@ if (isset($_POST['add-user'])) {
                             <h2 class="edit">Edit Form</h2>
                             <!-- <button data-close-button-edit type="submit" class="close-btn-edit">&times;</button> -->
                             <div class="modal-body-edit">
-                              <form action="edit_user.php?id=<?= $row['id'] ?>" method="post">
+                              <form action="edit_user.php?id=<?= $row['id'] ?>" method="post" enctype="multipart/form-data">
                                 <div class="form-group">
                                   <label for="example-text-input" class="form-control-label">Name</label>
                                   <input class="form-control" name="nama" type="text" value="<?= $row['nama'] ?>" placeholder="Enter Name" required />
+                                </div>
+
+
+                                <div class="form-group">
+                                  <label class="custom-file-label" for="customFileLang">Upload Avatar</label>
+                                  <input type="file" class="form-control" name="foto">
+
                                 </div>
 
                                 <div class="form-group">
@@ -756,13 +770,20 @@ if (isset($_POST['add-user'])) {
           <!-- <button data-close-add class="close-btn-add">&times;</button> -->
 
           <div class="modal-body-add">
-            <form class="hahahha" id="form" action="users.view.php" method="post">
+            <form class="hahahha" id="form" action="users.view.php" method="post" enctype="multipart/form-data">
 
               <div class="form-group">
                 <label for="example-text-input" class="form-control-label">Name</label>
                 <input class="form-control" type="text" value="" placeholder="Enter Name" name="txt_nama" id="txt_nama" required />
 
               </div>
+
+              <div class="form-group">
+                <label class="custom-file-label" for="customFileLang">Upload Avatar</label>
+                <input type="file" class="form-control" name="foto" id="foto" required>
+
+              </div>
+
 
 
               <div class="form-group">
