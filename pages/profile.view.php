@@ -69,6 +69,14 @@
           </a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="./transaksi.view.php">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-tag text-warning text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Transaksi</span>
+          </a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="./products.view.php">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-bag-17 text-warning text-sm opacity-10"></i>
@@ -90,6 +98,14 @@
               <i class="ni ni-circle-08 text-warning text-sm opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">Users</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./report.view.php">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-chart-bar-32 text-warning text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Report</span>
           </a>
         </li>
         <!-- <li class="nav-item">
@@ -630,7 +646,7 @@
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="../assets/js/argon-dashboard.min.js?v=2.0.4"></script>
+  <script src="../assets/js/argon-dashboard.min.js"></script>
 </body>
 
 </html>

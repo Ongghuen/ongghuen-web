@@ -18,7 +18,7 @@ if (isset($_POST['submit'])) {
             $sql = mysqli_query($koneksi, "UPDATE `tb_user` SET nama='$nama',nohp='$nohp',email='$email',username='$username',password='$password' WHERE id='$id'");
             header('location:users.view.php');
         } else {
-            $sql = mysqli_query($koneksi, "UPDATE `tb_user` SET foto='$foto', nama='$nama',nohp='$nohp',email='$email',username='$username',password='$password' WHERE id='$id'");
+            $sql = mysqli_query($koneksi, "UPDATE `tb_user` SET nama='$nama', foto='$foto', nohp='$nohp',email='$email',username='$username',password='$password' WHERE id='$id'");
             header('location:users.view.php');
         }
     }

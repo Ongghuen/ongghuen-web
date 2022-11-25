@@ -1,6 +1,6 @@
 <?php
 
-if(isset($_GET["error"])){
+if (isset($_GET["error"])) {
   echo "
   <script>
       alert('Username atau password salah!');
@@ -12,17 +12,19 @@ if(isset($_GET["error"])){
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="../styles/style.css">
   <script src="https://cdn.tailwindcss.com" defer></script>
   <title>Suki Store</title>
 </head>
+
 <body>
   <section class="shadow-2xl">
     <div class="leftBox">
-        <img class="logo" src="../assets/img/logo.png">
+      <img class="logo" src="../assets/img/logo.png">
     </div>
     <div class="rightBox">
       <div class="formBox">
@@ -49,4 +51,5 @@ if(isset($_GET["error"])){
     </div>
   </section>
 </body>
+
 </html>

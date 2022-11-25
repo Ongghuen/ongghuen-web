@@ -30,23 +30,18 @@
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
-  <link id="pagestyle" href="../assets/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
+  <link id="pagestyle" href="../assets/css/argon-dashboard.css" rel="stylesheet" />
 </head>
 
 <body class="g-sidenav-show bg-gray-100">
-  <div class="position-absolute w-100 min-height-300 top-0" style="
-        background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/profile-layout-header.jpg');
-        background-position-y: 50%;
-      ">
-    <span class="mask bg-primary opacity-6"></span>
-  </div>
-  <div class="min-height-300 position-absolute w-100"></div>
+  <div class="min-height-300 bg-primary position-absolute w-100"></div>
   <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4" id="sidenav-main">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href="./dashboard.view.php">
         <img src="../assets/images/icon.png" class="navbar-brand-img h-100" alt="main_logo" />
-        <span class="ms-1 font-weight-bold">Suki Dashboard</span> </a>
+        <span class="ms-1 font-weight-bold">Suki Dashboard</span>
+      </a>
     </div>
     <hr class="horizontal dark mt-0" />
     <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
@@ -66,6 +61,14 @@
               <i class="ni ni-cart text-warning text-sm opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">Oders</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./transaksi.view.php">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-tag text-warning text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Transaksi</span>
           </a>
         </li>
         <li class="nav-item">
@@ -90,6 +93,14 @@
               <i class="ni ni-circle-08 text-warning text-sm opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">Users</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./report.view.php">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-chart-bar-32 text-warning text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Report</span>
           </a>
         </li>
         <!-- <li class="nav-item">
@@ -619,7 +630,7 @@
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="../assets/js/argon-dashboard.min.js?v=2.0.4"></script>
+  <script src="../assets/js/argon-dashboard.min.js"></script>
 </body>
 
 </html>

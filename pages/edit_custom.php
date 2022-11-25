@@ -18,7 +18,7 @@ if (isset($_POST['submit'])) {
             $sql = mysqli_query($koneksi, "UPDATE `tb_custom` SET nama='$nama', kategori='$kategori',bahan='$bahan',detail='$detail' WHERE id='$id'");
             header('location:customs.view.php');
         } else {
-            $sql = mysqli_query($koneksi, "UPDATE `tb_custom` SET foto='$foto', nama='$nama', kategori='$kategori',bahan='$bahan',detail='$detail' WHERE id='$id'");
+            $sql = mysqli_query($koneksi, "UPDATE `tb_custom` SET nama='$nama', foto='$foto', kategori='$kategori',bahan='$bahan',detail='$detail' WHERE id='$id'");
             header('location:customs.view.php');
         }
     }

@@ -7,14 +7,13 @@ if (isset($_POST['add-product'])) {
   $harga = $_POST['txt_harga'];
   $qty = $_POST['txt_qty'];
   $kategori = $_POST['txt_kategori'];
-  $deskripsi = $_POST['txt_desc'];
 
   $foto = $_FILES['foto']['name'];
   $file_tmp = $_FILES['foto']['tmp_name'];
   move_uploaded_file($file_tmp, '../foto/product/' . $foto);
 
 
-  $query    = "INSERT INTO `tb_product` (`id`, `nama`,`foto`, `harga`, `qty`, `kategori`, `deskripsi`) VALUES (NULL, '$nama', '$foto', '$harga', '$qty','$kategori', '$deskripsi')";
+  $query    = "INSERT INTO `tb_product` (`id`, `nama`,`foto`, `harga`, `qty`, `kategori`) VALUES (NULL, '$nama', '$foto', '$harga', '$qty','$kategori')";
   $result   = mysqli_query($koneksi, $query);
 }
 ?>
@@ -79,7 +78,7 @@ if (isset($_POST['add-product'])) {
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="./transaksi.view.php">
+          <a class="nav-link active" href="./transaksi.view.php">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-tag text-warning text-sm opacity-10"></i>
             </div>
@@ -87,7 +86,7 @@ if (isset($_POST['add-product'])) {
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="./products.view.php">
+          <a class="nav-link" href="./products.view.php">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-bag-17 text-warning text-sm opacity-10"></i>
             </div>
@@ -380,17 +379,16 @@ if (isset($_POST['add-product'])) {
 
 
 
-
     <div class="container-fluid py-4">
       <div class="row">
         <div class="col-12">
           <div class="card mb-4">
             <div class="card-header pb-0">
               <div class="d-flex align-items-center">
-                <h6>Products table</h6>
-                <button class="btn btn-success btn-sm ms-auto " data-modal-target="#modal-add">
+                <h6>Transactions table</h6>
+                <!-- <button class="btn btn-success btn-sm ms-auto " data-modal-target="#modal-add">
                   Add Product
-                </button>
+                </button> -->
               </div>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
@@ -420,23 +418,20 @@ if (isset($_POST['add-product'])) {
                         No
                       </th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                        Image
+                        Nama
                       </th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                        Name
+                        Total
                       </th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                        Harga
+                        Tanggal
                       </th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                      <!-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                         Qty
                       </th>
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                         Kategori
-                      </th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                        Deskripsi
-                      </th>
+                      </th> -->
                       <!-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                         Password
                       </th> -->
@@ -454,53 +449,50 @@ if (isset($_POST['add-product'])) {
                   </thead>
                   <?php
                   if (isset($_POST['caridata'])) {
-                    $caringab = ("SELECT tb_product.id, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori, tb_product.deskripsi  FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id and tb_product.nama LIKE '" . $_POST['data'] . "%'");
+                    $caringab = ("SELECT tb_product.id, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id and tb_product.nama LIKE '" . $_POST['data'] . "%'");
                     $result   = mysqli_query($koneksi, $caringab);
                   } elseif (isset($_POST['tampilkategori'])) {
-                    $tampilkategori = ("SELECT tb_product.id, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori , tb_product.deskripsi FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id and tb_kategori.nama =  '" . $_POST['tampilkategori'] . "'");
+                    $tampilkategori = ("SELECT tb_product.id, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id and tb_kategori.nama =  '" . $_POST['tampilkategori'] . "'");
                     $result   = mysqli_query($koneksi, $tampilkategori);
                   } elseif (isset($_POST['urutnama'])) {
-                    $urutkannama = ("SELECT tb_product.id, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori , tb_product.deskripsi FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.nama asc");
+                    $urutkannama = ("SELECT tb_product.id, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.nama asc");
                     $result   = mysqli_query($koneksi, $urutkannama);
                   } elseif (isset($_POST['urutharga'])) {
-                    $urutkanharga = ("SELECT tb_product.id, tb_product.foto,tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori, tb_product.deskripsi FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.harga asc");
+                    $urutkanharga = ("SELECT tb_product.id, tb_product.foto,tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.harga asc");
                     $result   = mysqli_query($koneksi, $urutkanharga);
                   } elseif (isset($_POST['urutqty'])) {
-                    $urutkanqty = ("SELECT tb_product.id, tb_product.foto,tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori, tb_product.deskripsi FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.qty asc");
+                    $urutkanqty = ("SELECT tb_product.id, tb_product.foto,tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.qty asc");
                     $result   = mysqli_query($koneksi, $urutkanqty);
                   } elseif (isset($_POST['namaasc'])) {
-                    $namaasc = ("SELECT tb_product.id,tb_product.foto, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori, tb_product.deskripsi FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.nama asc");
+                    $namaasc = ("SELECT tb_product.id,tb_product.foto, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.nama asc");
                     $result   = mysqli_query($koneksi, $namaasc);
                   } elseif (isset($_POST['namadesc'])) {
-                    $namadesc = ("SELECT tb_product.id,tb_product.foto,  tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori,tb_product.deskripsi FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.nama desc");
+                    $namadesc = ("SELECT tb_product.id,tb_product.foto,  tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.nama desc");
                     $result   = mysqli_query($koneksi, $namadesc);
                   } elseif (isset($_POST['hargaasc'])) {
-                    $hargaasc = ("SELECT tb_product.id, tb_product.foto, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori, tb_product.deskripsi FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.harga asc");
+                    $hargaasc = ("SELECT tb_product.id, tb_product.foto, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.harga asc");
                     $result   = mysqli_query($koneksi, $hargaasc);
                   } elseif (isset($_POST['hargadesc'])) {
-                    $hargadesc = ("SELECT tb_product.id, tb_product.foto, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori, tb_product.deskripsi FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.harga desc");
+                    $hargadesc = ("SELECT tb_product.id, tb_product.foto, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.harga desc");
                     $result   = mysqli_query($koneksi, $hargadesc);
                   } elseif (isset($_POST['qtyasc'])) {
-                    $qtyasc = ("SELECT tb_product.id, tb_product.foto, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori, tb_product.deskripsi FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.qty asc");
+                    $qtyasc = ("SELECT tb_product.id, tb_product.foto, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.qty asc");
                     $result   = mysqli_query($koneksi, $qtyasc);
                   } elseif (isset($_POST['qtydesc'])) {
-                    $qtydesc = ("SELECT tb_product.id, tb_product.foto, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori, tb_product.deskripsi FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.qty desc");
+                    $qtydesc = ("SELECT tb_product.id, tb_product.foto, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.qty desc");
                     $result   = mysqli_query($koneksi, $qtydesc);
                   } else {
-                    $query  = "SELECT tb_product.id,tb_product.foto, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori, tb_product.deskripsi FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.nama asc";
+                    $query  = "SELECT tb_transaksi.id, SUM(tb_product.harga*tb_detail_transaksi.qty) AS total, tb_user.nama, tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product GROUP BY tb_user.nama";
                     $result = mysqli_query($koneksi, $query);
                   }
 
                   $no     = 1;
 
                   while ($row = mysqli_fetch_array($result)) {
-                    $productId = $row['id'];
-                    $productFoto = $row['foto'];
-                    $productName   = $row['nama'];
-                    $productHarga  = $row['harga'];
-                    $productQty  = $row['qty'];
-                    $productKategori = $row['kategori'];
-                    $productDesc = $row['deskripsi'];
+                    $transaksiId = $row['id'];
+                    $transaksiNama = $row['nama'];
+                    $transaksiTotal = $row['total'];
+                    $transaksiTanggal   = $row['tanggal'];
                   ?>
                     <tbody>
 
@@ -508,9 +500,9 @@ if (isset($_POST['add-product'])) {
                         <td class="align-middle text-center">
                           <span class="text-secondary text-xs font-weight-bold"><?php echo $no; ?></span>
                         </td>
-                        <td class="align-middle text-center">
+                        <!-- <td class="align-middle text-center">
                           <img src="../foto/product/<?php echo $productFoto; ?>" class="avatar avatar-sm me-2" alt="user1" />
-                        </td>
+                        </td> -->
                         <!-- <td class="align-middle text-center">
                           <div class="d-flex px-2 py-1">
                             <div>
@@ -521,158 +513,25 @@ if (isset($_POST['add-product'])) {
 
                         </td> -->
                         <td class="align-middle text-center">
-                          <span class="text-secondary text-xs font-weight-bold"><?php echo $productName; ?></span>
+                          <span class="text-secondary text-xs font-weight-bold"><?php echo $transaksiNama; ?></span>
                         </td>
                         <td class="align-middle text-center">
-                          <span class="text-secondary text-xs font-weight-bold"><?php echo $productHarga; ?></span>
+                          <span class="text-secondary text-xs font-weight-bold"><?php echo $transaksiTotal; ?></span>
                         </td>
                         <td class="align-middle text-center">
-                          <span class="text-secondary text-xs font-weight-bold"><?php echo $productQty; ?></span>
+                          <span class="text-secondary text-xs font-weight-bold"><?php echo $transaksiTanggal; ?></span>
                         </td>
-                        <td class="align-middle text-center">
+                        <!-- <td class="align-middle text-center">
                           <span class="text-secondary text-xs font-weight-bold"><?php echo $productKategori; ?></span>
-                        </td>
+                        </td> -->
                         <td class="align-middle text-center">
-                          <button class="btn btn-secondary btn-sm px-3 py-1 me-1 mt-3" data-modal-target="#modal-detail<?= $row['id'] ?>">Cek Deskripsi</button>
-
-                        </td>
-                        <td class="align-middle text-center">
-                          <button class="btn btn-dark btn-sm ms-auto" data-modal-target="#modal-edit<?php echo $row['id']; ?>">Edit</button>
-                          <button class="btn btn-danger btn-sm ms-auto" data-modal-target="#modal-delete<?php echo $row['id']; ?>">Delete</button>
+                          <button class="btn btn-secondary btn-sm px-3 py-1 me-1 mt-3" data-modal-target="#modal-delete<?= $row['id'] ?>">Cek Detail</button>
+                          <!-- <button class="btn btn-dark btn-sm ms-auto" data-modal-target="#modal-edit<?php echo $row['id']; ?>">Edit</button>
+                          <button class="btn btn-danger btn-sm ms-auto" data-modal-target="#modal-delete<?php echo $row['id']; ?>">Delete</button> -->
                         </td>
 
                       </tr>
 
-
-                      <!-- Pop up Detail -->
-
-                      <div class="modal-detail" id="modal-detail<?= $row['id'] ?>">
-                        <div class="modal-header-detail">
-                          <h2 class="detail">Detail Form</h2>
-                          <div class="modal-body-detail">
-                            <form class="anjasmara" action="edit_product.php?id=<?= $row['id'] ?>" method="post">
-                              <div class="form-group">
-                                <label for="exampleFormControlTextarea1">Detail</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" maxlength="500" rows="5"><?= $productDesc ?></textarea>
-                              </div>
-                              <div class="align-middle text-center">
-                                <button class="btn btn-danger btn-sm ms-auto" type="submit" name="close" data-close-button-detail>Close</button>
-                                <!-- <a class="btn btn-danger btn-sm ms-auto" type="submit" data-close-button-edit>Close</a> -->
-                              </div>
-                            </form>
-
-                          </div>
-                        </div>
-                      </div>
-
-                      <style>
-                        .modal-detail {
-                          position: fixed;
-                          left: 0;
-                          top: 0;
-                          background: rgb(0, 0, 0, 0.6);
-                          height: 100%;
-                          width: 100%;
-                          display: flex;
-                          align-items: center;
-                          justify-content: center;
-                          opacity: 0;
-                          pointer-events: none;
-                          transition: all 0.3s ease-in-out;
-                          z-index: 1;
-                        }
-
-                        .modal-body-detail {
-                          padding: 10px;
-                          bottom: 10px;
-                        }
-
-                        .modal-header-detail {
-                          background: white;
-                          width: 560px;
-                          max-width: 90%;
-                          padding: 20px;
-                          border-radius: 4x;
-                          position: relative;
-                          transform: translateY(-100);
-                          transition: all 0.3s ease-in-out;
-                        }
-
-                        .btn-open-detail {
-                          background: black;
-                          padding: 10px 40px;
-                          color: white;
-                          border-radius: 5px;
-                          font-size: 15px;
-                          cursor: pointer;
-                        }
-
-                        p.detail {
-                          line-height: 1.6;
-                          margin-bottom: 20px;
-                        }
-
-                        h2.detail {
-                          text-align: center;
-                          /* padding-bottom: 15px;
-                          font-weight: 200; */
-                        }
-
-                        .modal-header-detail button.close-btn-detail {
-                          position: absolute;
-                          right: 10px;
-                          top: 10px;
-                          font-size: 32px;
-                          background: none;
-                          outline: none;
-                          border: none;
-                          cursor: pointer;
-                        }
-
-                        .modal-header-detail button.close-btn-detail:hover {
-                          color: #6b46c1;
-                        }
-
-                        .active-detail {
-                          opacity: 1;
-                          pointer-events: auto;
-                        }
-
-                        .modal-detail.active-detail .modal-header-detail {
-                          transform: translateY(0px);
-                        }
-                      </style>
-                      <script>
-                        const openModalButtons = document.querySelectorAll("[data-modal-target]");
-                        const closeModalButtons = document.querySelectorAll(
-                          "[data-close-button-detail]"
-                        );
-
-                        openModalButtons.forEach((button) => {
-                          button.addEventListener("click", () => {
-                            const modal = document.querySelector(button.dataset.modalTarget);
-                            openModal(modal);
-                          });
-                        });
-
-                        closeModalButtons.forEach((button) => {
-                          button.addEventListener("click", () => {
-                            const modal = button.closest(".modal-detail");
-                            closeModal(modal);
-                          });
-                        });
-
-                        function openModal(modal) {
-                          if (modal == null) return;
-                          modal.classList.add("active-detail");
-                        }
-
-                        function closeModal(modal) {
-                          if (modal == null) return;
-                          modal.classList.remove("active-detail");
-                        }
-                      </script>
-                      <!-- end Pop up Detail -->
 
 
                       <!-- Popup Delete -->
@@ -863,14 +722,12 @@ if (isset($_POST['add-product'])) {
                             echo "<option value=$row[id]> $row[nama]</option>";
                           }
                           ?>
+
+
                         </select>
-                      </div>
 
-                      <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Deskripsi</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" maxlength="500" name="deskripsi" placeholder="Enter Detail" rows="3"><?= $productDesc ?></textarea>
-                      </div>
 
+                      </div>
                       <div class="align-middle text-center">
                         <button class="btn btn-success btn-sm ms-auto" name="submit">Edit</button>
                         <button class="btn btn-danger btn-sm ms-auto" type="submit" name="close" data-close-button-edit>Close</button>
@@ -991,15 +848,150 @@ if (isset($_POST['add-product'])) {
               </script>
               <!-- end Pop up Edit -->
 
-            <?php
+              <!-- Popup Delete -->
+
+              <div class="modal-delete" id="modal-delete<?= $row['id'] ?>">
+                <div class="modal-header-delete">
+                  <h2 class="delete">Detail</h2>
+                  <!-- <button data-close-delete class="close-btn-delete">&times;</button> -->
+
+                  <div class="modal-body-delete">
+
+
+
+                    <form class="yayyay" action="hapus_product.php" method="post">
+                      <div class="align-middle text-center">
+
+                        <button class="btn btn-success btn-sm ms-auto" name="submit" data-close-delete>Close</button>
+
+                    </form>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+
+
+            <style>
+              .modal-delete {
+                position: fixed;
+                left: 0;
+                top: 0;
+                background: rgb(0, 0, 0, 0.6);
+                height: 100%;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                opacity: 0;
+                pointer-events: none;
+                transition: all 0.3s ease-in-out;
+                z-index: 1;
+              }
+
+              .modal-body-delete {
+                padding: 10px;
+                bottom: 10px;
+              }
+
+              .modal-header-delete {
+                background: white;
+                width: 560px;
+                max-width: 90%;
+                padding: 20px;
+                border-radius: 4x;
+                position: relative;
+                transform: translateY(-100);
+                transition: all 0.3s ease-in-out;
+              }
+
+              .btn-open {
+                background: black;
+                padding: 10px 40px;
+                color: white;
+                border-radius: 5px;
+                font-size: 15px;
+                cursor: pointer;
+              }
+
+              p.delete {
+                line-height: 1.6;
+                margin-bottom: 20px;
+                text-align: center;
+              }
+
+              h2.delete {
+                text-align: center;
+                /* padding-bottom: 15px;
+                  font-weight: 200; */
+              }
+
+              .modal-header-delete button.close-btn-delete {
+                position: absolute;
+                right: 10px;
+                top: 10px;
+                font-size: 32px;
+                background: none;
+                outline: none;
+                border: none;
+                cursor: pointer;
+              }
+
+              .modal-header-delete button.close-btn-delete:hover {
+                color: #6b46c1;
+              }
+
+              .active-delete {
+                opacity: 1;
+                pointer-events: auto;
+              }
+
+              .modal-delete.active-delete .modal-header-delete {
+                transform: translateY(0px);
+              }
+            </style>
+            <script>
+              const openModalDelete = document.querySelectorAll("[data-modal-target]");
+              const closeModalDelete = document.querySelectorAll(
+                "[data-close-delete]"
+              );
+
+              openModalDelete.forEach((button) => {
+                button.addEventListener("click", () => {
+                  const modal = document.querySelector(button.dataset.modalTarget);
+                  openModal(modal);
+                });
+              });
+
+              closeModalDelete.forEach((button) => {
+                button.addEventListener("click", () => {
+                  const modal = button.closest(".modal-delete");
+                  closeModal(modal);
+                });
+              });
+
+              function openModal(modal) {
+                if (modal == null) return;
+                modal.classList.add("active-delete");
+              }
+
+              function closeModal(modal) {
+                if (modal == null) return;
+                modal.classList.remove("active-delete");
+              }
+            </script>
+            <!-- end Pop up Delete -->
+
+          <?php
                     $no++;
                   } ?>
-            </tbody>
-            </table>
-            </div>
+          </tbody>
+          </table>
           </div>
         </div>
       </div>
+    </div>
     </div>
 
     <!-- Pop up Add -->
@@ -1055,14 +1047,8 @@ if (isset($_POST['add-product'])) {
 
               </select>
 
+
             </div>
-
-            <div class="form-group">
-              <label for="exampleFormControlTextarea1">Deskripsi</label>
-              <textarea class="form-control" id="exampleFormControlTextarea1" maxlength="500" name="txt_desc" placeholder="Enter Detail" rows="3"></textarea>
-            </div>
-
-
             <div class="align-middle text-center">
               <button class="btn btn-success btn-sm ms-auto" type="submit" name="add-product">Add</button>
               <button class="btn btn-danger btn-sm ms-auto" data-close-add>Close</button>

@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/fontawesome.min.css" />
     <link rel="apple-touch-icon" href="images/icon.png" />
     <meta name="msapplication-TileImage" content="images/icon.png" />
-    <link rel="stylesheet" href="../assets/css/index.css" />
+    <link rel="stylesheet" href="../styles/index.css" />
 </head>
 
 <body>
@@ -27,7 +27,7 @@
       </ul> -->
         <div>
             <a href="./index.view.php" class="login-btn">Home</a>
-            <a href="./dashboard.view.php" class="login-btn">Dashboard</a>
+            <!-- <a href="./dashboard.view.php" class="login-btn">Dashboard</a> -->
             <!-- <a href="contact-us.html" class="login-btn">Contact Us</a> -->
             <a href="./login.view.php" class="login-btn">Login</a>
             <a href="#" class="btn">Download App</a>

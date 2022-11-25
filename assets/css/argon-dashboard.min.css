@@ -17084,8 +17084,8 @@ fieldset:disabled .btn {
   margin-left: 0;
 }
 .input-group .form-control:focus {
-  border-left: 1px solid #5e72e4 !important;
-  border-right: 1px solid #5e72e4 !important;
+  border-left: 1px solid #000 !important;
+  border-right: 1px solid #000 !important;
 }
 .input-group .form-control:not(:first-child) {
   border-left: 0;
@@ -17104,10 +17104,10 @@ fieldset:disabled .btn {
 }
 .input-group
   > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
-  border-left: #fff !important;
+  /* border-left: #fff !important; */
 }
 .input-group.focused .input-group-text {
-  border-color: #5e72e4 !important;
+  border-color: #000 !important;
 }
 .form-control.form-control-alternative {
   border: 0;
@@ -20078,8 +20078,8 @@ hr.horizontal.gray-light {
   border-bottom-color: #e9ecef;
 }
 .table > :not(:first-child) {
-  border-top: 0.1px solid;
-  border-color: #67748e40;
+  border-top: 1px solid currentColor;
+  border-color: #dcdcdc;
 }
 .timeline {
   position: relative;

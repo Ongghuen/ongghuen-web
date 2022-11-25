@@ -2,21 +2,6 @@
 require("./koneksi.php");
 session_start();
 error_reporting(1);
-
-if (isset($_POST['add-user'])) {
-  $userNama = $_POST['txt_nama'];
-  $userNoHp = $_POST['txt_nohp'];
-  $userMail = $_POST['txt_mail'];
-  $userUser = $_POST['txt_user'];
-  $userPw = $_POST['txt_pw'];
-
-  $foto = $_FILES['foto']['name'];
-  $file_tmp = $_FILES['foto']['tmp_name'];
-  move_uploaded_file($file_tmp, '../foto/user/' . $foto);
-
-  $query    = "INSERT INTO tb_user SET foto = '$foto', nama =  '$userNama', nohp = '$userNoHp', email = '$userMail', username = '$userUser', password = '$userPw', level = '1'";
-  $result   = mysqli_query($koneksi, $query);
-}
 ?>
 
 
@@ -78,6 +63,14 @@ if (isset($_POST['add-user'])) {
           </a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="./transaksi.view.php">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-tag text-warning text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Transaksi</span>
+          </a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="./products.view.php">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-bag-17 text-warning text-sm opacity-10"></i>
@@ -99,6 +92,14 @@ if (isset($_POST['add-user'])) {
               <i class="ni ni-circle-08 text-warning text-sm opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">Users</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./report.view.php">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-chart-bar-32 text-warning text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Report</span>
           </a>
         </li>
         <!-- <li class="nav-item">
@@ -379,9 +380,9 @@ if (isset($_POST['add-user'])) {
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                           Username
                         </th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                        <!-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                           Password
-                        </th>
+                        </th> -->
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                           Actions
                         </th>
@@ -437,9 +438,9 @@ if (isset($_POST['add-user'])) {
                           <td class="align-middle text-center">
                             <span class="text-secondary text-xs font-weight-bold"><?php echo $userUserName; ?></span>
                           </td>
-                          <td class="align-middle text-center">
+                          <!-- <td class="align-middle text-center">
                             <span class="text-secondary text-xs font-weight-bold"><?php echo $userPassword; ?></span>
-                          </td>
+                          </td> -->
                           <td class="align-middle text-center">
                             <button class="btn btn-dark btn-sm ms-auto" data-modal-target="#modal-edit<?= $row['id'] ?>">Edit</button>
                             <button class="btn btn-danger btn-sm ms-auto" data-modal-target="#modal-delete<?= $row['id'] ?>">Delete</button>
@@ -552,8 +553,8 @@ if (isset($_POST['add-user'])) {
 
                           h2.edit {
                             text-align: center;
-                            padding-bottom: 15px;
-                            font-weight: 200;
+                            /* padding-bottom: 15px;
+                            font-weight: 200; */
                           }
 
                           .modal-header-edit button.close-btn-edit {
@@ -696,8 +697,8 @@ if (isset($_POST['add-user'])) {
 
                   h2.delete {
                     text-align: center;
-                    padding-bottom: 15px;
-                    font-weight: 200;
+                    /* padding-bottom: 15px;
+                    font-weight: 200; */
                   }
 
                   .modal-header-delete button.close-btn-delete {
@@ -770,55 +771,77 @@ if (isset($_POST['add-user'])) {
 
       <!-- Pop up Add -->
 
+      <?php
+
+      require('./koneksi.php');
+      session_start();
+      error_reporting(1);
+      if (isset($_POST['add-user'])) {
+        $userNama = $_POST['txt_nama'];
+        $userNoHp = $_POST['txt_nohp'];
+        $userMail = $_POST['txt_mail'];
+        $userUser = $_POST['txt_user'];
+        $userPw = $_POST['txt_pw'];
+
+        $foto = $_FILES['foto']['name'];
+        $file_tmp = $_FILES['foto']['tmp_name'];
+        move_uploaded_file($file_tmp, '../foto/user/' . $foto);
+
+        $query    = "INSERT INTO tb_user SET nama = '$userNama', foto = '$foto', nohp = '$userNoHp', email = '$userMail', username = '$userUser', password = '$userPw', level = '1'";
+        $result   = mysqli_query($koneksi, $query);
+      }
+
+      ?>
+
       <div class="modal-add" id="modal-add">
         <div class="modal-header-add">
           <h2 class="add">Add Form</h2>
           <!-- <button data-close-add class="close-btn-add">&times;</button> -->
 
           <div class="modal-body-add">
-            <form class="hahahha" id="form" action="users.view.php" method="post" enctype="multipart/form-data">
+            <form action="users.view.php" method="post" enctype="multipart/form-data">
 
               <div class="form-group">
                 <label for="example-text-input" class="form-control-label">Name</label>
-                <input class="form-control" type="text" value="" placeholder="Enter Name" maxlength="30" name="txt_nama" id="txt_nama" required />
+                <input class="form-control" id="nama" type="text" value="" placeholder="Enter Name" maxlength="30" name="txt_nama" id="txt_nama" required />
 
               </div>
 
               <div class="form-group">
                 <label class="custom-file-label" for="customFileLang">Upload Avatar</label>
-                <input type="file" class="form-control" name="foto" id="foto" required>
+                <input type="file" class="form-control" id="foto" name="foto" id="foto" required>
 
               </div>
 
 
               <div class="form-group">
                 <label for="example-text-input" class="form-control-label">No Hp</label>
-                <input class="form-control" type="text" value="" placeholder="Enter No Hp" oninput="this.value = this.value.replace(/[^\d]+/, '').replace(/(\..*?)\..*/g, '$1');" maxlength="12" name="txt_nohp" id="txt_nohp" required />
+                <input class="form-control" id="nohp" type="text" value="" placeholder="Enter No Hp" oninput="this.value = this.value.replace(/[^\d]+/, '').replace(/(\..*?)\..*/g, '$1');" maxlength="12" name="txt_nohp" id="txt_nohp" required />
 
               </div>
 
 
               <div class="form-group">
                 <label for="example-text-input" class="form-control-label">Email</label>
-                <input class="form-control" type="email" value="" placeholder="Enter Email" maxlength="30" name="txt_mail" id="txt_mail" required />
+                <input class="form-control" id="email" type="email" value="" placeholder="Enter Email" maxlength="30" name="txt_mail" id="txt_mail" required />
 
               </div>
 
 
               <div class="form-group">
                 <label for="example-text-input" class="form-control-label">Username</label>
-                <input class="form-control" type="text" value="" placeholder="Enter Username" maxlength="30" name="txt_user" id="txt_user" required />
+                <input class="form-control" id="username" type="text" value="" placeholder="Enter Username" maxlength="30" name="txt_user" id="txt_user" required />
 
               </div>
 
               <div class="form-group">
                 <label for="example-text-input" class="form-control-label">Password</label>
-                <input class="form-control" type="password" value="" placeholder="Enter Password" maxlength="30" name="txt_pw" id="txt_pw" required />
+                <input class="form-control" id="password" type="password" value="" placeholder="Enter Password" maxlength="30" name="txt_pw" id="txt_pw" required />
 
               </div>
 
               <div class="align-middle text-center">
-                <button class="btn btn-success btn-sm ms-auto" type="submit" name="add-user">Add</button>
+                <button class="btn btn-success btn-sm ms-auto" id="add-user" name="add-user">Add</button>
                 <button class="btn btn-danger btn-sm ms-auto" data-close-add>Close</button>
               </div>
 
@@ -876,8 +899,8 @@ if (isset($_POST['add-user'])) {
 
         h2.add {
           text-align: center;
-          padding-bottom: 15px;
-          font-weight: 200;
+          /* padding-bottom: 15px;
+          font-weight: 200; */
         }
 
         .modal-header-add button.close-btn-add {
@@ -1073,6 +1096,28 @@ if (isset($_POST['add-user'])) {
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="../assets/js/argon-dashboard.min.js?v=2.0.4"></script>
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+  <!-- <script>
+    $("#add-user").click(function() {
+      var nama = $("#nama").val();
+      var foto = $("#foto").val();
+      var nohp = $("#nohp").val();
+      var email = $("#email").val();
+      var username = $("#username").val();
+      var password = $("#password").val();
+
+      if (nama == '' || foto == '' || nohp == '' || email == '' || username == '' || password == '') {
+        swal("Oops", "Something went wrong!", "error")
+      } else {
+        swal("Succes", "Your data has been added", "success")
+        header('location:users.view.php');
+      }
+
+    })
+  </script> -->
+
 </body>
 
 </html>

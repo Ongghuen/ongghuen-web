@@ -14,7 +14,7 @@ if (isset($_POST['add-custom'])) {
 
 
 
-  $query    = "INSERT INTO `tb_custom` (`id`, `foto`,`nama`,`kategori`, `bahan`, `detail`) VALUES (NULL, '$foto', '$namacustom','$kategoricustom', '$bahancustom', '$detailcustom')";
+  $query    = "INSERT INTO `tb_custom` (`id`, `nama`,`foto`,`kategori`, `bahan`, `detail`) VALUES (NULL, '$namacustom', '$foto','$kategoricustom', '$bahancustom', '$detailcustom')";
   $result   = mysqli_query($koneksi, $query);
 }
 ?>
@@ -52,9 +52,10 @@ if (isset($_POST['add-custom'])) {
   <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4" id="sidenav-main">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand m-0" href="./dashboard.view.php">
+      <a class="navbar-brand m-0" href="/pages/dashboard.html">
         <img src="../assets/images/icon.png" class="navbar-brand-img h-100" alt="main_logo" />
-        <span class="ms-1 font-weight-bold">Suki Dashboard</span>     </a>
+        <span class="ms-1 font-weight-bold">Suki Dashboard</span>
+      </a>
     </div>
     <hr class="horizontal dark mt-0" />
     <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
@@ -74,6 +75,14 @@ if (isset($_POST['add-custom'])) {
               <i class="ni ni-cart text-warning text-sm opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">Oders</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./transaksi.view.php">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-tag text-warning text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Transaksi</span>
           </a>
         </li>
         <li class="nav-item">
@@ -98,6 +107,14 @@ if (isset($_POST['add-custom'])) {
               <i class="ni ni-circle-08 text-warning text-sm opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">Users</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./report.view.php">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-chart-bar-32 text-warning text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Report</span>
           </a>
         </li>
         <!-- <li class="nav-item">
@@ -364,7 +381,6 @@ if (isset($_POST['add-custom'])) {
 
 
 
-
     <div class="container-fluid py-4">
       <div class="row">
         <div class="col-12">
@@ -460,11 +476,8 @@ if (isset($_POST['add-custom'])) {
 
 
                   $no     = 1;
-                  // if ($sesLvl == 1) {
-                  //   $dis = "";
-                  // } else {
-                  //   $dis = "disabled";
-                  // }
+
+
                   while ($row = mysqli_fetch_array($result)) {
                     $customid = $row['id'];
                     $customFoto = $row['foto'];
@@ -511,7 +524,6 @@ if (isset($_POST['add-custom'])) {
 
                       </tr>
 
-
                       <!-- Pop up Detail -->
 
                       <div class="modal-detail" id="modal-detail<?= $row['id'] ?>">
@@ -547,7 +559,7 @@ if (isset($_POST['add-custom'])) {
                           opacity: 0;
                           pointer-events: none;
                           transition: all 0.3s ease-in-out;
-                          z-index: 10000;
+                          z-index: 1;
                         }
 
                         .modal-body-detail {
@@ -582,8 +594,8 @@ if (isset($_POST['add-custom'])) {
 
                         h2.detail {
                           text-align: center;
-                          padding-bottom: 15px;
-                          font-weight: 200;
+                          /* padding-bottom: 15px;
+                          font-weight: 200; */
                         }
 
                         .modal-header-detail button.close-btn-detail {
@@ -642,7 +654,6 @@ if (isset($_POST['add-custom'])) {
                       </script>
                       <!-- end Pop up Detail -->
 
-
                       <!-- Pop up Delete -->
 
                       <div class="modal-delete" id="modal-delete<?= $row['id'] ?>">
@@ -689,7 +700,7 @@ if (isset($_POST['add-custom'])) {
                   opacity: 0;
                   pointer-events: none;
                   transition: all 0.3s ease-in-out;
-                  z-index: 10000;
+                  z-index: 1;
                 }
 
                 .modal-body-delete {
@@ -725,8 +736,8 @@ if (isset($_POST['add-custom'])) {
 
                 h2.delete {
                   text-align: center;
-                  padding-bottom: 15px;
-                  font-weight: 200;
+                  /* padding-bottom: 15px;
+                  font-weight: 200; */
                 }
 
                 .modal-header-delete button.close-btn-delete {
@@ -803,6 +814,7 @@ if (isset($_POST['add-custom'])) {
 
                       </div>
 
+
                       <div class="form-group">
                         <label for="kategori">Kategori</label>
                         <select class="form-control" name="kategori" required>
@@ -863,7 +875,7 @@ if (isset($_POST['add-custom'])) {
                   opacity: 0;
                   pointer-events: none;
                   transition: all 0.3s ease-in-out;
-                  z-index: 10000;
+                  z-index: 1;
                 }
 
                 .modal-body-edit {
@@ -898,8 +910,8 @@ if (isset($_POST['add-custom'])) {
 
                 h2.edit {
                   text-align: center;
-                  padding-bottom: 15px;
-                  font-weight: 200;
+                  /* padding-bottom: 15px;
+                  font-weight: 200; */
                 }
 
                 .modal-header-edit button.close-btn-edit {
@@ -1030,15 +1042,8 @@ if (isset($_POST['add-custom'])) {
 
             <div class="form-group">
               <label for="exampleFormControlTextarea1">Detail</label>
-              <textarea class="form-control" id="exampleFormControlTextarea1" name="txt_detail" maxlength="500" placeholder="Enter Detail" rows="5"></textarea>
+              <textarea class="form-control" id="exampleFormControlTextarea1" maxlength="500" name="txt_detail" placeholder="Enter Detail" rows="3"></textarea>
             </div>
-
-
-
-
-
-
-
 
 
 
@@ -1066,7 +1071,6 @@ if (isset($_POST['add-custom'])) {
         opacity: 0;
         pointer-events: none;
         transition: all 0.3s ease-in-out;
-        z-index: 10000;
       }
 
       .modal-body-add {
@@ -1101,8 +1105,8 @@ if (isset($_POST['add-custom'])) {
 
       h2.add {
         text-align: center;
-        padding-bottom: 15px;
-        font-weight: 200;
+        /* padding-bottom: 15px;
+        font-weight: 200; */
       }
 
       .modal-header-add button.close-btn-add {
@@ -1160,6 +1164,12 @@ if (isset($_POST['add-custom'])) {
       }
     </script>
     <!-- end Pop up Add -->
+
+
+
+
+
+
 
     <footer class="footer pt-3">
       <div class="container-fluid">
@@ -1292,7 +1302,7 @@ if (isset($_POST['add-custom'])) {
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="../assets/js/argon-dashboard.min.js?v=2.0.4"></script>
+  <script src="../assets/js/argon-dashboard.min.js"></script>
 </body>
 
 </html>
