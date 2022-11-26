@@ -449,45 +449,45 @@ if (isset($_POST['add-product'])) {
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                         Password
                       </th> -->
-                      <th></th>
+
                     </tr>
                   </thead>
                   <?php
                   if (isset($_POST['caridata'])) {
-                    $caringab = ("SELECT tb_product.id, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori, tb_product.deskripsi  FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id and tb_product.nama LIKE '" . $_POST['data'] . "%'");
+                    $caringab = ("SELECT tb_product.id,tb_product.foto, tb_product.nama, format(tb_product.harga, 0) AS harga,tb_product.qty, tb_kategori.nama AS kategori, tb_product.deskripsi  FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id and tb_product.nama LIKE '" . $_POST['data'] . "%'");
                     $result   = mysqli_query($koneksi, $caringab);
                   } elseif (isset($_POST['tampilkategori'])) {
-                    $tampilkategori = ("SELECT tb_product.id, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori , tb_product.deskripsi FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id and tb_kategori.nama =  '" . $_POST['tampilkategori'] . "'");
+                    $tampilkategori = ("SELECT tb_product.id, tb_product.foto,tb_product.nama, format(tb_product.harga, 0) AS harga, tb_product.qty, tb_kategori.nama AS kategori , tb_product.deskripsi FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id and tb_kategori.nama =  '" . $_POST['tampilkategori'] . "'");
                     $result   = mysqli_query($koneksi, $tampilkategori);
                   } elseif (isset($_POST['urutnama'])) {
-                    $urutkannama = ("SELECT tb_product.id, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori , tb_product.deskripsi FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.nama asc");
+                    $urutkannama = ("SELECT tb_product.id, tb_product.foto,tb_product.nama, format(tb_product.harga, 0) AS harga, tb_product.qty, tb_kategori.nama AS kategori , tb_product.deskripsi FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.nama asc");
                     $result   = mysqli_query($koneksi, $urutkannama);
                   } elseif (isset($_POST['urutharga'])) {
-                    $urutkanharga = ("SELECT tb_product.id, tb_product.foto,tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori, tb_product.deskripsi FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.harga asc");
+                    $urutkanharga = ("SELECT tb_product.id, tb_product.foto,tb_product.nama, format(tb_product.harga, 0) AS harga, tb_product.qty, tb_kategori.nama AS kategori, tb_product.deskripsi FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.harga asc");
                     $result   = mysqli_query($koneksi, $urutkanharga);
                   } elseif (isset($_POST['urutqty'])) {
-                    $urutkanqty = ("SELECT tb_product.id, tb_product.foto,tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori, tb_product.deskripsi FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.qty asc");
+                    $urutkanqty = ("SELECT tb_product.id, tb_product.foto,tb_product.nama,format(tb_product.harga, 0) AS harga, tb_product.qty, tb_kategori.nama AS kategori, tb_product.deskripsi FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.qty asc");
                     $result   = mysqli_query($koneksi, $urutkanqty);
                   } elseif (isset($_POST['namaasc'])) {
-                    $namaasc = ("SELECT tb_product.id,tb_product.foto, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori, tb_product.deskripsi FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.nama asc");
+                    $namaasc = ("SELECT tb_product.id,tb_product.foto, tb_product.nama, format(tb_product.harga, 0) AS harga, tb_product.qty, tb_kategori.nama AS kategori, tb_product.deskripsi FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.nama asc");
                     $result   = mysqli_query($koneksi, $namaasc);
                   } elseif (isset($_POST['namadesc'])) {
-                    $namadesc = ("SELECT tb_product.id,tb_product.foto,  tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori,tb_product.deskripsi FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.nama desc");
+                    $namadesc = ("SELECT tb_product.id,tb_product.foto,  tb_product.nama,format(tb_product.harga, 0) AS harga, tb_product.qty, tb_kategori.nama AS kategori,tb_product.deskripsi FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.nama desc");
                     $result   = mysqli_query($koneksi, $namadesc);
                   } elseif (isset($_POST['hargaasc'])) {
-                    $hargaasc = ("SELECT tb_product.id, tb_product.foto, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori, tb_product.deskripsi FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.harga asc");
+                    $hargaasc = ("SELECT tb_product.id, tb_product.foto, tb_product.nama, format(tb_product.harga, 0) AS harga, tb_product.qty, tb_kategori.nama AS kategori, tb_product.deskripsi FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.harga asc");
                     $result   = mysqli_query($koneksi, $hargaasc);
                   } elseif (isset($_POST['hargadesc'])) {
-                    $hargadesc = ("SELECT tb_product.id, tb_product.foto, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori, tb_product.deskripsi FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.harga desc");
+                    $hargadesc = ("SELECT tb_product.id, tb_product.foto, tb_product.nama,format(tb_product.harga, 0) AS harga, tb_product.qty, tb_kategori.nama AS kategori, tb_product.deskripsi FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.harga desc");
                     $result   = mysqli_query($koneksi, $hargadesc);
                   } elseif (isset($_POST['qtyasc'])) {
-                    $qtyasc = ("SELECT tb_product.id, tb_product.foto, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori, tb_product.deskripsi FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.qty asc");
+                    $qtyasc = ("SELECT tb_product.id, tb_product.foto, tb_product.nama, format(tb_product.harga, 0) AS harga, tb_product.qty, tb_kategori.nama AS kategori, tb_product.deskripsi FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.qty asc");
                     $result   = mysqli_query($koneksi, $qtyasc);
                   } elseif (isset($_POST['qtydesc'])) {
-                    $qtydesc = ("SELECT tb_product.id, tb_product.foto, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori, tb_product.deskripsi FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.qty desc");
+                    $qtydesc = ("SELECT tb_product.id, tb_product.foto, tb_product.nama, format(tb_product.harga, 0) AS harga, tb_product.qty, tb_kategori.nama AS kategori, tb_product.deskripsi FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.qty desc");
                     $result   = mysqli_query($koneksi, $qtydesc);
                   } else {
-                    $query  = "SELECT tb_product.id,tb_product.foto, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori, tb_product.deskripsi FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.nama asc";
+                    $query  = "SELECT tb_product.id,tb_product.foto, tb_product.nama, format(tb_product.harga, 0) AS harga, tb_product.qty, tb_kategori.nama AS kategori, tb_product.deskripsi FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.nama asc";
                     $result = mysqli_query($koneksi, $query);
                   }
 
@@ -524,7 +524,7 @@ if (isset($_POST['add-product'])) {
                           <span class="text-secondary text-xs font-weight-bold"><?php echo $productName; ?></span>
                         </td>
                         <td class="align-middle text-center">
-                          <span class="text-secondary text-xs font-weight-bold"><?php echo $productHarga; ?></span>
+                          <span class="text-secondary text-xs font-weight-bold">Rp. <?php echo $productHarga; ?></span>
                         </td>
                         <td class="align-middle text-center">
                           <span class="text-secondary text-xs font-weight-bold"><?php echo $productQty; ?></span>

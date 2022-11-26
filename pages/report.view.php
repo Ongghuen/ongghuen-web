@@ -210,59 +210,40 @@ if (isset($_POST['add-product'])) {
       <div class="card-body">
         <div class="row gx-4">
 
+          <form class="row gx-4 dropdown col-auto" action="" method="post">
+            <div class="dropdown col-auto">
+
+              <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-3" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                Sort By
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <button class="dropdown-item" name="namaasc" type="submit"> Nama Asc (A-Z)</button>
+                <button class="dropdown-item" name="namadesc" type="submit"> Nama Desc (Z-A)</button>
+                <button class="dropdown-item" name="produkasc" type="submit">Produk Asc (A-Z)</button>
+                <button class="dropdown-item" name="produkdesc" type="submit">Produk Desc (Z-A)</button>
+                <button class="dropdown-item" name="totalasc" type="submit">Total Desc (A-Z)</button>
+                <button class="dropdown-item" name="totaldesc" type="submit">Total Asc (Z-A)</button>
+
+              </ul>
+
+
+            </div>
+          </form>
+
+
           <div class="dropdown col-auto">
             <form class="" action="" method="post">
               <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-3" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                Sort
+                Date
               </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <button class="dropdown-item" name="urutnama" type="submit">Name</button>
-                <button class="dropdown-item" name="urutharga" type="submit">Harga</button>
-                <button class="dropdown-item" name="urutqty" type="submit">Qty</button>
+
 
               </ul>
             </form>
 
           </div>
 
-
-          <form class="row gx-4 dropdown col-auto" action="" method="post">
-            <div class="dropdown col-auto">
-
-              <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-3" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                Kategori
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <button class="dropdown-item" value="kasur" name="tampilkategori" type="submit">Kasur</button>
-                <button class="dropdown-item" value="lemari" name="tampilkategori" type="submit">Lemari</button>
-                <button class="dropdown-item" value="meja" name="tampilkategori" type="submit">Meja</button>
-                <button class="dropdown-item" value="kursi" name="tampilkategori" type="submit">Kursi</button>
-              </ul>
-
-
-            </div>
-          </form>
-
-
-          <form class="row gx-4 dropdown col-auto" action="" method="post">
-            <div class="dropdown col-auto">
-
-              <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-3" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                By
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <button class="dropdown-item" name="namaasc" type="submit"> Nama Asc (A-Z)</button>
-                <button class="dropdown-item" name="namadesc" type="submit"> Nama Desc (Z-A)</button>
-                <button class="dropdown-item" name="hargaasc" type="submit">Harga Asc (A-Z)</button>
-                <button class="dropdown-item" name="hargadesc" type="submit">Harga Desc (Z-A)</button>
-                <button class="dropdown-item" name="qtyasc" type="submit">Qty Asc (A-Z)</button>
-                <button class="dropdown-item" name="qtydesc" type="submit">Qty Desc (Z-A)</button>
-
-              </ul>
-
-
-            </div>
-          </form>
 
           <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
             <div class="nav-wrapper position-relative end-0">
@@ -320,45 +301,34 @@ if (isset($_POST['add-product'])) {
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                         Tanggal
                       </th>
-                      <th></th>
+
                     </tr>
                   </thead>
                   <?php
+                  $data = $_POST['data'];
                   if (isset($_POST['caridata'])) {
-                    $caringab = ("SELECT tb_product.id, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id and tb_product.nama LIKE '" . $_POST['data'] . "%'");
+                    $caringab = ("SELECT tb_user.nama, tb_product.nama AS produk, format(tb_product.harga, 0) AS harga , tb_detail_transaksi.qty, format(tb_product.harga * tb_detail_transaksi.qty, 0) AS total, tb_transaksi.tanggal FROM tb_detail_transaksi INNER JOIN tb_user ON tb_user.id=tb_detail_transaksi.id_user INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product INNER JOIN tb_transaksi ON tb_transaksi.id=tb_detail_transaksi.id_transaksi WHERE tb_user.nama LIKE '" . $data . "%'");
                     $result   = mysqli_query($koneksi, $caringab);
-                  } elseif (isset($_POST['tampilkategori'])) {
-                    $tampilkategori = ("SELECT tb_product.id, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id and tb_kategori.nama =  '" . $_POST['tampilkategori'] . "'");
-                    $result   = mysqli_query($koneksi, $tampilkategori);
-                  } elseif (isset($_POST['urutnama'])) {
-                    $urutkannama = ("SELECT tb_product.id, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.nama asc");
-                    $result   = mysqli_query($koneksi, $urutkannama);
-                  } elseif (isset($_POST['urutharga'])) {
-                    $urutkanharga = ("SELECT tb_product.id, tb_product.foto,tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.harga asc");
-                    $result   = mysqli_query($koneksi, $urutkanharga);
-                  } elseif (isset($_POST['urutqty'])) {
-                    $urutkanqty = ("SELECT tb_product.id, tb_product.foto,tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.qty asc");
-                    $result   = mysqli_query($koneksi, $urutkanqty);
                   } elseif (isset($_POST['namaasc'])) {
-                    $namaasc = ("SELECT tb_product.id,tb_product.foto, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.nama asc");
+                    $namaasc = ("SELECT tb_user.nama, tb_product.nama AS produk, format(tb_product.harga, 0) AS harga , tb_detail_transaksi.qty, format(tb_product.harga * tb_detail_transaksi.qty, 0) AS total, tb_transaksi.tanggal FROM tb_detail_transaksi INNER JOIN tb_user ON tb_user.id=tb_detail_transaksi.id_user INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product INNER JOIN tb_transaksi ON tb_transaksi.id=tb_detail_transaksi.id_transaksi order by tb_user.nama asc");
                     $result   = mysqli_query($koneksi, $namaasc);
                   } elseif (isset($_POST['namadesc'])) {
-                    $namadesc = ("SELECT tb_product.id,tb_product.foto,  tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.nama desc");
+                    $namadesc = ("SELECT tb_user.nama, tb_product.nama AS produk, format(tb_product.harga, 0) AS harga , tb_detail_transaksi.qty, format(tb_product.harga * tb_detail_transaksi.qty, 0) AS total, tb_transaksi.tanggal FROM tb_detail_transaksi INNER JOIN tb_user ON tb_user.id=tb_detail_transaksi.id_user INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product INNER JOIN tb_transaksi ON tb_transaksi.id=tb_detail_transaksi.id_transaksi order by tb_user.nama desc");
                     $result   = mysqli_query($koneksi, $namadesc);
-                  } elseif (isset($_POST['hargaasc'])) {
-                    $hargaasc = ("SELECT tb_product.id, tb_product.foto, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.harga asc");
-                    $result   = mysqli_query($koneksi, $hargaasc);
-                  } elseif (isset($_POST['hargadesc'])) {
-                    $hargadesc = ("SELECT tb_product.id, tb_product.foto, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.harga desc");
-                    $result   = mysqli_query($koneksi, $hargadesc);
-                  } elseif (isset($_POST['qtyasc'])) {
-                    $qtyasc = ("SELECT tb_product.id, tb_product.foto, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.qty asc");
-                    $result   = mysqli_query($koneksi, $qtyasc);
-                  } elseif (isset($_POST['qtydesc'])) {
-                    $qtydesc = ("SELECT tb_product.id, tb_product.foto, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.qty desc");
-                    $result   = mysqli_query($koneksi, $qtydesc);
+                  } elseif (isset($_POST['produkasc'])) {
+                    $produkasc = ("SELECT tb_user.nama, tb_product.nama AS produk, format(tb_product.harga, 0) AS harga , tb_detail_transaksi.qty, format(tb_product.harga * tb_detail_transaksi.qty, 0) AS total, tb_transaksi.tanggal FROM tb_detail_transaksi INNER JOIN tb_user ON tb_user.id=tb_detail_transaksi.id_user INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product INNER JOIN tb_transaksi ON tb_transaksi.id=tb_detail_transaksi.id_transaksi order by tb_product.nama asc");
+                    $result   = mysqli_query($koneksi, $produkasc);
+                  } elseif (isset($_POST['produkdesc'])) {
+                    $produkdesc = ("SELECT tb_user.nama, tb_product.nama AS produk, format(tb_product.harga, 0) AS harga , tb_detail_transaksi.qty, format(tb_product.harga * tb_detail_transaksi.qty, 0) AS total, tb_transaksi.tanggal FROM tb_detail_transaksi INNER JOIN tb_user ON tb_user.id=tb_detail_transaksi.id_user INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product INNER JOIN tb_transaksi ON tb_transaksi.id=tb_detail_transaksi.id_transaksi order by tb_product.nama desc");
+                    $result   = mysqli_query($koneksi, $produkdesc);
+                  } elseif (isset($_POST['totalasc'])) {
+                    $totalasc = ("SELECT tb_user.nama, tb_product.nama AS produk, format(tb_product.harga, 0) AS harga , tb_detail_transaksi.qty, format(tb_product.harga * tb_detail_transaksi.qty, 0) AS total, tb_transaksi.tanggal FROM tb_detail_transaksi INNER JOIN tb_user ON tb_user.id=tb_detail_transaksi.id_user INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product INNER JOIN tb_transaksi ON tb_transaksi.id=tb_detail_transaksi.id_transaksi order by total desc");
+                    $result   = mysqli_query($koneksi, $totalasc);
+                  } elseif (isset($_POST['totaldesc'])) {
+                    $totaldesc = ("SELECT tb_user.nama, tb_product.nama AS produk, format(tb_product.harga, 0) AS harga , tb_detail_transaksi.qty, format(tb_product.harga * tb_detail_transaksi.qty, 0) AS total, tb_transaksi.tanggal FROM tb_detail_transaksi INNER JOIN tb_user ON tb_user.id=tb_detail_transaksi.id_user INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product INNER JOIN tb_transaksi ON tb_transaksi.id=tb_detail_transaksi.id_transaksi order by total asc");
+                    $result   = mysqli_query($koneksi, $totaldesc);
                   } else {
-                    $query  = "SELECT tb_user.nama, tb_product.nama AS produk, tb_product.harga , tb_detail_transaksi.qty, tb_product.harga * tb_detail_transaksi.qty AS total, tb_transaksi.tanggal FROM tb_detail_transaksi INNER JOIN tb_user ON tb_user.id=tb_detail_transaksi.id_user INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product INNER JOIN tb_transaksi ON tb_transaksi.id=tb_detail_transaksi.id_transaksi";
+                    $query  = "SELECT tb_user.nama, tb_product.nama AS produk, format(tb_product.harga, 0) AS harga , tb_detail_transaksi.qty, format(tb_product.harga * tb_detail_transaksi.qty, 0) AS total, tb_transaksi.tanggal FROM tb_detail_transaksi INNER JOIN tb_user ON tb_user.id=tb_detail_transaksi.id_user INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product INNER JOIN tb_transaksi ON tb_transaksi.id=tb_detail_transaksi.id_transaksi";
                     $result = mysqli_query($koneksi, $query);
                   }
 
@@ -373,24 +343,15 @@ if (isset($_POST['add-product'])) {
                     $reportTanggal  = $row['tanggal'];
 
                   ?>
+
+
+
                     <tbody>
 
                       <tr>
                         <td class="align-middle text-center">
                           <span class="text-secondary text-xs font-weight-bold"><?php echo $no; ?></span>
                         </td>
-                        <!-- <td class="align-middle text-center">
-                          <img src="../foto/product/<?php echo $productFoto; ?>" class="avatar avatar-sm me-2" alt="user1" />
-                        </td> -->
-                        <!-- <td class="align-middle text-center">
-                          <div class="d-flex px-2 py-1">
-                            <div>
-                              <img src="../assets/img/team-3.jpg" class="avatar avatar-sm me-3" alt="user1" />
-                            </div>
-
-                          </div>
-
-                        </td> -->
                         <td class="align-middle text-center">
                           <span class="text-secondary text-xs font-weight-bold"><?php echo $reportNama; ?></span>
                         </td>
@@ -398,13 +359,13 @@ if (isset($_POST['add-product'])) {
                           <span class="text-secondary text-xs font-weight-bold"><?php echo $reportProduct; ?></span>
                         </td>
                         <td class="align-middle text-center">
-                          <span class="text-secondary text-xs font-weight-bold"><?php echo $reportHarga; ?></span>
+                          <span class="text-secondary text-xs font-weight-bold">Rp. <?php echo $reportHarga; ?></span>
                         </td>
                         <td class="align-middle text-center">
                           <span class="text-secondary text-xs font-weight-bold"><?php echo $reportQty; ?></span>
                         </td>
                         <td class="align-middle text-center">
-                          <span class="text-secondary text-xs font-weight-bold"><?php echo $reportTotal; ?></span>
+                          <span class="text-secondary text-xs font-weight-bold">Rp. <?php echo $reportTotal; ?></span>
                         </td>
                         <td class="align-middle text-center">
                           <span class="text-secondary text-xs font-weight-bold"><?php echo $reportTanggal; ?></span>
@@ -417,6 +378,7 @@ if (isset($_POST['add-product'])) {
                       </tr>
 
 
+                      <!-- Popup Delete -->
 
                       <div class="modal-delete" id="modal-delete<?= $row['id'] ?>">
                         <div class="modal-header-delete">

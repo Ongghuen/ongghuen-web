@@ -38,6 +38,7 @@ if (isset($_POST['add-product'])) {
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
+
   <link id="pagestyle" href="../assets/css/argon-dashboard.css" rel="stylesheet" />
 </head>
 
@@ -308,12 +309,25 @@ if (isset($_POST['add-product'])) {
           <div class="dropdown col-auto">
             <form class="" action="" method="post">
               <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-3" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                Sort
+                Sort By
               </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <button class="dropdown-item" name="urutnama" type="submit">Name</button>
-                <button class="dropdown-item" name="urutharga" type="submit">Harga</button>
-                <button class="dropdown-item" name="urutqty" type="submit">Qty</button>
+                <button class="dropdown-item" name="namaasc" type="submit"> Nama Asc (A-Z)</button>
+                <button class="dropdown-item" name="namadesc" type="submit"> Nama Desc (Z-A)</button>
+                <button class="dropdown-item" name="totalasc" type="submit">Total Desc (Z-A)</button>
+                <button class="dropdown-item" name="totaldesc" type="submit">Total Asc (A-Z)</button>
+              </ul>
+            </form>
+
+          </div>
+
+          <div class="dropdown col-auto">
+            <form class="" action="" method="post">
+              <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-3" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                Date
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
 
               </ul>
             </form>
@@ -321,43 +335,7 @@ if (isset($_POST['add-product'])) {
           </div>
 
 
-          <form class="row gx-4 dropdown col-auto" action="" method="post">
-            <div class="dropdown col-auto">
 
-              <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-3" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                Kategori
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <button class="dropdown-item" value="kasur" name="tampilkategori" type="submit">Kasur</button>
-                <button class="dropdown-item" value="lemari" name="tampilkategori" type="submit">Lemari</button>
-                <button class="dropdown-item" value="meja" name="tampilkategori" type="submit">Meja</button>
-                <button class="dropdown-item" value="kursi" name="tampilkategori" type="submit">Kursi</button>
-              </ul>
-
-
-            </div>
-          </form>
-
-
-          <form class="row gx-4 dropdown col-auto" action="" method="post">
-            <div class="dropdown col-auto">
-
-              <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-3" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                By
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <button class="dropdown-item" name="namaasc" type="submit"> Nama Asc (A-Z)</button>
-                <button class="dropdown-item" name="namadesc" type="submit"> Nama Desc (Z-A)</button>
-                <button class="dropdown-item" name="hargaasc" type="submit">Harga Asc (A-Z)</button>
-                <button class="dropdown-item" name="hargadesc" type="submit">Harga Desc (Z-A)</button>
-                <button class="dropdown-item" name="qtyasc" type="submit">Qty Asc (A-Z)</button>
-                <button class="dropdown-item" name="qtydesc" type="submit">Qty Desc (Z-A)</button>
-
-              </ul>
-
-
-            </div>
-          </form>
 
           <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
             <div class="nav-wrapper position-relative end-0">
@@ -386,9 +364,6 @@ if (isset($_POST['add-product'])) {
             <div class="card-header pb-0">
               <div class="d-flex align-items-center">
                 <h6>Transactions table</h6>
-                <!-- <button class="btn btn-success btn-sm ms-auto " data-modal-target="#modal-add">
-                  Add Product
-                </button> -->
               </div>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
@@ -396,24 +371,6 @@ if (isset($_POST['add-product'])) {
                 <table class="table align-items-center mb-0">
                   <thead>
                     <tr>
-                      <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                        No
-                      </th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                        Nama
-                      </th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                        No Hp
-                      </th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                        Email
-                      </th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                        Username
-                      </th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                        Password
-                      </th> -->
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                         No
                       </th>
@@ -426,454 +383,187 @@ if (isset($_POST['add-product'])) {
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                         Tanggal
                       </th>
-                      <!-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                        Qty
-                      </th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                        Kategori
-                      </th> -->
-                      <!-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                        Password
-                      </th> -->
+
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                         Actions
                       </th>
-                      <!-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                        Username
-                      </th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                        Password
-                      </th> -->
-                      <th></th>
+
                     </tr>
                   </thead>
+
                   <?php
+                  $data = $_POST['data'];
                   if (isset($_POST['caridata'])) {
-                    $caringab = ("SELECT tb_product.id, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id and tb_product.nama LIKE '" . $_POST['data'] . "%'");
+                    $caringab = ("SELECT tb_transaksi.id, format(SUM(tb_product.harga*tb_detail_transaksi.qty),0) AS total, tb_user.nama, tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product WHERE tb_user.nama LIKE '" . $data . "%' GROUP BY tb_user.nama");
                     $result   = mysqli_query($koneksi, $caringab);
-                  } elseif (isset($_POST['tampilkategori'])) {
-                    $tampilkategori = ("SELECT tb_product.id, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id and tb_kategori.nama =  '" . $_POST['tampilkategori'] . "'");
-                    $result   = mysqli_query($koneksi, $tampilkategori);
-                  } elseif (isset($_POST['urutnama'])) {
-                    $urutkannama = ("SELECT tb_product.id, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.nama asc");
-                    $result   = mysqli_query($koneksi, $urutkannama);
-                  } elseif (isset($_POST['urutharga'])) {
-                    $urutkanharga = ("SELECT tb_product.id, tb_product.foto,tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.harga asc");
-                    $result   = mysqli_query($koneksi, $urutkanharga);
-                  } elseif (isset($_POST['urutqty'])) {
-                    $urutkanqty = ("SELECT tb_product.id, tb_product.foto,tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.qty asc");
-                    $result   = mysqli_query($koneksi, $urutkanqty);
                   } elseif (isset($_POST['namaasc'])) {
-                    $namaasc = ("SELECT tb_product.id,tb_product.foto, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.nama asc");
+                    $namaasc = ("SELECT  tb_transaksi.id,  format(SUM(tb_product.harga*tb_detail_transaksi.qty),0) AS total, tb_user.nama, tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product GROUP BY tb_user.nama ORDER BY tb_user.nama asc");
                     $result   = mysqli_query($koneksi, $namaasc);
                   } elseif (isset($_POST['namadesc'])) {
-                    $namadesc = ("SELECT tb_product.id,tb_product.foto,  tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.nama desc");
+                    $namadesc = ("SELECT  tb_transaksi.id,  format(SUM(tb_product.harga*tb_detail_transaksi.qty),0) AS total, tb_user.nama, tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product GROUP BY tb_user.nama ORDER BY tb_user.nama desc");
                     $result   = mysqli_query($koneksi, $namadesc);
-                  } elseif (isset($_POST['hargaasc'])) {
-                    $hargaasc = ("SELECT tb_product.id, tb_product.foto, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.harga asc");
-                    $result   = mysqli_query($koneksi, $hargaasc);
-                  } elseif (isset($_POST['hargadesc'])) {
-                    $hargadesc = ("SELECT tb_product.id, tb_product.foto, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.harga desc");
-                    $result   = mysqli_query($koneksi, $hargadesc);
-                  } elseif (isset($_POST['qtyasc'])) {
-                    $qtyasc = ("SELECT tb_product.id, tb_product.foto, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.qty asc");
-                    $result   = mysqli_query($koneksi, $qtyasc);
-                  } elseif (isset($_POST['qtydesc'])) {
-                    $qtydesc = ("SELECT tb_product.id, tb_product.foto, tb_product.nama, tb_product.harga, tb_product.qty, tb_kategori.nama AS kategori FROM tb_product JOIN tb_kategori WHERE tb_product.kategori=tb_kategori.id order by tb_product.qty desc");
-                    $result   = mysqli_query($koneksi, $qtydesc);
+                  } elseif (isset($_POST['totalasc'])) {
+                    $totalasc = ("SELECT  tb_transaksi.id,  format(SUM(tb_product.harga*tb_detail_transaksi.qty),0) AS total, tb_user.nama, tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product GROUP BY tb_user.nama ORDER BY total desc");
+                    $result   = mysqli_query($koneksi, $totalasc);
+                  } elseif (isset($_POST['totaldesc'])) {
+                    $totaldesc = ("SELECT  tb_transaksi.id,  format(SUM(tb_product.harga*tb_detail_transaksi.qty),0) AS total, tb_user.nama, tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product GROUP BY tb_user.nama ORDER BY total asc");
+                    $result   = mysqli_query($koneksi, $totaldesc);
                   } else {
-                    $query  = "SELECT tb_transaksi.id, SUM(tb_product.harga*tb_detail_transaksi.qty) AS total, tb_user.nama, tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product GROUP BY tb_user.nama";
+                    $query  = "SELECT  tb_transaksi.id,  format(SUM(tb_product.harga*tb_detail_transaksi.qty),0) AS total, tb_user.nama, tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product GROUP BY tb_user.nama";
                     $result = mysqli_query($koneksi, $query);
                   }
 
+
                   $no     = 1;
+
 
                   while ($row = mysqli_fetch_array($result)) {
                     $transaksiId = $row['id'];
                     $transaksiNama = $row['nama'];
                     $transaksiTotal = $row['total'];
                     $transaksiTanggal   = $row['tanggal'];
+
                   ?>
+
                     <tbody>
 
                       <tr>
+
                         <td class="align-middle text-center">
                           <span class="text-secondary text-xs font-weight-bold"><?php echo $no; ?></span>
                         </td>
-                        <!-- <td class="align-middle text-center">
-                          <img src="../foto/product/<?php echo $productFoto; ?>" class="avatar avatar-sm me-2" alt="user1" />
-                        </td> -->
-                        <!-- <td class="align-middle text-center">
-                          <div class="d-flex px-2 py-1">
-                            <div>
-                              <img src="../assets/img/team-3.jpg" class="avatar avatar-sm me-3" alt="user1" />
-                            </div>
-
-                          </div>
-
-                        </td> -->
                         <td class="align-middle text-center">
                           <span class="text-secondary text-xs font-weight-bold"><?php echo $transaksiNama; ?></span>
                         </td>
                         <td class="align-middle text-center">
-                          <span class="text-secondary text-xs font-weight-bold"><?php echo $transaksiTotal; ?></span>
+                          <span class="text-secondary text-xs font-weight-bold">Rp. <?php echo $transaksiTotal; ?></span>
                         </td>
                         <td class="align-middle text-center">
                           <span class="text-secondary text-xs font-weight-bold"><?php echo $transaksiTanggal; ?></span>
                         </td>
-                        <!-- <td class="align-middle text-center">
-                          <span class="text-secondary text-xs font-weight-bold"><?php echo $productKategori; ?></span>
-                        </td> -->
                         <td class="align-middle text-center">
-                          <button class="btn btn-secondary btn-sm px-3 py-1 me-1 mt-3" data-modal-target="#modal-delete<?= $row['id'] ?>">Cek Detail</button>
-                          <!-- <button class="btn btn-dark btn-sm ms-auto" data-modal-target="#modal-edit<?php echo $row['id']; ?>">Edit</button>
-                          <button class="btn btn-danger btn-sm ms-auto" data-modal-target="#modal-delete<?php echo $row['id']; ?>">Delete</button> -->
+
+
+                          <button class="btn btn-secondary btn-sm px-3 py-1 me-1 mt-3" data-modal-target="#modal-delete<?php echo $row['id']; ?>">Detail</button>
+
                         </td>
 
                       </tr>
+                    <?php
 
+                    $no++;
+                  }
 
 
-                      <!-- Popup Delete -->
-
-                      <div class="modal-delete" id="modal-delete<?= $row['id'] ?>">
-                        <div class="modal-header-delete">
-                          <h2 class="delete">Warning</h2>
-                          <!-- <button data-close-delete class="close-btn-delete">&times;</button> -->
-
-                          <div class="modal-body-delete">
-                            <div class="row">
-
-                              <p class="delete">
-                                Yakin dek mau ngehapus data orang? dosah loh dek
-                              </p>
-
-                            </div>
-                            <div></div>
-                            <div></div>
-                            <form class="yayyay" action="hapus_product.php" method="post">
-                              <div class="align-middle text-center">
-                                <a class="btn btn-danger btn-sm ms-auto" href="hapus_product.php?id=<?php echo $row['id']; ?>">Delete</a>
-
-                                <button class="btn btn-success btn-sm ms-auto" name="submit" data-close-delete>Close</button>
-                                <!-- <button class="btn btn-danger btn-sm ms-auto" href="hapus_user.php?id=<?php echo $row['id']; ?>" data-close-delete>Close</button> -->
-                            </form>
-                          </div>
-
-
-                        </div>
-                      </div>
-              </div>
-
-
-              <style>
-                .modal-delete {
-                  position: fixed;
-                  left: 0;
-                  top: 0;
-                  background: rgb(0, 0, 0, 0.6);
-                  height: 100%;
-                  width: 100%;
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  opacity: 0;
-                  pointer-events: none;
-                  transition: all 0.3s ease-in-out;
-                  z-index: 1;
-                }
-
-                .modal-body-delete {
-                  padding: 10px;
-                  bottom: 10px;
-                }
-
-                .modal-header-delete {
-                  background: white;
-                  width: 560px;
-                  max-width: 90%;
-                  padding: 20px;
-                  border-radius: 4x;
-                  position: relative;
-                  transform: translateY(-100);
-                  transition: all 0.3s ease-in-out;
-                }
-
-                .btn-open {
-                  background: black;
-                  padding: 10px 40px;
-                  color: white;
-                  border-radius: 5px;
-                  font-size: 15px;
-                  cursor: pointer;
-                }
-
-                p.delete {
-                  line-height: 1.6;
-                  margin-bottom: 20px;
-                  text-align: center;
-                }
-
-                h2.delete {
-                  text-align: center;
-                  /* padding-bottom: 15px;
-                  font-weight: 200; */
-                }
-
-                .modal-header-delete button.close-btn-delete {
-                  position: absolute;
-                  right: 10px;
-                  top: 10px;
-                  font-size: 32px;
-                  background: none;
-                  outline: none;
-                  border: none;
-                  cursor: pointer;
-                }
-
-                .modal-header-delete button.close-btn-delete:hover {
-                  color: #6b46c1;
-                }
-
-                .active-delete {
-                  opacity: 1;
-                  pointer-events: auto;
-                }
-
-                .modal-delete.active-delete .modal-header-delete {
-                  transform: translateY(0px);
-                }
-              </style>
-              <script>
-                const openModalDelete = document.querySelectorAll("[data-modal-target]");
-                const closeModalDelete = document.querySelectorAll(
-                  "[data-close-delete]"
-                );
-
-                openModalDelete.forEach((button) => {
-                  button.addEventListener("click", () => {
-                    const modal = document.querySelector(button.dataset.modalTarget);
-                    openModal(modal);
-                  });
-                });
-
-                closeModalDelete.forEach((button) => {
-                  button.addEventListener("click", () => {
-                    const modal = button.closest(".modal-delete");
-                    closeModal(modal);
-                  });
-                });
-
-                function openModal(modal) {
-                  if (modal == null) return;
-                  modal.classList.add("active-delete");
-                }
-
-                function closeModal(modal) {
-                  if (modal == null) return;
-                  modal.classList.remove("active-delete");
-                }
-              </script>
-              <!-- end Pop up Delete -->
-
-              <!-- Pop up Edit -->
-
-              <div class="modal-edit" id="modal-edit<?= $row['id'] ?>">
-                <div class="modal-header-edit">
-                  <h2 class="edit">Edit Form</h2>
-                  <div class="modal-body-edit">
-                    <form action="edit_product.php?id=<?= $row['id'] ?>" method="post" enctype="multipart/form-data">
-                      <div class="form-group">
-                        <label for="example-text-input" class="form-control-label">Name</label>
-                        <input class="form-control" name="nama" type="text" value="<?= $row['nama'] ?>" maxlength="30" placeholder="Enter Nama" required />
-                      </div>
-
-                      <div class="form-group">
-                        <label class="custom-file-label" for="customFileLang">Upload Photo</label>
-                        <input type="file" class="form-control" name="foto">
-
-                      </div>
-
-                      <div class="form-group">
-                        <label for="example-text-input" class="form-control-label">Harga</label>
-                        <input class="form-control" name="harga" type="text" value="<?= $row['harga'] ?>" oninput="this.value = this.value.replace(/[^\d]+/, '').replace(/(\..*?)\..*/g, '$1');" maxlength="8" placeholder="Enter harga" required />
-                      </div>
-
-
-                      <div class="form-group">
-                        <label for="example-text-input" class="form-control-label">Qty</label>
-                        <input class="form-control" name="qty" type="text" value="<?= $row['qty'] ?>" oninput="this.value = this.value.replace(/[^\d]+/, '').replace(/(\..*?)\..*/g, '$1');" maxlength="4" placeholder="Enter Qty" required />
-                      </div>
-
-
-
-                      <div class="form-group">
-                        <label for="exampleFormControlSelect1">Kategori</label>
-
-
-
-
-                        <select class="form-control" name="kategori" required>
-                          <?php
-                          require("./koneksi.php");
-                          // echo "<option value=$row[id]>$row[kategori]</option>";
-                          $query = mysqli_query($koneksi, "select * from tb_kategori order by nama asc") or die(mysqli_error($koneksi));
-                          while ($row = mysqli_fetch_array($query)) {
-                            echo "<option value=$row[id]> $row[nama]</option>";
-                          }
-                          ?>
-
-
-                        </select>
-
-
-                      </div>
-                      <div class="align-middle text-center">
-                        <button class="btn btn-success btn-sm ms-auto" name="submit">Edit</button>
-                        <button class="btn btn-danger btn-sm ms-auto" type="submit" name="close" data-close-button-edit>Close</button>
-                        <!-- <a class="btn btn-danger btn-sm ms-auto" type="submit" data-close-button-edit>Close</a> -->
-                      </div>
-                    </form>
-
-                  </div>
-                </div>
-              </div>
-
-              <style>
-                .modal-edit {
-                  position: fixed;
-                  left: 0;
-                  top: 0;
-                  background: rgb(0, 0, 0, 0.6);
-                  height: 100%;
-                  width: 100%;
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  opacity: 0;
-                  pointer-events: none;
-                  transition: all 0.3s ease-in-out;
-                  z-index: 1;
-                }
-
-                .modal-body-edit {
-                  padding: 10px;
-                  bottom: 10px;
-                }
-
-                .modal-header-edit {
-                  background: white;
-                  width: 560px;
-                  max-width: 90%;
-                  padding: 20px;
-                  border-radius: 4x;
-                  position: relative;
-                  transform: translateY(-100);
-                  transition: all 0.3s ease-in-out;
-                }
-
-                .btn-open-edit {
-                  background: black;
-                  padding: 10px 40px;
-                  color: white;
-                  border-radius: 5px;
-                  font-size: 15px;
-                  cursor: pointer;
-                }
-
-                p.edit {
-                  line-height: 1.6;
-                  margin-bottom: 20px;
-                }
-
-                h2.edit {
-                  text-align: center;
-                  /* padding-bottom: 15px;
-                  font-weight: 200; */
-                }
-
-                .modal-header-edit button.close-btn-edit {
-                  position: absolute;
-                  right: 10px;
-                  top: 10px;
-                  font-size: 32px;
-                  background: none;
-                  outline: none;
-                  border: none;
-                  cursor: pointer;
-                }
-
-                .modal-header-edit button.close-btn-edit:hover {
-                  color: #6b46c1;
-                }
-
-                .active-edit {
-                  opacity: 1;
-                  pointer-events: auto;
-                }
-
-                .modal-edit.active-edit .modal-header-edit {
-                  transform: translateY(0px);
-                }
-              </style>
-              <script>
-                const openModalButtons = document.querySelectorAll("[data-modal-target]");
-                const closeModalButtons = document.querySelectorAll(
-                  "[data-close-button-edit]"
-                );
-
-                openModalButtons.forEach((button) => {
-                  button.addEventListener("click", () => {
-                    const modal = document.querySelector(button.dataset.modalTarget);
-                    openModal(modal);
-                  });
-                });
-
-                closeModalButtons.forEach((button) => {
-                  button.addEventListener("click", () => {
-                    const modal = button.closest(".modal-edit");
-                    closeModal(modal);
-                  });
-                });
-
-                function openModal(modal) {
-                  if (modal == null) return;
-                  modal.classList.add("active-edit");
-                }
-
-                function closeModal(modal) {
-                  if (modal == null) return;
-                  modal.classList.remove("active-edit");
-                }
-              </script>
-              <!-- end Pop up Edit -->
-
-              <!-- Popup Delete -->
-
-              <div class="modal-delete" id="modal-delete<?= $row['id'] ?>">
-                <div class="modal-header-delete">
-                  <h2 class="delete">Detail</h2>
-                  <!-- <button data-close-delete class="close-btn-delete">&times;</button> -->
-
-                  <div class="modal-body-delete">
-
-
-
-                    <form class="yayyay" action="hapus_product.php" method="post">
-                      <div class="align-middle text-center">
-
-                        <button class="btn btn-success btn-sm ms-auto" name="submit" data-close-delete>Close</button>
-
-                    </form>
-                  </div>
-
-
-                </div>
+                    ?>
+                    </tbody>
+                </table>
               </div>
             </div>
 
+            <!-- Popup Delete -->
+
+            <div class="modal-delete" id="modal-delete<?php echo $row['id']; ?>">
+              <form class="yayyay" action="transaksi_detail.php" method="post">
+                <div class="modal-header-delete">
+                  <h2 class="delete">Detail</h2>
+                  <div class="modal-body-delete">
+                    <div class="table-responsive p-0">
+                      <table class="table align-items-center mb-0">
+                        <thead>
+                          <tr>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                              No
+                            </th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                              Nama
+                            </th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                              Produk
+                            </th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                              Harga
+                            </th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                              Qty
+                            </th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                              Total
+                            </th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                              Tanggal
+                            </th>
+
+                          </tr>
+                        </thead>
+
+                        <?php
+                        $idtransaksi = $_GET['id'];
+                        $queryreport  = "SELECT tb_user.nama as namareport, tb_product.nama AS produk, format(tb_product.harga, 0) AS harga , tb_detail_transaksi.qty, format(tb_product.harga * tb_detail_transaksi.qty,0) AS totalreport, tb_transaksi.tanggal as tanggalreport FROM tb_detail_transaksi INNER JOIN tb_user ON tb_user.id=tb_detail_transaksi.id_user INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product INNER JOIN tb_transaksi ON tb_transaksi.id=tb_detail_transaksi.id_transaksi where tb_transaksi.id = '$idtransaksi'";
+                        $resultanjay = mysqli_query($koneksi, $queryreport);
+                        $nomer = 1;
+
+
+                        while ($data = mysqli_fetch_array($resultanjay)) {
+
+                          $reportNama = $data['namareport'];
+                          $reportProduct = $data['produk'];
+                          $reportHarga = $data['harga'];
+                          $reportQty   = $data['qty'];
+                          $reportTotal  = $data['totalreport'];
+                          $reportTanggal  = $data['tanggalreport'];
+
+
+                        ?>
+                          <tbody>
+
+                            <tr>
+                              <td class="align-middle text-center">
+                                <span class="text-secondary text-xs font-weight-bold"><?php echo $nomer; ?></span>
+                              </td>
+                              <td class="align-middle text-center">
+                                <span class="text-secondary text-xs font-weight-bold"><?php echo $reportNama; ?></span>
+                              </td>
+                              <td class="align-middle text-center">
+                                <span class="text-secondary text-xs font-weight-bold"><?php echo $reportProduct; ?></span>
+                              </td>
+                              <td class="align-middle text-center">
+                                <span class="text-secondary text-xs font-weight-bold">Rp. <?php echo $reportHarga; ?></span>
+                              </td>
+                              <td class="align-middle text-center">
+                                <span class="text-secondary text-xs font-weight-bold"><?php echo $reportQty; ?></span>
+                              </td>
+                              <td class="align-middle text-center">
+                                <span class="text-secondary text-xs font-weight-bold">Rp. <?php echo $reportTotal; ?></span>
+                              </td>
+                              <td class="align-middle text-center">
+                                <span class="text-secondary text-xs font-weight-bold"><?php echo $reportTanggal; ?></span>
+                              </td>
+
+                            </tr>
+                          <?php
+                          $nomer++;
+                        }
+
+                          ?>
+                          </tbody>
+                      </table>
+                    </div>
+
+                    <div class="align-middle text-center">
+                      <button class="btn btn-danger btn-sm ms-auto" name="submit" data-close-delete>Close</button>
+                      <!-- <button class="btn btn-danger btn-sm ms-auto" href="hapus_user.php?id=<?php echo $row['id']; ?>" data-close-delete>Close</button> -->
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
 
             <style>
+              p.detailya {
+                font-weight: 100;
+              }
+
               .modal-delete {
                 position: fixed;
                 left: 0;
@@ -887,7 +577,7 @@ if (isset($_POST['add-product'])) {
                 opacity: 0;
                 pointer-events: none;
                 transition: all 0.3s ease-in-out;
-                z-index: 1;
+                z-index: 10000;
               }
 
               .modal-body-delete {
@@ -897,8 +587,8 @@ if (isset($_POST['add-product'])) {
 
               .modal-header-delete {
                 background: white;
-                width: 560px;
-                max-width: 90%;
+                width: 900px;
+                max-width: 100%;
                 padding: 20px;
                 border-radius: 4x;
                 position: relative;
@@ -983,226 +673,229 @@ if (isset($_POST['add-product'])) {
             </script>
             <!-- end Pop up Delete -->
 
-          <?php
-                    $no++;
-                  } ?>
-          </tbody>
-          </table>
+
+
+
+
+
           </div>
         </div>
       </div>
-    </div>
-    </div>
-
-    <!-- Pop up Add -->
-
-    <div class="modal-add" id="modal-add">
-      <div class="modal-header-add">
-        <h2 class="add">Add Form</h2>
-        <!-- <button data-close-add class="close-btn-add">&times;</button> -->
-
-        <div class="modal-body-add">
-          <form class="hahahhaaaa" id="form" action="" method="post" enctype="multipart/form-data">
-
-            <div class="form-group">
-              <label for="example-text-input" class="form-control-label">Name</label>
-              <input class="form-control" type="text" placeholder="Enter Name" name="txt_nama" maxlength="30" required />
-
-            </div>
-
-            <div class="form-group">
-              <label class="custom-file-label" for="customFileLang">Upload Photo</label>
-              <input type="file" class="form-control" name="foto" required>
-
-            </div>
 
 
-            <div class="form-group">
-              <label for="example-text-input" class="form-control-label">Harga</label>
-              <input class="form-control" type="text" oninput="this.value = this.value.replace(/[^\d]+/, '').replace(/(\..*?)\..*/g, '$1');" maxlength="8" placeholder="Enter Harga" name="txt_harga" required />
-
-            </div>
 
 
-            <div class="form-group">
-              <label for="example-text-input" class="form-control-label">Qty</label>
-              <input class="form-control" type="text" oninput="this.value = this.value.replace(/[^\d]+/, '').replace(/(\..*?)\..*/g, '$1');" maxlength="4" placeholder="Enter Qty" name="txt_qty" required />
-            </div>
 
 
-            <div class="form-group">
-              <label for="exampleFormControlSelect1">Kategori</label>
+      <!-- Pop up Add -->
+
+      <div class="modal-add" id="modal-add">
+        <div class="modal-header-add">
+          <h2 class="add">Add Form</h2>
+          <!-- <button data-close-add class="close-btn-add">&times;</button> -->
+
+          <div class="modal-body-add">
+            <form class="hahahhaaaa" id="form" action="" method="post" enctype="multipart/form-data">
+
+              <div class="form-group">
+                <label for="example-text-input" class="form-control-label">Name</label>
+                <input class="form-control" type="text" placeholder="Enter Name" name="txt_nama" maxlength="30" required />
+
+              </div>
+
+              <div class="form-group">
+                <label class="custom-file-label" for="customFileLang">Upload Photo</label>
+                <input type="file" class="form-control" name="foto" required>
+
+              </div>
 
 
-              <select class="form-control" name="txt_kategori" required>
-                <?php
-                require("./koneksi.php");
-                // echo "<option value=$row[id]> Pilih Kategori $row[nama]</option>";
-                $query = mysqli_query($koneksi, "select * from tb_kategori") or die(mysqli_error($koneksi));
-                while ($row = mysqli_fetch_array($query)) {
-                  echo "<option value=$row[id]> $row[nama]</option>";
-                }
-                ?>
+              <div class="form-group">
+                <label for="example-text-input" class="form-control-label">Harga</label>
+                <input class="form-control" type="text" oninput="this.value = this.value.replace(/[^\d]+/, '').replace(/(\..*?)\..*/g, '$1');" maxlength="8" placeholder="Enter Harga" name="txt_harga" required />
+
+              </div>
 
 
-              </select>
+              <div class="form-group">
+                <label for="example-text-input" class="form-control-label">Qty</label>
+                <input class="form-control" type="text" oninput="this.value = this.value.replace(/[^\d]+/, '').replace(/(\..*?)\..*/g, '$1');" maxlength="4" placeholder="Enter Qty" name="txt_qty" required />
+              </div>
 
 
-            </div>
-            <div class="align-middle text-center">
-              <button class="btn btn-success btn-sm ms-auto" type="submit" name="add-product">Add</button>
-              <button class="btn btn-danger btn-sm ms-auto" data-close-add>Close</button>
-            </div>
+              <div class="form-group">
+                <label for="exampleFormControlSelect1">Kategori</label>
 
 
-          </form>
+                <select class="form-control" name="txt_kategori" required>
+                  <?php
+                  require("./koneksi.php");
+                  // echo "<option value=$row[id]> Pilih Kategori $row[nama]</option>";
+                  $query = mysqli_query($koneksi, "select * from tb_kategori") or die(mysqli_error($koneksi));
+                  while ($row = mysqli_fetch_array($query)) {
+                    echo "<option value=$row[id]> $row[nama]</option>";
+                  }
+                  ?>
+
+
+                </select>
+
+
+              </div>
+              <div class="align-middle text-center">
+                <button class="btn btn-success btn-sm ms-auto" type="submit" name="add-product">Add</button>
+                <button class="btn btn-danger btn-sm ms-auto" data-close-add>Close</button>
+              </div>
+
+
+            </form>
+          </div>
         </div>
       </div>
-    </div>
-    <style>
-      .modal-add {
-        position: fixed;
-        left: 0;
-        top: 0;
-        background: rgb(0, 0, 0, 0.6);
-        height: 100%;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 0;
-        pointer-events: none;
-        transition: all 0.3s ease-in-out;
-      }
+      <style>
+        .modal-add {
+          position: fixed;
+          left: 0;
+          top: 0;
+          background: rgb(0, 0, 0, 0.6);
+          height: 100%;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          opacity: 0;
+          pointer-events: none;
+          transition: all 0.3s ease-in-out;
+        }
 
-      .modal-body-add {
-        padding: 10px;
-        bottom: 10px;
-      }
+        .modal-body-add {
+          padding: 10px;
+          bottom: 10px;
+        }
 
-      .modal-header-add {
-        background: white;
-        width: 560px;
-        max-width: 90%;
-        padding: 20px;
-        border-radius: 4px;
-        position: relative;
-        transform: translateY(-100);
-        transition: all 0.3s ease-in-out;
-      }
+        .modal-header-add {
+          background: white;
+          width: 560px;
+          max-width: 90%;
+          padding: 20px;
+          border-radius: 4px;
+          position: relative;
+          transform: translateY(-100);
+          transition: all 0.3s ease-in-out;
+        }
 
-      .btn-open {
-        background: black;
-        padding: 10px 40px;
-        color: white;
-        border-radius: 5px;
-        font-size: 15px;
-        cursor: pointer;
-      }
+        .btn-open {
+          background: black;
+          padding: 10px 40px;
+          color: white;
+          border-radius: 5px;
+          font-size: 15px;
+          cursor: pointer;
+        }
 
-      p.add {
-        line-height: 1.6;
-        margin-bottom: 20px;
-      }
+        p.add {
+          line-height: 1.6;
+          margin-bottom: 20px;
+        }
 
-      h2.add {
-        text-align: center;
-        /* padding-bottom: 15px;
+        h2.add {
+          text-align: center;
+          /* padding-bottom: 15px;
         font-weight: 200; */
-      }
+        }
 
-      .modal-header-add button.close-btn-add {
-        position: absolute;
-        right: 10px;
-        top: 10px;
-        font-size: 32px;
-        background: none;
-        outline: none;
-        border: none;
-        cursor: pointer;
-      }
+        .modal-header-add button.close-btn-add {
+          position: absolute;
+          right: 10px;
+          top: 10px;
+          font-size: 32px;
+          background: none;
+          outline: none;
+          border: none;
+          cursor: pointer;
+        }
 
-      .modal-header-add button.close-btn-add:hover {
-        color: #6b46c1;
-      }
+        .modal-header-add button.close-btn-add:hover {
+          color: #6b46c1;
+        }
 
-      .active-add {
-        opacity: 1;
-        pointer-events: auto;
-      }
+        .active-add {
+          opacity: 1;
+          pointer-events: auto;
+        }
 
-      .modal-add.active-add .modal-header-add {
-        transform: translateY(0px);
-      }
-    </style>
-    <script>
-      const openModalAdd = document.querySelectorAll("[data-modal-target]");
-      const closeModalAdd = document.querySelectorAll(
-        "[data-close-add]"
-      );
+        .modal-add.active-add .modal-header-add {
+          transform: translateY(0px);
+        }
+      </style>
+      <script>
+        const openModalAdd = document.querySelectorAll("[data-modal-target]");
+        const closeModalAdd = document.querySelectorAll(
+          "[data-close-add]"
+        );
 
-      openModalAdd.forEach((button) => {
-        button.addEventListener("click", () => {
-          const modal = document.querySelector(button.dataset.modalTarget);
-          openModal(modal);
+        openModalAdd.forEach((button) => {
+          button.addEventListener("click", () => {
+            const modal = document.querySelector(button.dataset.modalTarget);
+            openModal(modal);
+          });
         });
-      });
 
-      closeModalAdd.forEach((button) => {
-        button.addEventListener("click", () => {
-          const modal = button.closest(".modal-add");
-          closeModal(modal);
+        closeModalAdd.forEach((button) => {
+          button.addEventListener("click", () => {
+            const modal = button.closest(".modal-add");
+            closeModal(modal);
+          });
         });
-      });
 
-      function openModal(modal) {
-        if (modal == null) return;
-        modal.classList.add("active-add");
-      }
+        function openModal(modal) {
+          if (modal == null) return;
+          modal.classList.add("active-add");
+        }
 
-      function closeModal(modal) {
-        if (modal == null) return;
-        modal.classList.remove("active-add");
-      }
-    </script>
-    <!-- end Pop up Add -->
-
+        function closeModal(modal) {
+          if (modal == null) return;
+          modal.classList.remove("active-add");
+        }
+      </script>
+      <!-- end Pop up Add -->
 
 
 
-    <footer class="footer pt-3">
-      <div class="container-fluid">
-        <div class="row align-items-center justify-content-lg-between">
-          <div class="col-lg-6 mb-lg-0 mb-4">
-            <div class="copyright text-center text-sm text-muted text-lg-start">
-              ©
-              <script>
-                document.write(new Date().getFullYear());
-              </script>
-              , made with <i class="fa fa-heart"></i> by
-              <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
-              for a better web.
+
+      <footer class="footer pt-3">
+        <div class="container-fluid">
+          <div class="row align-items-center justify-content-lg-between">
+            <div class="col-lg-6 mb-lg-0 mb-4">
+              <div class="copyright text-center text-sm text-muted text-lg-start">
+                ©
+                <script>
+                  document.write(new Date().getFullYear());
+                </script>
+                , made with <i class="fa fa-heart"></i> by
+                <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
+                for a better web.
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+                <li class="nav-item">
+                  <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Creative Tim</a>
+                </li>
+                <li class="nav-item">
+                  <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted" target="_blank">About Us</a>
+                </li>
+                <li class="nav-item">
+                  <a href="https://www.creative-tim.com/blog" class="nav-link text-muted" target="_blank">Blog</a>
+                </li>
+                <li class="nav-item">
+                  <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted" target="_blank">License</a>
+                </li>
+              </ul>
             </div>
           </div>
-          <div class="col-lg-6">
-            <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-              <li class="nav-item">
-                <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Creative Tim</a>
-              </li>
-              <li class="nav-item">
-                <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted" target="_blank">About Us</a>
-              </li>
-              <li class="nav-item">
-                <a href="https://www.creative-tim.com/blog" class="nav-link text-muted" target="_blank">Blog</a>
-              </li>
-              <li class="nav-item">
-                <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted" target="_blank">License</a>
-              </li>
-            </ul>
-          </div>
         </div>
-      </div>
-    </footer>
+      </footer>
     </div>
   </main>
   <div class="fixed-plugin">
