@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -244,31 +243,33 @@
                 <span class="d-sm-inline d-none">Halo, Ragnar Lothbrok</span>
               </a>
             </li>
+
             <li class="nav-item dropdown pe-2 d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-white p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+              <a href="#" class="nav-link text-white p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fa fa-chevron-circle-down cursor-pointer"></i>
               </a>
               <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
                 <li class="dropdown-item d-flex align-items-center">
-                  <a href="javascript:;" class="nav-link text-black px-2">
-                    <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
+                  <a href="#" class="nav-link text-black px-2">
+                    <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i> Setting
                   </a>
-                  Setting
+
                 </li>
                 <li class="dropdown-item d-flex align-items-center">
                   <a href="./profile.view.php" class="nav-link text-black">
-                    <i class="fa fa-user fixed-plugin-button-nav cursor-pointer"></i>
+                    <i class="fa fa-user fixed-plugin-button-nav cursor-pointer"></i> Profile
                   </a>
-                  Profile
+
                 </li>
                 <li class="dropdown-item d-flex align-items-center">
-                  <a href="../core/process/logout.php" class="nav-link text-black">
-                    <i class="fa fa-sign-out cursor-pointer"></i>
+                  <a href="./logout.php" class="nav-link text-black">
+                    <i class="fa fa-sign-out cursor-pointer"></i> Logout
                   </a>
-                  Logout
+
                 </li>
               </ul>
             </li>
+            
           </ul>
         </div>
       </div>

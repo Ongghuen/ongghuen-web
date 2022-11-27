@@ -255,28 +255,29 @@ error_reporting(1);
                 <span class="d-sm-inline d-none">Halo, Ragnar Lothbrok</span>
               </a>
             </li>
+
             <li class="nav-item dropdown pe-2 d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-white p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+              <a href="#" class="nav-link text-white p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fa fa-chevron-circle-down cursor-pointer"></i>
               </a>
               <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
                 <li class="dropdown-item d-flex align-items-center">
-                  <a href="javascript:;" class="nav-link text-black px-2">
-                    <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
+                  <a href="#" class="nav-link text-black px-2">
+                    <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i> Setting
                   </a>
-                  Setting
+
                 </li>
                 <li class="dropdown-item d-flex align-items-center">
                   <a href="./profile.view.php" class="nav-link text-black">
-                    <i class="fa fa-user fixed-plugin-button-nav cursor-pointer"></i>
+                    <i class="fa fa-user fixed-plugin-button-nav cursor-pointer"></i> Profile
                   </a>
-                  Profile
+
                 </li>
                 <li class="dropdown-item d-flex align-items-center">
-                  <a href="../core/process/logout.php" class="nav-link text-black">
-                    <i class="fa fa-sign-out cursor-pointer"></i>
+                  <a href="./logout.php" class="nav-link text-black">
+                    <i class="fa fa-sign-out cursor-pointer"></i> Logout
                   </a>
-                  Logout
+
                 </li>
               </ul>
             </li>
@@ -633,7 +634,6 @@ error_reporting(1);
                               <form class="yayyay" action="hapus_user.php" method="post">
                                 <div class="align-middle text-center">
                                   <a class="btn btn-danger btn-sm ms-auto" href="hapus_user.php?id=<?php echo $row['id']; ?>">Delete</a>
-
                                   <button class="btn btn-success btn-sm ms-auto" name="submit" data-close-delete>Close</button>
                                   <!-- <button class="btn btn-danger btn-sm ms-auto" href="hapus_user.php?id=<?php echo $row['id']; ?>" data-close-delete>Close</button> -->
                               </form>
@@ -770,29 +770,6 @@ error_reporting(1);
       </div>
 
       <!-- Pop up Add -->
-
-      <?php
-
-      require('./koneksi.php');
-      session_start();
-      error_reporting(1);
-      if (isset($_POST['add-user'])) {
-        $userNama = $_POST['txt_nama'];
-        $userNoHp = $_POST['txt_nohp'];
-        $userMail = $_POST['txt_mail'];
-        $userUser = $_POST['txt_user'];
-        $userPw = $_POST['txt_pw'];
-
-        $foto = $_FILES['foto']['name'];
-        $file_tmp = $_FILES['foto']['tmp_name'];
-        move_uploaded_file($file_tmp, '../foto/user/' . $foto);
-
-        $query    = "INSERT INTO tb_user SET nama = '$userNama', foto = '$foto', nohp = '$userNoHp', email = '$userMail', username = '$userUser', password = '$userPw', level = '1'";
-        $result   = mysqli_query($koneksi, $query);
-      }
-
-      ?>
-
       <div class="modal-add" id="modal-add">
         <div class="modal-header-add">
           <h2 class="add">Add Form</h2>
@@ -958,46 +935,42 @@ error_reporting(1);
         }
       </script>
       <!-- end Pop up Add -->
+    </div>
 
-
-
-
-
-
-      <footer class="footer pt-3">
-        <div class="container-fluid">
-          <div class="row align-items-center justify-content-lg-between">
-            <div class="col-lg-6 mb-lg-0 mb-4">
-              <div class="copyright text-center text-sm text-muted text-lg-start">
-                ©
-                <script>
-                  document.write(new Date().getFullYear());
-                </script>
-                , made with <i class="fa fa-heart"></i> by
-                <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
-                for a better web.
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Creative Tim</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted" target="_blank">About Us</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/blog" class="nav-link text-muted" target="_blank">Blog</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted" target="_blank">License</a>
-                </li>
-              </ul>
+    <footer class="footer pt-3">
+      <div class="container-fluid">
+        <div class="row align-items-center justify-content-lg-between">
+          <div class="col-lg-6 mb-lg-0 mb-4">
+            <div class="copyright text-center text-sm text-muted text-lg-start">
+              ©
+              <script>
+                document.write(new Date().getFullYear());
+              </script>
+              , made with <i class="fa fa-heart"></i> by
+              <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
+              for a better web.
             </div>
           </div>
+          <div class="col-lg-6">
+            <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+              <li class="nav-item">
+                <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Creative Tim</a>
+              </li>
+              <li class="nav-item">
+                <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted" target="_blank">About Us</a>
+              </li>
+              <li class="nav-item">
+                <a href="https://www.creative-tim.com/blog" class="nav-link text-muted" target="_blank">Blog</a>
+              </li>
+              <li class="nav-item">
+                <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted" target="_blank">License</a>
+              </li>
+            </ul>
+          </div>
         </div>
-      </footer>
-    </div>
+      </div>
+    </footer>
+
   </main>
   <div class="fixed-plugin">
     <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
@@ -1096,28 +1069,49 @@ error_reporting(1);
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="../assets/js/argon-dashboard.min.js?v=2.0.4"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-  <!-- <script>
-    $("#add-user").click(function() {
-      var nama = $("#nama").val();
-      var foto = $("#foto").val();
-      var nohp = $("#nohp").val();
-      var email = $("#email").val();
-      var username = $("#username").val();
-      var password = $("#password").val();
-
-      if (nama == '' || foto == '' || nohp == '' || email == '' || username == '' || password == '') {
-        swal("Oops", "Something went wrong!", "error")
-      } else {
-        swal("Succes", "Your data has been added", "success")
-        header('location:users.view.php');
-      }
-
-    })
-  </script> -->
 
 </body>
 
 </html>
+
+
+<?php
+
+require('./koneksi.php');
+session_start();
+error_reporting(1);
+if (isset($_POST['add-user'])) {
+  $userNama = $_POST['txt_nama'];
+  $userNoHp = $_POST['txt_nohp'];
+  $userMail = $_POST['txt_mail'];
+  $userUser = $_POST['txt_user'];
+  $userPw = $_POST['txt_pw'];
+
+  $foto = $_FILES['foto']['name'];
+  $file_tmp = $_FILES['foto']['tmp_name'];
+  move_uploaded_file($file_tmp, '../foto/user/' . $foto);
+
+  $query    = "INSERT INTO tb_user SET nama = '$userNama', foto = '$foto', nohp = '$userNoHp', email = '$userMail', username = '$userUser', password = '$userPw', level = '1'";
+  $result   = mysqli_query($koneksi, $query);
+
+
+  if ($result) {
+    echo "<script>
+		Swal.fire({title: 'Data Berhasil Disimpan',text: '',icon: 'success',confirmButtonText: 'OK'
+		}).then((result) => {if (result.value)
+			{window.location = '';}
+		})</script>";
+  } else {
+
+    echo "<script>
+			Swal.fire({title: 'Data Gagal Disimpan',text: '',icon: 'error',confirmButtonText: 'OK'
+			}).then((result) => {if (result.value)
+				{window.location = '';}
+			})</script>";
+  }
+}
+
+?>

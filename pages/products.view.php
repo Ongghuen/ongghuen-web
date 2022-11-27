@@ -2,23 +2,7 @@
 require("./koneksi.php");
 session_start();
 error_reporting(1);
-if (isset($_POST['add-product'])) {
-  $nama = $_POST['txt_nama'];
-  $harga = $_POST['txt_harga'];
-  $qty = $_POST['txt_qty'];
-  $kategori = $_POST['txt_kategori'];
-  $deskripsi = $_POST['txt_desc'];
-
-  $foto = $_FILES['foto']['name'];
-  $file_tmp = $_FILES['foto']['tmp_name'];
-  move_uploaded_file($file_tmp, '../foto/product/' . $foto);
-
-
-  $query    = "INSERT INTO `tb_product` (`id`, `nama`,`foto`, `harga`, `qty`, `kategori`, `deskripsi`) VALUES (NULL, '$nama', '$foto', '$harga', '$qty','$kategori', '$deskripsi')";
-  $result   = mysqli_query($koneksi, $query);
-}
 ?>
-
 
 
 <!DOCTYPE html>
@@ -271,31 +255,33 @@ if (isset($_POST['add-product'])) {
                 <span class="d-sm-inline d-none">Halo, Ragnar Lothbrok</span>
               </a>
             </li>
+
             <li class="nav-item dropdown pe-2 d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-white p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+              <a href="#" class="nav-link text-white p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fa fa-chevron-circle-down cursor-pointer"></i>
               </a>
               <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
                 <li class="dropdown-item d-flex align-items-center">
-                  <a href="javascript:;" class="nav-link text-black px-2">
-                    <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
+                  <a href="#" class="nav-link text-black px-2">
+                    <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i> Setting
                   </a>
-                  Setting
+
                 </li>
                 <li class="dropdown-item d-flex align-items-center">
                   <a href="./profile.view.php" class="nav-link text-black">
-                    <i class="fa fa-user fixed-plugin-button-nav cursor-pointer"></i>
+                    <i class="fa fa-user fixed-plugin-button-nav cursor-pointer"></i> Profile
                   </a>
-                  Profile
+
                 </li>
                 <li class="dropdown-item d-flex align-items-center">
-                  <a href="../core/process/logout.php" class="nav-link text-black">
-                    <i class="fa fa-sign-out cursor-pointer"></i>
+                  <a href="./logout.php" class="nav-link text-black">
+                    <i class="fa fa-sign-out cursor-pointer"></i> Logout
                   </a>
-                  Logout
+
                 </li>
               </ul>
             </li>
+
           </ul>
         </div>
       </div>
@@ -1316,6 +1302,47 @@ if (isset($_POST['add-product'])) {
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="../assets/js/argon-dashboard.min.js"></script>
+
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 </body>
 
 </html>
+
+<?php
+require("./koneksi.php");
+session_start();
+error_reporting(1);
+if (isset($_POST['add-product'])) {
+  $nama = $_POST['txt_nama'];
+  $harga = $_POST['txt_harga'];
+  $qty = $_POST['txt_qty'];
+  $kategori = $_POST['txt_kategori'];
+  $deskripsi = $_POST['txt_desc'];
+
+  $foto = $_FILES['foto']['name'];
+  $file_tmp = $_FILES['foto']['tmp_name'];
+  move_uploaded_file($file_tmp, '../foto/product/' . $foto);
+
+
+  $query    = "INSERT INTO `tb_product` (`id`, `nama`,`foto`, `harga`, `qty`, `kategori`, `deskripsi`) VALUES (NULL, '$nama', '$foto', '$harga', '$qty','$kategori', '$deskripsi')";
+  $result   = mysqli_query($koneksi, $query);
+
+  if ($result) {
+    echo "<script>
+		Swal.fire({title: 'Data Berhasil Disimpan',text: '',icon: 'success',confirmButtonText: 'OK'
+		}).then((result) => {if (result.value)
+			{window.location = '';}
+		})</script>";
+  } else {
+
+    echo "<script>
+			Swal.fire({title: 'Data Gagal Disimpan',text: '',icon: 'error',confirmButtonText: 'OK'
+			}).then((result) => {if (result.value)
+				{window.location = '';}
+			})</script>";
+  }
+}
+
+
+?>

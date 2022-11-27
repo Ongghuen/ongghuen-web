@@ -603,7 +603,6 @@ progress {
   --bs-gutter-x: 1.5rem;
   --bs-gutter-y: 0;
   display: flex;
-  flex-wrap: wrap;
   margin-top: calc(-1 * var(--bs-gutter-y));
   margin-right: calc(-0.5 * var(--bs-gutter-x));
   margin-left: calc(-0.5 * var(--bs-gutter-x));
@@ -1991,7 +1990,7 @@ progress {
   vertical-align: bottom;
 }
 .table-group-divider {
-  border-top: calc(2 * $table-border-width) solid currentColor;
+  border-top: calc solid currentColor;
 }
 .caption-top {
   caption-side: top;
@@ -4667,7 +4666,7 @@ fieldset:disabled .btn {
   border-color: var(--bs-pagination-disabled-border-color);
 }
 .page-item:not(:first-child) .page-link {
-  margin-left: calc($pagination-border-width * -1);
+  margin-left: calc;
 }
 .page-item:first-child .page-link {
   border-top-left-radius: var(--bs-pagination-border-radius);

@@ -1,13 +1,9 @@
 <?php
-
-if (isset($_GET["error"])) {
-  echo "
-  <script>
-      alert('Username atau password salah!');
-  </script>
-  ";
+include "koneksi.php";
+session_start();
+if (isset($_SESSION["ses_username"]) != '') {
+  header("location: dashboard.view.php");
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +25,7 @@ if (isset($_GET["error"])) {
     <div class="rightBox">
       <div class="formBox">
         <h2>Login</h2>
-        <form action="../core/process/login.php" method="post">
+        <form action="" method="post">
           <div class="inputBox">
             <span>Username</span>
             <input type="text" name="username" required>
@@ -38,11 +34,11 @@ if (isset($_GET["error"])) {
             <span>Password</span>
             <input type="password" name="password" required>
           </div>
-          <div class="remember">
+          <!-- <div class="remember">
             <label for="remember">
               <input type="checkbox" name="remember" id="remember"> Remember me
             </label>
-          </div>
+          </div> -->
           <div class="inputBox">
             <input type="submit" name="login" value="Sign In">
           </div>
@@ -50,6 +46,46 @@ if (isset($_GET["error"])) {
       </div>
     </div>
   </section>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 </body>
 
 </html>
+
+<?php
+if (isset($_POST['login'])) {
+  //anti inject sql
+  $username = mysqli_real_escape_string($koneksi, $_POST['username']);
+  $password = mysqli_real_escape_string($koneksi, $_POST['password']);
+
+  //query login
+  $sql_login = "SELECT * FROM tb_user WHERE BINARY username='$username' AND password='$password'";
+  $query_login = mysqli_query($koneksi, $sql_login);
+  $data_login = mysqli_fetch_array($query_login, MYSQLI_BOTH);
+  $jumlah_login = mysqli_num_rows($query_login);
+
+
+  if ($jumlah_login == 1) {
+
+    $_SESSION["ses_id"] = $data_login["id"];
+    $_SESSION["ses_nama"] = $data_login["nama"];
+    $_SESSION["ses_foto"] = $data_login["foto"];
+    $_SESSION["ses_nohp"] = $data_login["nohp"];
+    $_SESSION["ses_username"] = $data_login["username"];
+    $_SESSION["ses_password"] = $data_login["password"];
+    $_SESSION["ses_level"] = $data_login["level"];
+
+    echo "<script>
+		Swal.fire({title: 'Login Berhasil',text: '',icon: 'success',confirmButtonText: 'OK'
+		}).then((result) => {if (result.value)
+			{window.location = 'dashboard.view.php';}
+		})</script>";
+  } else {
+
+    echo "<script>
+			Swal.fire({title: 'Login Gagal',text: '',icon: 'error',confirmButtonText: 'OK'
+			}).then((result) => {if (result.value)
+				{window.location = 'login.view.php';}
+			})</script>";
+  }
+}

@@ -1,3 +1,9 @@
+<body>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+</body>
+
+
 <?php
 require('./koneksi.php');
 error_reporting(1);
@@ -16,11 +22,27 @@ if (isset($_POST['submit'])) {
     if (isset($_POST['submit'])) {
         if ($foto == "") {
             $sql = mysqli_query($koneksi, "UPDATE `tb_user` SET nama='$nama',nohp='$nohp',email='$email',username='$username',password='$password' WHERE id='$id'");
-            header('location:users.view.php');
+            // header('location:users.view.php');
+            echo "<script>
+            Swal.fire({title: 'Data Berhasil Diubah',text: '',icon: 'success',confirmButtonText: 'OK'
+            }).then((result) => {if (result.value)
+                {window.location = 'users.view.php';}
+            })</script>";
         } else {
             $sql = mysqli_query($koneksi, "UPDATE `tb_user` SET nama='$nama', foto='$foto', nohp='$nohp',email='$email',username='$username',password='$password' WHERE id='$id'");
-            header('location:users.view.php');
+            // header('location:users.view.php');
+            echo "<script>
+            Swal.fire({title: 'Data Berhasil Diubah',text: '',icon: 'success',confirmButtonText: 'OK'
+            }).then((result) => {if (result.value)
+                {window.location = 'users.view.php';}
+            })</script>";
         }
+    } else {
+        echo "<script>
+            Swal.fire({title: 'Data Gagal Disimpan',text: '',icon: 'error',confirmButtonText: 'OK'
+            }).then((result) => {if (result.value)
+                {window.location = 'users.view.php';}
+            })</script>";
     }
 }
 

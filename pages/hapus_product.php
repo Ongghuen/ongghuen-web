@@ -9,12 +9,8 @@ if (file_exists('../file/product' . $row['foto'])) {
     mysqli_query($koneksi, $query);
     header('location:products.view.php"');
 } else {
-    $query = "DELETE FROM tb_product WHERE id = '$_GET[id]' ";
-    mysqli_query($koneksi, $query);
-    header('location:products.view.php"');
+
 }
-
-
 
 
 if (isset($_POST['submit'])) {

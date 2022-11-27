@@ -271,28 +271,29 @@ if (isset($_POST['add-product'])) {
                 <span class="d-sm-inline d-none">Halo, Ragnar Lothbrok</span>
               </a>
             </li>
+
             <li class="nav-item dropdown pe-2 d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-white p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+              <a href="#" class="nav-link text-white p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fa fa-chevron-circle-down cursor-pointer"></i>
               </a>
               <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
                 <li class="dropdown-item d-flex align-items-center">
-                  <a href="javascript:;" class="nav-link text-black px-2">
-                    <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
+                  <a href="#" class="nav-link text-black px-2">
+                    <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i> Setting
                   </a>
-                  Setting
+
                 </li>
                 <li class="dropdown-item d-flex align-items-center">
                   <a href="./profile.view.php" class="nav-link text-black">
-                    <i class="fa fa-user fixed-plugin-button-nav cursor-pointer"></i>
+                    <i class="fa fa-user fixed-plugin-button-nav cursor-pointer"></i> Profile
                   </a>
-                  Profile
+
                 </li>
                 <li class="dropdown-item d-flex align-items-center">
-                  <a href="../core/process/logout.php" class="nav-link text-black">
-                    <i class="fa fa-sign-out cursor-pointer"></i>
+                  <a href="./logout.php" class="nav-link text-black">
+                    <i class="fa fa-sign-out cursor-pointer"></i> Logout
                   </a>
-                  Logout
+
                 </li>
               </ul>
             </li>
@@ -357,6 +358,7 @@ if (isset($_POST['add-product'])) {
 
 
 
+
     <div class="container-fluid py-4">
       <div class="row">
         <div class="col-12">
@@ -374,56 +376,70 @@ if (isset($_POST['add-product'])) {
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                         No
                       </th>
+
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                         Nama
                       </th>
+
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                         Total
                       </th>
+
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                         Tanggal
                       </th>
-
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                         Actions
                       </th>
-
                     </tr>
                   </thead>
-
-                  <?php
-                  $data = $_POST['data'];
-                  if (isset($_POST['caridata'])) {
-                    $caringab = ("SELECT tb_transaksi.id, format(SUM(tb_product.harga*tb_detail_transaksi.qty),0) AS total, tb_user.nama, tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product WHERE tb_user.nama LIKE '" . $data . "%' GROUP BY tb_user.nama");
-                    $result   = mysqli_query($koneksi, $caringab);
-                  } elseif (isset($_POST['namaasc'])) {
-                    $namaasc = ("SELECT  tb_transaksi.id,  format(SUM(tb_product.harga*tb_detail_transaksi.qty),0) AS total, tb_user.nama, tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product GROUP BY tb_user.nama ORDER BY tb_user.nama asc");
-                    $result   = mysqli_query($koneksi, $namaasc);
-                  } elseif (isset($_POST['namadesc'])) {
-                    $namadesc = ("SELECT  tb_transaksi.id,  format(SUM(tb_product.harga*tb_detail_transaksi.qty),0) AS total, tb_user.nama, tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product GROUP BY tb_user.nama ORDER BY tb_user.nama desc");
-                    $result   = mysqli_query($koneksi, $namadesc);
-                  } elseif (isset($_POST['totalasc'])) {
-                    $totalasc = ("SELECT  tb_transaksi.id,  format(SUM(tb_product.harga*tb_detail_transaksi.qty),0) AS total, tb_user.nama, tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product GROUP BY tb_user.nama ORDER BY total desc");
-                    $result   = mysqli_query($koneksi, $totalasc);
-                  } elseif (isset($_POST['totaldesc'])) {
-                    $totaldesc = ("SELECT  tb_transaksi.id,  format(SUM(tb_product.harga*tb_detail_transaksi.qty),0) AS total, tb_user.nama, tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product GROUP BY tb_user.nama ORDER BY total asc");
-                    $result   = mysqli_query($koneksi, $totaldesc);
-                  } else {
-                    $query  = "SELECT  tb_transaksi.id,  format(SUM(tb_product.harga*tb_detail_transaksi.qty),0) AS total, tb_user.nama, tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product GROUP BY tb_user.nama";
-                    $result = mysqli_query($koneksi, $query);
-                  }
+                </table>
 
 
-                  $no     = 1;
+
+                <?php
+                $data = $_POST['data'];
+                if (isset($_POST['caridata'])) {
+                  $caringab = ("SELECT tb_transaksi.id, format(SUM(tb_product.harga*tb_detail_transaksi.qty),0) AS total, tb_user.nama, tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product WHERE tb_user.nama LIKE '" . $data . "%' GROUP BY tb_user.nama");
+                  $result   = mysqli_query($koneksi, $caringab);
+                } elseif (isset($_POST['namaasc'])) {
+                  $namaasc = ("SELECT  tb_transaksi.id,  format(SUM(tb_product.harga*tb_detail_transaksi.qty),0) AS total, tb_user.nama, tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product GROUP BY tb_user.nama ORDER BY tb_user.nama asc");
+                  $result   = mysqli_query($koneksi, $namaasc);
+                } elseif (isset($_POST['namadesc'])) {
+                  $namadesc = ("SELECT  tb_transaksi.id,  format(SUM(tb_product.harga*tb_detail_transaksi.qty),0) AS total, tb_user.nama, tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product GROUP BY tb_user.nama ORDER BY tb_user.nama desc");
+                  $result   = mysqli_query($koneksi, $namadesc);
+                } elseif (isset($_POST['totalasc'])) {
+                  $totalasc = ("SELECT  tb_transaksi.id,  format(SUM(tb_product.harga*tb_detail_transaksi.qty),0) AS total, tb_user.nama, tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product GROUP BY tb_user.nama ORDER BY total desc");
+                  $result   = mysqli_query($koneksi, $totalasc);
+                } elseif (isset($_POST['totaldesc'])) {
+                  $totaldesc = ("SELECT  tb_transaksi.id,  format(SUM(tb_product.harga*tb_detail_transaksi.qty),0) AS total, tb_user.nama, tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product GROUP BY tb_user.nama ORDER BY total asc");
+                  $result   = mysqli_query($koneksi, $totaldesc);
+                } else {
+                  $query  = "SELECT  tb_transaksi.id,  format(SUM(tb_product.harga*tb_detail_transaksi.qty),0) AS total, tb_user.nama, tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product GROUP BY tb_user.nama";
+                  $result = mysqli_query($koneksi, $query);
+                }
 
 
-                  while ($row = mysqli_fetch_array($result)) {
-                    $transaksiId = $row['id'];
-                    $transaksiNama = $row['nama'];
-                    $transaksiTotal = $row['total'];
-                    $transaksiTanggal   = $row['tanggal'];
+                $no     = 1;
 
-                  ?>
+
+                while ($row = mysqli_fetch_array($result)) {
+                  $transaksiId = $row['id'];
+                  $transaksiNama = $row['nama'];
+                  $transaksiTotal = $row['total'];
+                  $transaksiTanggal   = $row['tanggal'];
+
+                ?>
+
+                  <table class="table align-items-center mb-0">
+                    <thead>
+                      <tr>
+                      <tr>
+
+                      </tr>
+                      </tr>
+                    </thead>
+
 
                     <tbody>
 
@@ -432,256 +448,260 @@ if (isset($_POST['add-product'])) {
                         <td class="align-middle text-center">
                           <span class="text-secondary text-xs font-weight-bold"><?php echo $no; ?></span>
                         </td>
+
+
                         <td class="align-middle text-center">
                           <span class="text-secondary text-xs font-weight-bold"><?php echo $transaksiNama; ?></span>
                         </td>
+
+
                         <td class="align-middle text-center">
                           <span class="text-secondary text-xs font-weight-bold">Rp. <?php echo $transaksiTotal; ?></span>
                         </td>
+
+
                         <td class="align-middle text-center">
                           <span class="text-secondary text-xs font-weight-bold"><?php echo $transaksiTanggal; ?></span>
                         </td>
+
+
                         <td class="align-middle text-center">
 
-
                           <button class="btn btn-secondary btn-sm px-3 py-1 me-1 mt-3" data-modal-target="#modal-delete<?php echo $row['id']; ?>">Detail</button>
-
                         </td>
 
+
+                      <tr></tr>
                       </tr>
-                    <?php
-
-                    $no++;
-                  }
-
-
-                    ?>
                     </tbody>
-                </table>
+                  </table>
+
+
+                  <!-- Popup Delete -->
+
+                  <div class="modal-delete" id="modal-delete<?php echo $row['id']; ?>">
+                    <form class="yayyay" action="transaksi_detail.php" method="post">
+                      <div class="modal-header-delete">
+                        <h2 class="delete">Detail</h2>
+                        <div class="modal-body-delete">
+                          <div class="table-responsive p-0">
+                            <table class="table align-items-center mb-0">
+                              <thead>
+                                <tr>
+                                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    No
+                                  </th>
+                                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    Nama
+                                  </th>
+                                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    Produk
+                                  </th>
+                                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    Harga
+                                  </th>
+                                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    Qty
+                                  </th>
+                                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    Total
+                                  </th>
+                                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    Tanggal
+                                  </th>
+
+                                </tr>
+                              </thead>
+
+                              <?php
+
+                              $queryreport  = "SELECT tb_user.nama as namareport, tb_product.nama AS produk, format(tb_product.harga, 0) AS harga , tb_detail_transaksi.qty, format(tb_product.harga * tb_detail_transaksi.qty,0) AS totalreport, tb_transaksi.tanggal as tanggalreport FROM tb_detail_transaksi INNER JOIN tb_user ON tb_user.id=tb_detail_transaksi.id_user INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product INNER JOIN tb_transaksi ON tb_transaksi.id=tb_detail_transaksi.id_transaksi where tb_transaksi.id = '" . $row['id'] . "'";
+                              $resultanjay = mysqli_query($koneksi, $queryreport);
+                              $nomer = 1;
+
+
+                              while ($data = mysqli_fetch_array($resultanjay)) {
+
+                                $reportNama = $data['namareport'];
+                                $reportProduct = $data['produk'];
+                                $reportHarga = $data['harga'];
+                                $reportQty   = $data['qty'];
+                                $reportTotal  = $data['totalreport'];
+                                $reportTanggal  = $data['tanggalreport'];
+
+
+                              ?>
+                                <tbody>
+
+                                  <tr>
+                                    <td class="align-middle text-center">
+                                      <span class="text-secondary text-xs font-weight-bold"><?php echo $nomer; ?></span>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                      <span class="text-secondary text-xs font-weight-bold"><?php echo $reportNama; ?></span>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                      <span class="text-secondary text-xs font-weight-bold"><?php echo $reportProduct; ?></span>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                      <span class="text-secondary text-xs font-weight-bold">Rp. <?php echo $reportHarga; ?></span>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                      <span class="text-secondary text-xs font-weight-bold"><?php echo $reportQty; ?></span>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                      <span class="text-secondary text-xs font-weight-bold">Rp. <?php echo $reportTotal; ?></span>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                      <span class="text-secondary text-xs font-weight-bold"><?php echo $reportTanggal; ?></span>
+                                    </td>
+
+                                  </tr>
+                                <?php
+                                $nomer++;
+                              }
+
+                                ?>
+                                </tbody>
+                            </table>
+                          </div>
+                          <div></div>
+                          <div></div>
+
+                          <div class="align-middle text-center">
+                            <button class="btn btn-danger btn-sm ms-auto" name="submit" data-close-delete>Close</button>
+                            <!-- <button class="btn btn-danger btn-sm ms-auto" href="hapus_user.php?id=<?php echo $row['id']; ?>" data-close-delete>Close</button> -->
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+
+                  <style>
+                    p.detailya {
+                      font-weight: 100;
+                    }
+
+                    .modal-delete {
+                      position: fixed;
+                      left: 0;
+                      top: 0;
+                      background: rgb(0, 0, 0, 0.6);
+                      height: 100%;
+                      width: 100%;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      opacity: 0;
+                      pointer-events: none;
+                      transition: all 0.3s ease-in-out;
+                      z-index: 10000;
+                    }
+
+                    .modal-body-delete {
+                      padding: 10px;
+                      bottom: 10px;
+                    }
+
+                    .modal-header-delete {
+                      background: white;
+                      width: 900px;
+                      max-width: 100%;
+                      padding: 20px;
+                      border-radius: 4x;
+                      position: relative;
+                      transform: translateY(-100);
+                      transition: all 0.3s ease-in-out;
+                    }
+
+                    .btn-open {
+                      background: black;
+                      padding: 10px 40px;
+                      color: white;
+                      border-radius: 5px;
+                      font-size: 15px;
+                      cursor: pointer;
+                    }
+
+                    p.delete {
+                      line-height: 1.6;
+                      margin-bottom: 20px;
+                      text-align: center;
+                    }
+
+                    h2.delete {
+                      text-align: center;
+                      /* padding-bottom: 15px;
+                  font-weight: 200; */
+                    }
+
+                    .modal-header-delete button.close-btn-delete {
+                      position: absolute;
+                      right: 10px;
+                      top: 10px;
+                      font-size: 32px;
+                      background: none;
+                      outline: none;
+                      border: none;
+                      cursor: pointer;
+                    }
+
+                    .modal-header-delete button.close-btn-delete:hover {
+                      color: #6b46c1;
+                    }
+
+                    .active-delete {
+                      opacity: 1;
+                      pointer-events: auto;
+                    }
+
+                    .modal-delete.active-delete .modal-header-delete {
+                      transform: translateY(0px);
+                    }
+                  </style>
+                  <script>
+                    const openModalDelete = document.querySelectorAll("[data-modal-target]");
+                    const closeModalDelete = document.querySelectorAll(
+                      "[data-close-delete]"
+                    );
+
+                    openModalDelete.forEach((button) => {
+                      button.addEventListener("click", () => {
+                        const modal = document.querySelector(button.dataset.modalTarget);
+                        openModal(modal);
+                      });
+                    });
+
+                    closeModalDelete.forEach((button) => {
+                      button.addEventListener("click", () => {
+                        const modal = button.closest(".modal-delete");
+                        closeModal(modal);
+                      });
+                    });
+
+                    function openModal(modal) {
+                      if (modal == null) return;
+                      modal.classList.add("active-delete");
+                    }
+
+                    function closeModal(modal) {
+                      if (modal == null) return;
+                      modal.classList.remove("active-delete");
+                    }
+                  </script>
+                  <!-- end Pop up Delete -->
+
+                <?php
+                  $no++;
+                }
+
+
+                ?>
               </div>
             </div>
-
-            <!-- Popup Delete -->
-
-            <div class="modal-delete" id="modal-delete<?php echo $row['id']; ?>">
-              <form class="yayyay" action="transaksi_detail.php" method="post">
-                <div class="modal-header-delete">
-                  <h2 class="delete">Detail</h2>
-                  <div class="modal-body-delete">
-                    <div class="table-responsive p-0">
-                      <table class="table align-items-center mb-0">
-                        <thead>
-                          <tr>
-                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                              No
-                            </th>
-                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                              Nama
-                            </th>
-                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                              Produk
-                            </th>
-                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                              Harga
-                            </th>
-                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                              Qty
-                            </th>
-                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                              Total
-                            </th>
-                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                              Tanggal
-                            </th>
-
-                          </tr>
-                        </thead>
-
-                        <?php
-                        $idtransaksi = $_GET['id'];
-                        $queryreport  = "SELECT tb_user.nama as namareport, tb_product.nama AS produk, format(tb_product.harga, 0) AS harga , tb_detail_transaksi.qty, format(tb_product.harga * tb_detail_transaksi.qty,0) AS totalreport, tb_transaksi.tanggal as tanggalreport FROM tb_detail_transaksi INNER JOIN tb_user ON tb_user.id=tb_detail_transaksi.id_user INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product INNER JOIN tb_transaksi ON tb_transaksi.id=tb_detail_transaksi.id_transaksi where tb_transaksi.id = '$idtransaksi'";
-                        $resultanjay = mysqli_query($koneksi, $queryreport);
-                        $nomer = 1;
-
-
-                        while ($data = mysqli_fetch_array($resultanjay)) {
-
-                          $reportNama = $data['namareport'];
-                          $reportProduct = $data['produk'];
-                          $reportHarga = $data['harga'];
-                          $reportQty   = $data['qty'];
-                          $reportTotal  = $data['totalreport'];
-                          $reportTanggal  = $data['tanggalreport'];
-
-
-                        ?>
-                          <tbody>
-
-                            <tr>
-                              <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold"><?php echo $nomer; ?></span>
-                              </td>
-                              <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold"><?php echo $reportNama; ?></span>
-                              </td>
-                              <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold"><?php echo $reportProduct; ?></span>
-                              </td>
-                              <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold">Rp. <?php echo $reportHarga; ?></span>
-                              </td>
-                              <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold"><?php echo $reportQty; ?></span>
-                              </td>
-                              <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold">Rp. <?php echo $reportTotal; ?></span>
-                              </td>
-                              <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold"><?php echo $reportTanggal; ?></span>
-                              </td>
-
-                            </tr>
-                          <?php
-                          $nomer++;
-                        }
-
-                          ?>
-                          </tbody>
-                      </table>
-                    </div>
-
-                    <div class="align-middle text-center">
-                      <button class="btn btn-danger btn-sm ms-auto" name="submit" data-close-delete>Close</button>
-                      <!-- <button class="btn btn-danger btn-sm ms-auto" href="hapus_user.php?id=<?php echo $row['id']; ?>" data-close-delete>Close</button> -->
-                    </div>
-                  </div>
-                </div>
-              </form>
-            </div>
-
-            <style>
-              p.detailya {
-                font-weight: 100;
-              }
-
-              .modal-delete {
-                position: fixed;
-                left: 0;
-                top: 0;
-                background: rgb(0, 0, 0, 0.6);
-                height: 100%;
-                width: 100%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                opacity: 0;
-                pointer-events: none;
-                transition: all 0.3s ease-in-out;
-                z-index: 10000;
-              }
-
-              .modal-body-delete {
-                padding: 10px;
-                bottom: 10px;
-              }
-
-              .modal-header-delete {
-                background: white;
-                width: 900px;
-                max-width: 100%;
-                padding: 20px;
-                border-radius: 4x;
-                position: relative;
-                transform: translateY(-100);
-                transition: all 0.3s ease-in-out;
-              }
-
-              .btn-open {
-                background: black;
-                padding: 10px 40px;
-                color: white;
-                border-radius: 5px;
-                font-size: 15px;
-                cursor: pointer;
-              }
-
-              p.delete {
-                line-height: 1.6;
-                margin-bottom: 20px;
-                text-align: center;
-              }
-
-              h2.delete {
-                text-align: center;
-                /* padding-bottom: 15px;
-                  font-weight: 200; */
-              }
-
-              .modal-header-delete button.close-btn-delete {
-                position: absolute;
-                right: 10px;
-                top: 10px;
-                font-size: 32px;
-                background: none;
-                outline: none;
-                border: none;
-                cursor: pointer;
-              }
-
-              .modal-header-delete button.close-btn-delete:hover {
-                color: #6b46c1;
-              }
-
-              .active-delete {
-                opacity: 1;
-                pointer-events: auto;
-              }
-
-              .modal-delete.active-delete .modal-header-delete {
-                transform: translateY(0px);
-              }
-            </style>
-            <script>
-              const openModalDelete = document.querySelectorAll("[data-modal-target]");
-              const closeModalDelete = document.querySelectorAll(
-                "[data-close-delete]"
-              );
-
-              openModalDelete.forEach((button) => {
-                button.addEventListener("click", () => {
-                  const modal = document.querySelector(button.dataset.modalTarget);
-                  openModal(modal);
-                });
-              });
-
-              closeModalDelete.forEach((button) => {
-                button.addEventListener("click", () => {
-                  const modal = button.closest(".modal-delete");
-                  closeModal(modal);
-                });
-              });
-
-              function openModal(modal) {
-                if (modal == null) return;
-                modal.classList.add("active-delete");
-              }
-
-              function closeModal(modal) {
-                if (modal == null) return;
-                modal.classList.remove("active-delete");
-              }
-            </script>
-            <!-- end Pop up Delete -->
-
-
-
-
-
-
           </div>
         </div>
       </div>
-
 
 
 
