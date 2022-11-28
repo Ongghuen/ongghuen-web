@@ -1,9 +1,20 @@
 <?php
-require("./koneksi.php");
-session_start();
-error_reporting(1);
-?>
+include "koneksi.php";
 
+session_start();
+error_reporting(0);
+if (isset($_SESSION["ses_username"]) == "") {
+  header("location: login.php");
+} else {
+  $data_id = $_SESSION["ses_id"];
+  $data_nama = $_SESSION["ses_nama"];
+  $data_foto = $_SESSION["ses_foto"];
+  $data_nohp = $_SESSION["nohp"];
+  $data_email = $_SESSION["ses_email"];
+  $data_username = $_SESSION["ses_username"];
+  $data_password = $_SESSION["ses_password"];
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -221,10 +232,10 @@ error_reporting(1);
               <a class="opacity-5 text-white" href="javascript:;">Pages</a>
             </li>
             <li class="breadcrumb-item text-sm text-white active" aria-current="page">
-              Dashboard
+              Products
             </li>
           </ol>
-          <h6 class="font-weight-bolder text-white mb-0">Dashboard</h6>
+          <h6 class="font-weight-bolder text-white mb-0">Products</h6>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <!-- <div class="ms-md-auto pe-md-3 d-flex align-items-center"> -->
@@ -250,11 +261,29 @@ error_reporting(1);
               </a>
             </li>
 
-            <li class="nav-item px-3 d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-white font-weight-bold px-0">
-                <span class="d-sm-inline d-none">Halo, Ragnar Lothbrok</span>
-              </a>
-            </li>
+            <?php
+            error_reporting(0);
+
+
+            $tampilprofil = ("SELECT id, foto, nama, nohp, email, username, password  FROM tb_user WHERE id = '$data_id'");
+            $result   = mysqli_query($koneksi, $tampilprofil);
+
+            while ($row = mysqli_fetch_array($result)) {
+
+              $profilName   = $row['nama'];
+
+            ?>
+
+              <li class="nav-item px-3 d-flex align-items-center">
+                <a href="javascript:;" class="nav-link text-white font-weight-bold px-0">
+                  <span class="d-sm-inline d-none">Halo, <?php echo $profilName ?></span>
+                </a>
+              </li>
+
+            <?php
+
+            }
+            ?>
 
             <li class="nav-item dropdown pe-2 d-flex align-items-center">
               <a href="#" class="nav-link text-white p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
@@ -523,8 +552,8 @@ error_reporting(1);
 
                         </td>
                         <td class="align-middle text-center">
-                          <button class="btn btn-dark btn-sm ms-auto" data-modal-target="#modal-edit<?php echo $row['id']; ?>">Edit</button>
-                          <button class="btn btn-danger btn-sm ms-auto" data-modal-target="#modal-delete<?php echo $row['id']; ?>">Delete</button>
+                          <button class="btn btn-dark btn-sm px-3 py-1 me-1 mt-3" data-modal-target="#modal-edit<?php echo $row['id']; ?>">Edit</button>
+                          <button class="btn btn-danger btn-sm px-3 py-1 me-1 mt-3" data-modal-target="#modal-delete<?php echo $row['id']; ?>">Delete</button>
                         </td>
 
                       </tr>

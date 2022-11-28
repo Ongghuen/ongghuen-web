@@ -1,3 +1,21 @@
+<?php
+include "koneksi.php";
+
+session_start();
+error_reporting(0);
+if (isset($_SESSION["ses_username"]) == "") {
+  header("location: login.php");
+} else {
+  $data_id = $_SESSION["ses_id"];
+  $data_nama = $_SESSION["ses_nama"];
+  $data_foto = $_SESSION["ses_foto"];
+  $data_nohp = $_SESSION["ses_nohp"];
+  $data_email = $_SESSION["ses_email"];
+  $data_username = $_SESSION["ses_username"];
+  $data_password = $_SESSION["ses_password"];
+}
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -329,23 +347,43 @@
       </div>
     </nav>
     <!-- End Navbar -->
-    <div class="card shadow-lg mx-4 card-profile-bottom">
-      <div class="card-body p-3">
-        <div class="row gx-4">
-          <div class="col-auto">
-            <div class="avatar avatar-xl position-relative">
-              <img src="../assets/img/team-1.jpg" alt="profile_image" class="w-100 border-radius-lg shadow-sm" />
+
+    <?php
+    error_reporting(1);
+
+
+    $tampilngab = ("SELECT id, foto, nama, nohp, email, username, password  FROM tb_user WHERE id = '$data_id'");
+    $result   = mysqli_query($koneksi, $tampilngab);
+
+    while ($row = mysqli_fetch_array($result)) {
+      $userUserId   = $row['id'];
+      $userFoto  = $row['foto'];
+      $userName   = $row['nama'];
+      $userPhone  = $row['nohp'];
+      $userEmail  = $row['email'];
+      $userUserName  = $row['username'];
+      $userPassword  = $row['password'];
+
+    ?>
+
+
+      <div class="card shadow-lg mx-4 card-profile-bottom">
+        <div class="card-body p-3">
+          <div class="row gx-4">
+            <div class="col-auto">
+              <div class="avatar avatar-xl position-relative">
+                <img src="../foto/user/<?php echo $userFoto ?>" alt="profile_image" class="w-100 border-radius-lg shadow-sm" />
+              </div>
             </div>
-          </div>
-          <div class="col-auto my-auto">
-            <div class="h-100">
-              <h5 class="mb-1">Sayo Kravits</h5>
-              <p class="mb-0 font-weight-bold text-sm">Public Relations</p>
+            <div class="col-auto my-auto">
+              <div class="h-100">
+                <h5 class="mb-1"> <?php echo $userName ?></h5>
+                <p class="mb-0 font-weight-bold text-sm">Admin</p>
+              </div>
             </div>
-          </div>
-          <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
-            <div class="nav-wrapper position-relative end-0">
-              <ul class="nav nav-pills nav-fill p-1" role="tablist">
+            <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
+              <div class="nav-wrapper position-relative end-0">
+                <!-- <ul class="nav nav-pills nav-fill p-1" role="tablist">
                 <li class="nav-item">
                   <a class="nav-link mb-0 px-0 py-1 active d-flex align-items-center justify-content-center" data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="true">
                     <i class="ni ni-app"></i>
@@ -364,53 +402,247 @@
                     <span class="ms-2">Settings</span>
                   </a>
                 </li>
-              </ul>
+              </ul> -->
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="container-fluid py-4">
-      <div class="row">
-        <div class="col-md-8">
-          <div class="card">
-            <div class="card-header pb-0">
-              <div class="d-flex align-items-center">
-                <p class="mb-0">Edit Profile</p>
-                <button class="btn btn-primary btn-sm ms-auto">
-                  Settings
-                </button>
-              </div>
-            </div>
-            <div class="card-body">
-              <p class="text-uppercase text-sm">User Information</p>
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="example-text-input" class="form-control-label">Username</label>
-                    <input class="form-control" type="text" value="lucky.jesse" />
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="example-text-input" class="form-control-label">Email address</label>
-                    <input class="form-control" type="email" value="jesse@example.com" />
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="example-text-input" class="form-control-label">First name</label>
-                    <input class="form-control" type="text" value="Jesse" />
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="example-text-input" class="form-control-label">Last name</label>
-                    <input class="form-control" type="text" value="Lucky" />
-                  </div>
+      <div class="container-fluid py-4">
+        <div class="row">
+          <div class="col-md-8">
+            <div class="card">
+              <div class="card-header pb-0">
+                <div class="d-flex align-items-center">
+                  <p class="mb-0">Edit Profile</p>
+                  <button class="btn btn-primary btn-sm ms-auto" data-modal-target="#modal-edit<?php echo $data_id ?>">
+                    Change
+                  </button>
                 </div>
               </div>
-              <hr class="horizontal dark" />
+              <div class="card-body">
+                <!-- <p class="text-uppercase text-sm">User Information</p> -->
+
+
+
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="example-text-input" class="form-control-label">Nama</label>
+                      <input class="form-control" type="text" value="<?php echo $userName ?>" disabled />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="example-text-input" class="form-control-label">No Hp</label>
+                      <input class="form-control" type="text" value="<?php echo $userPhone ?>" disabled />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="example-text-input" class="form-control-label">Email</label>
+                      <input class="form-control" type="email" value="<?php echo $userEmail ?>" disabled />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="example-text-input" class="form-control-label">Username</label>
+                      <input class="form-control" type="text" value="<?php echo $userUserName ?>" disabled />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="example-text-input" class="form-control-label">Password</label>
+                      <input class="form-control" type="password" value="<?php echo $userPassword ?>" disabled />
+                    </div>
+                  </div>
+                </div>
+
+
+
+                <!-- Pop up Edit -->
+
+                <div class="modal-edit" id="modal-edit<?php echo $data_id ?>">
+                  <div class="modal-header-edit">
+                    <h2 class="edit">Edit Form</h2>
+                    <!-- <button data-close-button-edit type="submit" class="close-btn-edit">&times;</button> -->
+                    <div class="modal-body-edit">
+                      <form action="" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                          <label for="example-text-input" class="form-control-label">Name</label>
+                          <input class="form-control" name="nama" type="text" value="<?= $userName ?>" maxlength="30" placeholder="Enter Name" required />
+                        </div>
+
+
+                        <div class="form-group">
+                          <label class="custom-file-label" for="customFileLang">Upload Avatar</label>
+                          <input type="file" class="form-control" name="foto">
+
+                        </div>
+
+                        <div class="form-group">
+                          <label for="example-text-input" class="form-control-label">No Hp</label>
+                          <input class="form-control" name="nohp" type="text" value="<?= $userPhone ?>" oninput="this.value = this.value.replace(/[^\d]+/, '').replace(/(\..*?)\..*/g, '$1');" maxlength="12" placeholder="Enter No Hp" required />
+                        </div>
+
+
+                        <div class="form-group">
+                          <label for="example-text-input" class="form-control-label">Email</label>
+                          <input class="form-control" name="email" type="email" value="<?= $userEmail ?>" maxlength="30" placeholder="Enter Email" required />
+                        </div>
+
+
+                        <div class="form-group">
+                          <label for="example-text-input" class="form-control-label">Username</label>
+                          <input class="form-control" name="username" type="text" value="<?= $userUserName ?>" maxlength="30" placeholder="Enter Username" required />
+                        </div>
+
+                        <div class="form-group">
+                          <label for="example-text-input" class="form-control-label">Password</label>
+                          <input class="form-control" name="password" type="password" value="<?= $userPassword ?>" maxlength="30" placeholder="Enter Password" required />
+                        </div>
+
+
+                        <div class="align-middle text-center">
+                          <button class="btn btn-success btn-sm ms-auto" name="submit">Edit</button>
+                          <button class="btn btn-danger btn-sm ms-auto" name="close" data-close-button-edit>Close</button>
+                          <!-- <a class="btn btn-danger btn-sm ms-auto" type="submit" data-close-button-edit>Close</a> -->
+                        </div>
+                      </form>
+
+                    </div>
+                  </div>
+                </div>
+
+                <style>
+                  .modal-edit {
+                    position: fixed;
+                    left: 0;
+                    top: 0;
+                    background: rgb(0, 0, 0, 0.6);
+                    height: 100%;
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    opacity: 0;
+                    pointer-events: none;
+                    transition: all 0.3s ease-in-out;
+                    z-index: 10000;
+                  }
+
+                  .modal-body-edit {
+                    padding: 10px;
+                    bottom: 10px;
+                  }
+
+                  .modal-header-edit {
+                    background: white;
+                    width: 560px;
+                    max-width: 90%;
+                    padding: 20px;
+                    border-radius: 4x;
+                    position: relative;
+                    transform: translateY(-100);
+                    transition: all 0.3s ease-in-out;
+                  }
+
+                  .btn-open-edit {
+                    background: black;
+                    padding: 10px 40px;
+                    color: white;
+                    border-radius: 5px;
+                    font-size: 15px;
+                    cursor: pointer;
+                  }
+
+                  p.edit {
+                    line-height: 1.6;
+                    margin-bottom: 20px;
+                  }
+
+                  h2.edit {
+                    text-align: center;
+                    /* padding-bottom: 15px;
+                            font-weight: 200; */
+                  }
+
+                  .modal-header-edit button.close-btn-edit {
+                    position: absolute;
+                    right: 10px;
+                    top: 10px;
+                    font-size: 32px;
+                    background: none;
+                    outline: none;
+                    border: none;
+                    cursor: pointer;
+                  }
+
+                  .modal-header-edit button.close-btn-edit:hover {
+                    color: #6b46c1;
+                  }
+
+                  .active-edit {
+                    opacity: 1;
+                    pointer-events: auto;
+                  }
+
+                  .modal-edit.active-edit .modal-header-edit {
+                    transform: translateY(0px);
+                  }
+                </style>
+                <script>
+                  const openModalButtons = document.querySelectorAll("[data-modal-target]");
+                  const closeModalButtons = document.querySelectorAll(
+                    "[data-close-button-edit]"
+                  );
+
+                  openModalButtons.forEach((button) => {
+                    button.addEventListener("click", () => {
+                      const modal = document.querySelector(button.dataset.modalTarget);
+                      openModal(modal);
+                    });
+                  });
+
+                  closeModalButtons.forEach((button) => {
+                    button.addEventListener("click", () => {
+                      const modal = button.closest(".modal-edit");
+                      closeModal(modal);
+                    });
+                  });
+
+                  function openModal(modal) {
+                    if (modal == null) return;
+                    modal.classList.add("active-edit");
+                  }
+
+                  function closeModal(modal) {
+                    if (modal == null) return;
+                    modal.classList.remove("active-edit");
+                  }
+                </script>
+                <!-- end Pop up Edit -->
+
+              <?php
+
+            }
+              ?>
+
+
+              <!-- <hr class="horizontal dark" />
               <p class="text-uppercase text-sm">Contact Information</p>
               <div class="row">
                 <div class="col-md-12">
@@ -447,11 +679,11 @@
                     <input class="form-control" type="text" value="A beautiful Dashboard for Bootstrap 5. It is Free and Open Source." />
                   </div>
                 </div>
+              </div> -->
               </div>
             </div>
           </div>
-        </div>
-        <div class="col-md-4">
+          <!-- <div class="col-md-4">
           <div class="card card-profile">
             <img src="../assets/img/bg-profile.jpg" alt="Image placeholder" class="card-img-top" />
             <div class="row justify-content-center">
@@ -506,42 +738,42 @@
               </div>
             </div>
           </div>
+        </div> -->
         </div>
-      </div>
-      <footer class="footer pt-3">
-        <div class="container-fluid">
-          <div class="row align-items-center justify-content-lg-between">
-            <div class="col-lg-6 mb-lg-0 mb-4">
-              <div class="copyright text-center text-sm text-muted text-lg-start">
-                ©
-                <script>
-                  document.write(new Date().getFullYear());
-                </script>
-                , made with <i class="fa fa-heart"></i> by
-                <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
-                for a better web.
+        <footer class="footer pt-3">
+          <div class="container-fluid">
+            <div class="row align-items-center justify-content-lg-between">
+              <div class="col-lg-6 mb-lg-0 mb-4">
+                <div class="copyright text-center text-sm text-muted text-lg-start">
+                  ©
+                  <script>
+                    document.write(new Date().getFullYear());
+                  </script>
+                  , made with <i class="fa fa-heart"></i> by
+                  <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
+                  for a better web.
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+                  <li class="nav-item">
+                    <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Creative Tim</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted" target="_blank">About Us</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="https://www.creative-tim.com/blog" class="nav-link text-muted" target="_blank">Blog</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted" target="_blank">License</a>
+                  </li>
+                </ul>
               </div>
             </div>
-            <div class="col-lg-6">
-              <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Creative Tim</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted" target="_blank">About Us</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/blog" class="nav-link text-muted" target="_blank">Blog</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted" target="_blank">License</a>
-                </li>
-              </ul>
-            </div>
           </div>
-        </div>
-      </footer>
-    </div>
+        </footer>
+      </div>
   </div>
   <div class="fixed-plugin">
     <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
@@ -621,6 +853,8 @@
   <script src="../assets/js/core/bootstrap.min.js"></script>
   <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
   <script>
     var win = navigator.platform.indexOf("Win") > -1;
     if (win && document.querySelector("#sidenav-scrollbar")) {
@@ -637,3 +871,46 @@
 </body>
 
 </html>
+
+
+<?php
+require('./koneksi.php');
+error_reporting(1);
+
+$nama = $_POST['nama'];
+$nohp = $_POST['nohp'];
+$email = $_POST['email'];
+$username = $_POST['username'];
+$password = $_POST['password'];
+$foto = $_FILES['foto']['name'];
+$file_tmp = $_FILES['foto']['tmp_name'];
+move_uploaded_file($file_tmp, '../foto/user/' . $foto);
+
+
+if (isset($_POST['submit'])) {
+  if (isset($_POST['submit'])) {
+    if ($foto == "") {
+      $sql = mysqli_query($koneksi, "UPDATE `tb_user` SET nama='$nama',nohp='$nohp',email='$email',username='$username',password='$password' WHERE id='$data_id]'");
+      // header('location:users.view.php');
+      echo "<script>
+            Swal.fire({title: 'Data Berhasil Diubah',text: '',icon: 'success',confirmButtonText: 'OK'
+            }).then((result) => {if (result.value)
+                {window.location = 'profile.view.php';}
+            })</script>";
+    } else {
+      $sql = mysqli_query($koneksi, "UPDATE `tb_user` SET nama='$nama', foto='$foto', nohp='$nohp',email='$email',username='$username',password='$password' WHERE id='$data_id'");
+      // header('location:users.view.php');
+      echo "<script>
+            Swal.fire({title: 'Data Berhasil Diubah',text: '',icon: 'success',confirmButtonText: 'OK'
+            }).then((result) => {if (result.value)
+                {window.location = 'profile.view.php';}
+            })</script>";
+    }
+  } else {
+    echo "<script>
+            Swal.fire({title: 'Data Gagal Disimpan',text: '',icon: 'error',confirmButtonText: 'OK'
+            }).then((result) => {if (result.value)
+                {window.location = 'profile.view.php';}
+            })</script>";
+  }
+}

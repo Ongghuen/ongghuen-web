@@ -1,20 +1,19 @@
 <?php
-require("./koneksi.php");
+
+include "koneksi.php";
+
 session_start();
-error_reporting(1);
-if (isset($_POST['add-product'])) {
-  $nama = $_POST['txt_nama'];
-  $harga = $_POST['txt_harga'];
-  $qty = $_POST['txt_qty'];
-  $kategori = $_POST['txt_kategori'];
-
-  $foto = $_FILES['foto']['name'];
-  $file_tmp = $_FILES['foto']['tmp_name'];
-  move_uploaded_file($file_tmp, '../foto/product/' . $foto);
-
-
-  $query    = "INSERT INTO `tb_product` (`id`, `nama`,`foto`, `harga`, `qty`, `kategori`) VALUES (NULL, '$nama', '$foto', '$harga', '$qty','$kategori')";
-  $result   = mysqli_query($koneksi, $query);
+error_reporting(0);
+if (isset($_SESSION["ses_username"]) == "") {
+  header("location: login.php");
+} else {
+  $data_id = $_SESSION["ses_id"];
+  $data_nama = $_SESSION["ses_nama"];
+  $data_foto = $_SESSION["ses_foto"];
+  $data_nohp = $_SESSION["ses_nohp"];
+  $data_email = $_SESSION["ses_email"];
+  $data_username = $_SESSION["ses_username"];
+  $data_password = $_SESSION["ses_password"];
 }
 ?>
 
@@ -141,10 +140,10 @@ if (isset($_POST['add-product'])) {
               <a class="opacity-5 text-white" href="javascript:;">Pages</a>
             </li>
             <li class="breadcrumb-item text-sm text-white active" aria-current="page">
-              Dashboard
+              Report
             </li>
           </ol>
-          <h6 class="font-weight-bolder text-white mb-0">Dashboard</h6>
+          <h6 class="font-weight-bolder text-white mb-0">Report</h6>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <!-- <div class="ms-md-auto pe-md-3 d-flex align-items-center"> -->
@@ -170,11 +169,30 @@ if (isset($_POST['add-product'])) {
               </a>
             </li>
 
-            <li class="nav-item px-3 d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-white font-weight-bold px-0">
-                <span class="d-sm-inline d-none">Halo, Ragnar Lothbrok</span>
-              </a>
-            </li>
+
+            <?php
+            error_reporting(0);
+
+
+            $tampilprofil = ("SELECT id, foto, nama, nohp, email, username, password  FROM tb_user WHERE id = '$data_id'");
+            $result   = mysqli_query($koneksi, $tampilprofil);
+
+            while ($row = mysqli_fetch_array($result)) {
+
+              $profilName   = $row['nama'];
+
+            ?>
+
+              <li class="nav-item px-3 d-flex align-items-center">
+                <a href="javascript:;" class="nav-link text-white font-weight-bold px-0">
+                  <span class="d-sm-inline d-none">Halo, <?php echo $profilName ?></span>
+                </a>
+              </li>
+
+            <?php
+
+            }
+            ?>
 
             <li class="nav-item dropdown pe-2 d-flex align-items-center">
               <a href="#" class="nav-link text-white p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">

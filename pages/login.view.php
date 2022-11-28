@@ -3,6 +3,13 @@ include "koneksi.php";
 session_start();
 if (isset($_SESSION["ses_username"]) != '') {
   header("location: dashboard.view.php");
+  header("location: customs.view.php");
+  header("location: orders.view.php");
+  header("location: products.view.php");
+  header("location: profile.view.php");
+  header("location: report.view.php");
+  header("location: transaksi.view.php");
+  header("location: users.view.php");
 }
 ?>
 
@@ -59,7 +66,7 @@ if (isset($_POST['login'])) {
   $password = mysqli_real_escape_string($koneksi, $_POST['password']);
 
   //query login
-  $sql_login = "SELECT * FROM tb_user WHERE BINARY username='$username' AND password='$password'";
+  $sql_login = "SELECT * FROM tb_user WHERE username='$username' AND password='$password'";
   $query_login = mysqli_query($koneksi, $sql_login);
   $data_login = mysqli_fetch_array($query_login, MYSQLI_BOTH);
   $jumlah_login = mysqli_num_rows($query_login);
@@ -71,9 +78,10 @@ if (isset($_POST['login'])) {
     $_SESSION["ses_nama"] = $data_login["nama"];
     $_SESSION["ses_foto"] = $data_login["foto"];
     $_SESSION["ses_nohp"] = $data_login["nohp"];
+    $_SESSION["ses_email"] = $data_login["email"];
     $_SESSION["ses_username"] = $data_login["username"];
     $_SESSION["ses_password"] = $data_login["password"];
-    $_SESSION["ses_level"] = $data_login["level"];
+
 
     echo "<script>
 		Swal.fire({title: 'Login Berhasil',text: '',icon: 'success',confirmButtonText: 'OK'

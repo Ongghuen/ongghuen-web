@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 25, 2022 at 04:25 PM
+-- Generation Time: Nov 28, 2022 at 03:50 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -60,9 +60,10 @@ CREATE TABLE `tb_custom` (
 --
 
 INSERT INTO `tb_custom` (`id`, `nama`, `foto`, `kategori`, `bahan`, `detail`) VALUES
-(9, 'Kursi ngab', 'icon_register.png', 3, 1, 'anjas'),
+(9, 'Kursi ngab', 'icon_register.png', 1, 1, 'anjas'),
 (10, 'kasur Pengantinn', 'anony.jpeg', 1, 1, 'ppp'),
-(12, 'ahah', 'RARS_18+.svg.png', 2, 2, 'aa');
+(12, 'ahah', 'RARS_18+.svg.png', 1, 1, 'aa'),
+(13, 'Anjas Mara', 'icon_register.png', 2, 2, 'hihi');
 
 -- --------------------------------------------------------
 
@@ -86,7 +87,9 @@ INSERT INTO `tb_detail_transaksi` (`id`, `id_transaksi`, `id_user`, `id_product`
 (7, 2, 95, 39, 1),
 (8, 2, 95, 38, 2),
 (9, 3, 58, 38, 4),
-(10, 3, 58, 39, 5);
+(10, 3, 58, 39, 5),
+(11, 4, 57, 38, 5),
+(12, 4, 57, 39, 5);
 
 -- --------------------------------------------------------
 
@@ -130,8 +133,9 @@ CREATE TABLE `tb_product` (
 --
 
 INSERT INTO `tb_product` (`id`, `nama`, `foto`, `harga`, `qty`, `kategori`, `deskripsi`) VALUES
-(38, 'Meja Belajarr', 'anony.jpeg', 25000, 20, 4, 'efg'),
-(39, 'Kursi Belajarr', 'icon_login.png', 50000, 50, 4, 'abc');
+(38, 'Meja Belajarr', 'anony.jpeg', 900000, 20, 4, 'efg'),
+(39, 'Kursi Belajarr', 'icon_login.png', 500000, 50, 4, 'abc'),
+(40, 'Lemari Dosen', 'RARS_18+.svg.png', 1000000, 10, 4, 'anjas');
 
 -- --------------------------------------------------------
 
@@ -170,7 +174,8 @@ CREATE TABLE `tb_transaksi` (
 
 INSERT INTO `tb_transaksi` (`id`, `user_id`, `tanggal`) VALUES
 (2, 95, '2022-11-24'),
-(3, 58, '2022-11-25');
+(3, 58, '2022-11-25'),
+(4, 57, '2022-11-26');
 
 -- --------------------------------------------------------
 
@@ -196,8 +201,9 @@ CREATE TABLE `tb_user` (
 INSERT INTO `tb_user` (`id`, `nama`, `foto`, `nohp`, `email`, `username`, `password`, `level`) VALUES
 (57, 'Ilham Ibnu Ahmad', 'bjorka.jpg', '085607743539', 'ilham@gmail.com', 'ilham123', 'ilham123', 1),
 (58, 'Fidinova Ika Putri SangAdji', 'icon_login.png', '081231897839', 'fidin@gmail.com', 'fidin123', 'fidin123', 1),
-(59, 'Sugeng Budisaputra', 'RARS_18+.svg.png', '085678345123', 'sugeng@gmail.com', 'sugeng123', 'sugeng123', 1),
-(95, 'Faisal', 'anony.jpeg', '085607743539', 'bjirkangab@gmail.com', '123', '1', 1);
+(95, 'Faisal Oktabrian Sholihin', 'anony.jpeg', '085607743539', 'bjirkangab@gmail.com', '123', '1', 1),
+(97, 'root2 dong tolong', 'bjorka.jpg', '12', 'root2@gmail.com', 'root2', 'root2', 2),
+(108, 'admin', 'bjorka.jpg', '081231897839', 'raihanachmad@gmail.com', 'admin', 'admin', 2);
 
 -- --------------------------------------------------------
 
@@ -291,13 +297,13 @@ ALTER TABLE `tb_bahan`
 -- AUTO_INCREMENT for table `tb_custom`
 --
 ALTER TABLE `tb_custom`
-  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `tb_detail_transaksi`
 --
 ALTER TABLE `tb_detail_transaksi`
-  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tb_kategori`
@@ -309,7 +315,7 @@ ALTER TABLE `tb_kategori`
 -- AUTO_INCREMENT for table `tb_product`
 --
 ALTER TABLE `tb_product`
-  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `tb_role`
@@ -321,13 +327,13 @@ ALTER TABLE `tb_role`
 -- AUTO_INCREMENT for table `tb_transaksi`
 --
 ALTER TABLE `tb_transaksi`
-  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
+  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
 
 --
 -- Constraints for dumped tables
