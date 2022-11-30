@@ -1,4 +1,7 @@
 <?php
+
+use LDAP\Result;
+
 include "koneksi.php";
 
 session_start();
@@ -41,7 +44,7 @@ if (isset($_SESSION["ses_username"]) == "") {
 
 <body class="g-sidenav-show bg-gray-100">
   <div class="position-absolute w-100 min-height-300 top-0" style="
-        background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/profile-layout-header.jpg');
+        background-image: url('../assets/img/nv-bg.jpg');
         background-position-y: 50%;
       ">
     <span class="mask bg-primary opacity-6"></span>
@@ -67,14 +70,14 @@ if (isset($_SESSION["ses_username"]) == "") {
             <span class="nav-link-text ms-1">Dashboard</span>
           </a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link" href="./orders.view.php">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-cart text-warning text-sm opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">Oders</span>
           </a>
-        </li>
+        </li> -->
         <li class="nav-item">
           <a class="nav-link" href="./transaksi.view.php">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -423,19 +426,19 @@ if (isset($_SESSION["ses_username"]) == "") {
                     <?php
                     error_reporting(1);
                     if (isset($_POST['caridata'])) {
-                      $caringab = ("SELECT id, foto, nama, nohp, email, username, password  FROM tb_user WHERE level = '1' and nama LIKE '" . $_POST['data'] . "%'");
+                      $caringab = ("SELECT id, foto, nama, nohp, email, alamat , username, password  FROM tb_user WHERE level = '1' and nama LIKE '" . $_POST['data'] . "%'");
                       $result   = mysqli_query($koneksi, $caringab);
                     } elseif (isset($_POST['urutnama'])) {
-                      $urutnama = ("SELECT id, foto, nama, nohp, email, username, password  FROM tb_user WHERE level = '1' order by nama asc ");
+                      $urutnama = ("SELECT id, foto, nama, nohp, email, alamat , username, password  FROM tb_user WHERE level = '1' order by nama asc ");
                       $result   = mysqli_query($koneksi, $urutnama);
                     } elseif (isset($_POST['urutinasc'])) {
-                      $urutasc = ("SELECT id, foto, nama, nohp, email, username, password  FROM tb_user WHERE level = '1' order by nama asc ");
+                      $urutasc = ("SELECT id, foto, nama, nohp, email, alamat, username, password  FROM tb_user WHERE level = '1' order by nama asc ");
                       $result   = mysqli_query($koneksi, $urutasc);
                     } elseif (isset($_POST['urutindesc'])) {
-                      $urutdesc = ("SELECT id, foto, nama, nohp, email, username, password  FROM tb_user WHERE level = '1' order by nama desc ");
+                      $urutdesc = ("SELECT id, foto, nama, nohp, email, alamat, username, password  FROM tb_user WHERE level = '1' order by nama desc ");
                       $result   = mysqli_query($koneksi, $urutdesc);
                     } else {
-                      $tampilngab = ("SELECT id, foto, nama, nohp, email, username, password  FROM tb_user WHERE level = '1'");
+                      $tampilngab = ("SELECT id, foto, nama, nohp, email, alamat,  username, password  FROM tb_user WHERE level = '1'");
                       $result   = mysqli_query($koneksi, $tampilngab);
                     }
                     $no = 1;
@@ -446,6 +449,7 @@ if (isset($_SESSION["ses_username"]) == "") {
                       $userName   = $row['nama'];
                       $userPhone  = $row['nohp'];
                       $userEmail  = $row['email'];
+                      $userAlamat = $row['alamat'];
                       $userUserName  = $row['username'];
                       $userPassword  = $row['password'];
                     ?>
@@ -489,7 +493,7 @@ if (isset($_SESSION["ses_username"]) == "") {
                             <h2 class="edit">Edit Form</h2>
                             <!-- <button data-close-button-edit type="submit" class="close-btn-edit">&times;</button> -->
                             <div class="modal-body-edit">
-                              <form action="edit_user.php?id=<?= $row['id'] ?>" method="post" enctype="multipart/form-data">
+                              <form action="users.view.php?id=<?= $row['id'] ?>" method="post" enctype="multipart/form-data">
                                 <div class="form-group">
                                   <label for="example-text-input" class="form-control-label">Name</label>
                                   <input class="form-control" name="nama" type="text" value="<?= $row['nama'] ?>" maxlength="30" placeholder="Enter Name" required />
@@ -513,6 +517,11 @@ if (isset($_SESSION["ses_username"]) == "") {
                                   <input class="form-control" name="email" type="email" value="<?= $row['email'] ?>" maxlength="30" placeholder="Enter Email" required />
                                 </div>
 
+                                <div class="form-group">
+                                  <label for="exampleFormControlTextarea1">Alamat</label>
+                                  <textarea class="form-control" name="alamat" id="exampleFormControlTextarea1" maxlength="500" rows="2"><?= $userAlamat ?></textarea>
+                                </div>
+
 
                                 <div class="form-group">
                                   <label for="example-text-input" class="form-control-label">Username</label>
@@ -526,8 +535,9 @@ if (isset($_SESSION["ses_username"]) == "") {
 
 
                                 <div class="align-middle text-center">
-                                  <button class="btn btn-success btn-sm ms-auto" name="submit">Edit</button>
-                                  <button class="btn btn-danger btn-sm ms-auto" name="close" data-close-button-edit>Close</button>
+                                  <button class="btn btn-success btn-sm ms-auto" name="edit-user">Edit</button>
+                                  <a href="users.view.php" class="btn btn-danger btn-sm ms-auto">Close</a>
+                                  <!-- <button class="btn btn-danger btn-sm ms-auto" data-close-button-edit>Close</button> -->
                                   <!-- <a class="btn btn-danger btn-sm ms-auto" type="submit" data-close-button-edit>Close</a> -->
                                 </div>
                               </form>
@@ -664,8 +674,9 @@ if (isset($_SESSION["ses_username"]) == "") {
                               <div></div>
                               <form class="yayyay" action="hapus_user.php" method="post">
                                 <div class="align-middle text-center">
-                                  <a class="btn btn-danger btn-sm ms-auto" href="hapus_user.php?id=<?php echo $row['id']; ?>">Delete</a>
-                                  <button class="btn btn-success btn-sm ms-auto" name="submit" data-close-delete>Close</button>
+                                  <a class="btn btn-success btn-sm ms-auto" href="users.view.php?id=<?= $row['id'] ?>">Delete</a>
+                                  <a href="users.view.php" class="btn btn-danger btn-sm ms-auto">Close</a>
+                                  <!-- <button class="btn btn-success btn-sm ms-auto" name="submit" data-close-delete>Close</button> -->
                                   <!-- <button class="btn btn-danger btn-sm ms-auto" href="hapus_user.php?id=<?php echo $row['id']; ?>" data-close-delete>Close</button> -->
                               </form>
                             </div>
@@ -817,7 +828,7 @@ if (isset($_SESSION["ses_username"]) == "") {
 
               <div class="form-group">
                 <label class="custom-file-label" for="customFileLang">Upload Avatar</label>
-                <input type="file" class="form-control" id="foto" name="foto" id="foto" required>
+                <input type="file" class="form-control" id="foto" name="fotoadd" id="foto" required>
 
               </div>
 
@@ -833,6 +844,11 @@ if (isset($_SESSION["ses_username"]) == "") {
                 <label for="example-text-input" class="form-control-label">Email</label>
                 <input class="form-control" id="email" type="email" value="" placeholder="Enter Email" maxlength="30" name="txt_mail" id="txt_mail" required />
 
+              </div>
+
+              <div class="form-group">
+                <label for="exampleFormControlTextarea1">Alamat</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" name="txt_alamat" placeholder="Enter Address" maxlength="500" rows="2"></textarea>
               </div>
 
 
@@ -1113,19 +1129,20 @@ if (isset($_SESSION["ses_username"]) == "") {
 
 require('./koneksi.php');
 session_start();
-error_reporting(1);
+error_reporting(0);
 if (isset($_POST['add-user'])) {
   $userNama = $_POST['txt_nama'];
   $userNoHp = $_POST['txt_nohp'];
   $userMail = $_POST['txt_mail'];
+  $userAlamat = $_POST['txt_alamat'];
   $userUser = $_POST['txt_user'];
   $userPw = $_POST['txt_pw'];
 
-  $foto = $_FILES['foto']['name'];
-  $file_tmp = $_FILES['foto']['tmp_name'];
+  $fotoadd = $_FILES['fotoadd']['name'];
+  $file_tmp = $_FILES['fotoadd']['tmp_name'];
   move_uploaded_file($file_tmp, '../foto/user/' . $foto);
 
-  $query    = "INSERT INTO tb_user SET nama = '$userNama', foto = '$foto', nohp = '$userNoHp', email = '$userMail', username = '$userUser', password = '$userPw', level = '1'";
+  $query    = "INSERT INTO tb_user SET nama = '$userNama', foto = '$fotoadd', nohp = '$userNoHp', email = '$userMail', alamat = '$userAlamat', username = '$userUser', password = '$userPw', level = '1'";
   $result   = mysqli_query($koneksi, $query);
 
 
@@ -1142,6 +1159,71 @@ if (isset($_POST['add-user'])) {
 			}).then((result) => {if (result.value)
 				{window.location = '';}
 			})</script>";
+  }
+}
+
+
+require('./koneksi.php');
+error_reporting(0);
+$id = $_GET['id'];
+$nama = $_POST['nama'];
+$nohp = $_POST['nohp'];
+$email = $_POST['email'];
+$alamat = $_POST['alamat'];
+$username = $_POST['username'];
+$password = $_POST['password'];
+$foto = $_FILES['foto']['name'];
+$file_tmp = $_FILES['foto']['tmp_name'];
+move_uploaded_file($file_tmp, '../foto/user/' . $foto);
+
+
+if (isset($_POST['edit-user'])) {
+  if (isset($_POST['edit-user'])) {
+    if ($foto == "") {
+      $sql = mysqli_query($koneksi, "UPDATE `tb_user` SET nama='$nama',nohp='$nohp',email='$email', alamat='$alamat', username='$username',password='$password' WHERE id='$id'");
+      // header('location:users.view.php');
+      echo "<script>
+            Swal.fire({title: 'Data Berhasil Diubah',text: '',icon: 'success',confirmButtonText: 'OK'
+            }).then((result) => {if (result.value)
+                {window.location = 'users.view.php';}
+            })</script>";
+    } else {
+      $sql = mysqli_query($koneksi, "UPDATE `tb_user` SET nama='$nama', foto='$foto', nohp='$nohp',email='$email', alamat='$alamat', username='$username',password='$password' WHERE id='$id'");
+      // header('location:users.view.php');
+      echo "<script>
+            Swal.fire({title: 'Data Berhasil Diubah',text: '',icon: 'success',confirmButtonText: 'OK'
+            }).then((result) => {if (result.value)
+                {window.location = 'users.view.php';}
+            })</script>";
+    }
+  } else {
+    echo "<script>
+            Swal.fire({title: 'Data Gagal Disimpan',text: '',icon: 'error',confirmButtonText: 'OK'
+            }).then((result) => {if (result.value)
+                {window.location = 'users.view.php';}
+            })</script>";
+  }
+}
+
+include "koneksi.php";
+error_reporting(0);
+if (isset($_GET['id'])) {
+
+  $querydel = "DELETE FROM tb_user WHERE id = '$_GET[id]' ";
+  $result = mysqli_query($koneksi, $querydel);
+
+  if ($result) {
+    echo "<script>
+    Swal.fire({title: 'Data Berhasil Dihapus',text: '',icon: 'success',confirmButtonText: 'OK'
+    }).then((result) => {if (result.value)
+        {window.location = 'users.view.php';}
+    })</script>";
+  } else {
+    echo "<script>
+    Swal.fire({title: 'Data Gagal Dihapus',text: '',icon: 'error',confirmButtonText: 'OK'
+    }).then((result) => {if (result.value)
+        {window.location = 'users.view.php';}
+    })</script>";
   }
 }
 

@@ -42,7 +42,7 @@ if (isset($_SESSION["ses_username"]) == "") {
 
 <body class="g-sidenav-show bg-gray-100">
   <div class="position-absolute w-100 min-height-300 top-0" style="
-        background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/profile-layout-header.jpg');
+        background-image: url('../assets/img/nv-bg.jpg');
         background-position-y: 50%;
       ">
     <span class="mask bg-primary opacity-6"></span>
@@ -68,14 +68,14 @@ if (isset($_SESSION["ses_username"]) == "") {
             <span class="nav-link-text ms-1">Dashboard</span>
           </a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link" href="./orders.view.php">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-cart text-warning text-sm opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">Oders</span>
           </a>
-        </li>
+        </li> -->
         <li class="nav-item">
           <a class="nav-link" href="./transaksi.view.php">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -250,37 +250,66 @@ if (isset($_SESSION["ses_username"]) == "") {
           </form>
 
 
-          <div class="dropdown col-auto">
-            <form class="" action="" method="post">
-              <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-3" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                Date
+          <form class="row gx-4" action="" method="post">
+            <div class="dropdown col-auto">
+
+              <div class="form-group">
+                <input class="form-control btn btn-sm bg-gradient-white mb-1 px-3" value="<?php if (isset($_POST['from_date'])) {
+                                                                                            echo $_POST['from_date'];
+                                                                                          }  ?>" type="date" name="from_date" />
+
+              </div>
+
+            </div>
+            <div class="dropdown col-auto">
+
+              <button class="btn btn-sm bg-gradient-white mb-1 px-3" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                To Date
               </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+            </div>
+
+            <div class="dropdown col-auto">
+
+              <div class="form-group">
+                <input class="form-control btn btn-sm bg-gradient-white mb-1 px-3" value="<?php if (isset($_POST['to_date'])) {
+                                                                                            echo $_POST['to_date'];
+                                                                                          }  ?>" type="date" name="to_date" />
+
+              </div>
+
+            </div>
 
 
-              </ul>
-            </form>
+            <div class="dropdown col-auto">
 
-          </div>
+              <button class="btn btn-sm bg-gradient-dark mb-1 px-3" type="submit" aria-expanded="false">
+                Filter
+              </button>
 
 
-          <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
-            <div class="nav-wrapper position-relative end-0">
-              <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                <form class="input-group" action="" method="post">
+            </div>
+            <div class="col-lg-4 col-md-6 me-sm-7 mx-auto mt-0">
+              <div class="nav-wrapper position-relative end-0">
+                <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                  <!-- <form class="input-group" action="" method="post"> -->
                   <div class="input-group">
                     <input type="text" class="form-control ms-4" name="data" placeholder="Type here..." aria-label="Type here..." aria-describedby="button-addon2">
                     <button class="btn bg-gradient-dark  mb-0" name="caridata" type="submit" id="button-addon2">
                       <i class="fas fa-search" aria-hidden="true"></i>
                     </button>
                   </div>
-                </form>
+                  <!-- </form> -->
+                </div>
               </div>
             </div>
-          </div>
+          </form>
+
+
         </div>
       </div>
     </div>
+
 
 
 
@@ -346,6 +375,13 @@ if (isset($_SESSION["ses_username"]) == "") {
                   } elseif (isset($_POST['totaldesc'])) {
                     $totaldesc = ("SELECT tb_user.nama, tb_product.nama AS produk, format(tb_product.harga, 0) AS harga , tb_detail_transaksi.qty, format(tb_product.harga * tb_detail_transaksi.qty, 0) AS total, tb_transaksi.tanggal FROM tb_detail_transaksi INNER JOIN tb_user ON tb_user.id=tb_detail_transaksi.id_user INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product INNER JOIN tb_transaksi ON tb_transaksi.id=tb_detail_transaksi.id_transaksi order by total asc");
                     $result   = mysqli_query($koneksi, $totaldesc);
+                  } elseif (isset($_POST['from_date']) && isset($_POST['to_date'])) {
+
+                    $from_date = $_POST['from_date'];
+                    $to_date = $_POST['to_date'];
+
+                    $filter_dek = ("SELECT tb_user.nama, tb_product.nama AS produk, format(tb_product.harga, 0) AS harga , tb_detail_transaksi.qty, format(tb_product.harga * tb_detail_transaksi.qty, 0) AS total, tb_transaksi.tanggal FROM tb_detail_transaksi INNER JOIN tb_user ON tb_user.id=tb_detail_transaksi.id_user INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product INNER JOIN tb_transaksi ON tb_transaksi.id=tb_detail_transaksi.id_transaksi WHERE tb_transaksi.tanggal BETWEEN '$from_date'AND '$to_date' ORDER BY tb_transaksi.tanggal asc");
+                    $result   = mysqli_query($koneksi, $filter_dek);
                   } else {
                     $query  = "SELECT tb_user.nama, tb_product.nama AS produk, format(tb_product.harga, 0) AS harga , tb_detail_transaksi.qty, format(tb_product.harga * tb_detail_transaksi.qty, 0) AS total, tb_transaksi.tanggal FROM tb_detail_transaksi INNER JOIN tb_user ON tb_user.id=tb_detail_transaksi.id_user INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product INNER JOIN tb_transaksi ON tb_transaksi.id=tb_detail_transaksi.id_transaksi";
                     $result = mysqli_query($koneksi, $query);
@@ -443,7 +479,7 @@ if (isset($_SESSION["ses_username"]) == "") {
                   opacity: 0;
                   pointer-events: none;
                   transition: all 0.3s ease-in-out;
-                  z-index: 1;
+                  z-index: 10000;
                 }
 
                 .modal-body-delete {
@@ -616,7 +652,7 @@ if (isset($_SESSION["ses_username"]) == "") {
                   opacity: 0;
                   pointer-events: none;
                   transition: all 0.3s ease-in-out;
-                  z-index: 1;
+                  z-index: 10000;
                 }
 
                 .modal-body-edit {
@@ -801,6 +837,7 @@ if (isset($_SESSION["ses_username"]) == "") {
         opacity: 0;
         pointer-events: none;
         transition: all 0.3s ease-in-out;
+        z-index: 10000;
       }
 
       .modal-body-add {

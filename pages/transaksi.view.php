@@ -43,7 +43,7 @@ if (isset($_SESSION["ses_username"]) == "") {
 
 <body class="g-sidenav-show bg-gray-100">
   <div class="position-absolute w-100 min-height-300 top-0" style="
-        background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/profile-layout-header.jpg');
+        background-image: url('../assets/img/nv-bg.jpg');
         background-position-y: 50%;
       ">
     <span class="mask bg-primary opacity-6"></span>
@@ -69,14 +69,14 @@ if (isset($_SESSION["ses_username"]) == "") {
             <span class="nav-link-text ms-1">Dashboard</span>
           </a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link" href="./orders.view.php">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-cart text-warning text-sm opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">Oders</span>
           </a>
-        </li>
+        </li> -->
         <li class="nav-item">
           <a class="nav-link active" href="./transaksi.view.php">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -340,36 +340,62 @@ if (isset($_SESSION["ses_username"]) == "") {
 
           </div>
 
-          <div class="dropdown col-auto">
-            <form class="" action="" method="post">
-              <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-3" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                Date
+
+          <form class="row gx-4" action="" method="post">
+            <div class="dropdown col-auto">
+
+              <div class="form-group">
+                <input class="form-control btn btn-sm bg-gradient-white mb-1 px-3" value="<?php if (isset($_POST['from_date'])) {
+                                                                                            echo $_POST['from_date'];
+                                                                                          }  ?>" type="date" name="from_date" />
+
+              </div>
+
+            </div>
+            <div class="dropdown col-auto">
+
+              <button class="btn btn-sm bg-gradient-white mb-1 px-3" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                To Date
               </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+            </div>
+
+            <div class="dropdown col-auto">
+
+              <div class="form-group">
+                <input class="form-control btn btn-sm bg-gradient-white mb-1 px-3" value="<?php if (isset($_POST['to_date'])) {
+                                                                                            echo $_POST['to_date'];
+                                                                                          }  ?>" type="date" name="to_date" />
+
+              </div>
+
+            </div>
 
 
-              </ul>
-            </form>
+            <div class="dropdown col-auto">
 
-          </div>
+              <button class="btn btn-sm bg-gradient-dark mb-1 px-3" type="submit" aria-expanded="false">
+                Filter
+              </button>
 
 
-
-
-          <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
-            <div class="nav-wrapper position-relative end-0">
-              <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                <form class="input-group" action="" method="post">
+            </div>
+            <div class="col-lg-4 col-md-6 me-sm-7 mx-auto mt-0">
+              <div class="nav-wrapper position-relative end-0">
+                <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                  <!-- <form class="input-group" action="" method="post"> -->
                   <div class="input-group">
                     <input type="text" class="form-control ms-4" name="data" placeholder="Type here..." aria-label="Type here..." aria-describedby="button-addon2">
                     <button class="btn bg-gradient-dark  mb-0" name="caridata" type="submit" id="button-addon2">
                       <i class="fas fa-search" aria-hidden="true"></i>
                     </button>
                   </div>
-                </form>
+                  <!-- </form> -->
+                </div>
               </div>
             </div>
-          </div>
+          </form>
+
         </div>
       </div>
     </div>
@@ -396,7 +422,15 @@ if (isset($_SESSION["ses_username"]) == "") {
                       </th>
 
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                        Status
+                      </th>
+
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                         Nama
+                      </th>
+
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                        Alamat
                       </th>
 
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -406,6 +440,9 @@ if (isset($_SESSION["ses_username"]) == "") {
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                         Tanggal
                       </th>
+                      <!-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                        Tanggal Selesai
+                      </th> -->
                       <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                         Actions
                       </th>
@@ -415,22 +452,29 @@ if (isset($_SESSION["ses_username"]) == "") {
                   <?php
                   $data = $_POST['data'];
                   if (isset($_POST['caridata'])) {
-                    $caringab = ("SELECT tb_transaksi.id, format(SUM(tb_product.harga*tb_detail_transaksi.qty),0) AS total, tb_user.nama, tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product WHERE tb_user.nama LIKE '" . $data . "%' GROUP BY tb_user.nama");
+                    $caringab = ("SELECT tb_transaksi.id, format(SUM(tb_product.harga*tb_detail_transaksi.qty),0) AS total, tb_user.nama,tb_user.alamat,tb_transaksi.status, tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product WHERE tb_user.nama LIKE '" . $data . "%' GROUP BY tb_user.nama");
                     $result   = mysqli_query($koneksi, $caringab);
                   } elseif (isset($_POST['namaasc'])) {
-                    $namaasc = ("SELECT  tb_transaksi.id,  format(SUM(tb_product.harga*tb_detail_transaksi.qty),0) AS total, tb_user.nama, tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product GROUP BY tb_user.nama ORDER BY tb_user.nama asc");
+                    $namaasc = ("SELECT  tb_transaksi.id,  format(SUM(tb_product.harga*tb_detail_transaksi.qty),0) AS total, tb_user.nama, tb_user.alamat, tb_transaksi.status, tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product GROUP BY tb_user.nama ORDER BY tb_user.nama asc");
                     $result   = mysqli_query($koneksi, $namaasc);
                   } elseif (isset($_POST['namadesc'])) {
-                    $namadesc = ("SELECT  tb_transaksi.id,  format(SUM(tb_product.harga*tb_detail_transaksi.qty),0) AS total, tb_user.nama, tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product GROUP BY tb_user.nama ORDER BY tb_user.nama desc");
+                    $namadesc = ("SELECT  tb_transaksi.id,  format(SUM(tb_product.harga*tb_detail_transaksi.qty),0) AS total, tb_user.nama, tb_user.alamat, tb_transaksi.status, tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product GROUP BY tb_user.nama ORDER BY tb_user.nama desc");
                     $result   = mysqli_query($koneksi, $namadesc);
                   } elseif (isset($_POST['totalasc'])) {
-                    $totalasc = ("SELECT  tb_transaksi.id,  format(SUM(tb_product.harga*tb_detail_transaksi.qty),0) AS total, tb_user.nama, tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product GROUP BY tb_user.nama ORDER BY total desc");
+                    $totalasc = ("SELECT  tb_transaksi.id,  format(SUM(tb_product.harga*tb_detail_transaksi.qty),0) AS total, tb_user.nama, tb_user.alamat, tb_transaksi.status,tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product GROUP BY tb_user.nama ORDER BY total desc");
                     $result   = mysqli_query($koneksi, $totalasc);
                   } elseif (isset($_POST['totaldesc'])) {
-                    $totaldesc = ("SELECT  tb_transaksi.id,  format(SUM(tb_product.harga*tb_detail_transaksi.qty),0) AS total, tb_user.nama, tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product GROUP BY tb_user.nama ORDER BY total asc");
+                    $totaldesc = ("SELECT  tb_transaksi.id,  format(SUM(tb_product.harga*tb_detail_transaksi.qty),0) AS total, tb_user.nama, tb_user.alamat,tb_transaksi.status, tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product GROUP BY tb_user.nama ORDER BY total asc");
                     $result   = mysqli_query($koneksi, $totaldesc);
+                  } elseif (isset($_POST['from_date']) && isset($_POST['to_date'])) {
+
+                    $from_date = $_POST['from_date'];
+                    $to_date = $_POST['to_date'];
+
+                    $filter_dek = ("SELECT tb_transaksi.id, format(SUM(tb_product.harga*tb_detail_transaksi.qty),0) AS total, tb_user.nama, tb_user.alamat,tb_transaksi.status, tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product WHERE tb_transaksi.tanggal BETWEEN '$from_date' AND '$to_date' GROUP BY tb_user.nama ORDER BY tb_transaksi.tanggal asc;");
+                    $result   = mysqli_query($koneksi, $filter_dek);
                   } else {
-                    $query  = "SELECT  tb_transaksi.id,  format(SUM(tb_product.harga*tb_detail_transaksi.qty),0) AS total, tb_user.nama, tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product GROUP BY tb_user.nama";
+                    $query  = "SELECT  tb_transaksi.id,  format(SUM(tb_product.harga*tb_detail_transaksi.qty),0) AS total, tb_user.nama, tb_user.alamat, tb_transaksi.status, tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product GROUP BY tb_user.nama";
                     $result = mysqli_query($koneksi, $query);
                   }
 
@@ -438,7 +482,9 @@ if (isset($_SESSION["ses_username"]) == "") {
                   $no     = 1;
                   while ($row = mysqli_fetch_array($result)) {
                     $transaksiId = $row['id'];
+                    $transaksiStatus = $row['status'];
                     $transaksiNama = $row['nama'];
+                    $transaksiAlamat = $row['alamat'];
                     $transaksiTotal = $row['total'];
                     $transaksiTanggal   = $row['tanggal'];
 
@@ -452,9 +498,46 @@ if (isset($_SESSION["ses_username"]) == "") {
                         </td>
 
 
+                        <td class="align-middle text-center text-sm">
+
+                          <?php
+
+                          if ($transaksiStatus == "pending") {
+                            echo "
+                          <span class='badge badge-sm bg-gradient-warning px-3'>Pending</span>
+                          ";
+                          } elseif ($transaksiStatus == "delivery") {
+                            echo "
+                          <span class='badge badge-sm bg-gradient-info px-4'>Delivery</span>
+                          ";
+                          } elseif ($transaksiStatus == "done") {
+                            echo "
+                          <span class='badge badge-sm bg-gradient-success px-4'>Done</span>
+                            ";
+                          } elseif ($transaksiStatus == "cancel") {
+                            echo "
+                            <span class='badge badge-sm bg-gradient-danger'>Cancel</span>
+                              ";
+                          }
+
+                          ?>
+
+                        </td>
+
                         <td class="align-middle text-center">
                           <span class="text-secondary text-xs font-weight-bold"><?php echo $transaksiNama; ?></span>
                         </td>
+
+                        <!-- 
+                        <td class="align-middle text-center">
+                          <span class="text-secondary text-xs font-weight-bold"><?php echo $transaksiAlamat; ?></span>
+                        </td> -->
+                        <td class="align-middle text-center">
+                          <button class="btn btn-secondary btn-sm px-3 py-1 me-1 mt-3" data-modal-target="#modal-detail<?= $row['id'] ?>">Cek Detail</button>
+                          <!-- <span class="text-secondary text-xs font-weight-bold" ><?php echo $customDetail; ?></span> -->
+                        </td>
+
+
 
 
                         <td class="align-middle text-center">
@@ -466,10 +549,17 @@ if (isset($_SESSION["ses_username"]) == "") {
                           <span class="text-secondary text-xs font-weight-bold"><?php echo $transaksiTanggal; ?></span>
                         </td>
 
+                        <!-- <td class="align-middle text-center">
+                          <span class="text-secondary text-xs font-weight-bold"><?php echo $transaksiTanggal; ?></span>
+                        </td> -->
+
 
                         <td class="align-middle text-center">
 
+
+
                           <button class="btn btn-secondary btn-sm px-3 py-1 me-1 mt-3" data-modal-target="#modal-delete<?php echo $row['id']; ?>">Detail</button>
+                          <!-- <button class="btn btn-dark btn-sm px-3 py-1 me-1 mt-3" data-modal-target="#modal-delete<?php echo $row['id']; ?>">Edit</button> -->
                         </td>
 
 
@@ -477,6 +567,138 @@ if (isset($_SESSION["ses_username"]) == "") {
                       </tr>
                     </tbody>
 
+
+                    <!-- Pop up Detail -->
+
+                    <div class="modal-detail" id="modal-detail<?= $row['id'] ?>">
+                      <div class="modal-header-detail">
+                        <h2 class="detail">Detail Form</h2>
+                        <div class="modal-body-detail">
+                          <form class="anjasmara" action="transaksi_detail.php?id=<?= $row['id'] ?>" method="post">
+                            <div class="form-group">
+                              <label for="exampleFormControlTextarea1">Detail</label>
+                              <textarea class="form-control" id="exampleFormControlTextarea1" maxlength="500" rows="5"><?= $transaksiAlamat ?></textarea>
+                            </div>
+                            <div class="align-middle text-center">
+                              <a href="transaksi.view.php" class="btn btn-danger btn-sm ms-auto">Close</a>
+
+                              <!-- <button class="btn btn-danger btn-sm ms-auto" type="submit" name="close" data-close-button-detail>Close</button> -->
+                              <!-- <a class="btn btn-danger btn-sm ms-auto" type="submit" data-close-button-edit>Close</a> -->
+                            </div>
+                          </form>
+
+                        </div>
+                      </div>
+                    </div>
+
+                    <style>
+                      .modal-detail {
+                        position: fixed;
+                        left: 0;
+                        top: 0;
+                        background: rgb(0, 0, 0, 0.6);
+                        height: 100%;
+                        width: 100%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        opacity: 0;
+                        pointer-events: none;
+                        transition: all 0.3s ease-in-out;
+                        z-index: 1;
+                      }
+
+                      .modal-body-detail {
+                        padding: 10px;
+                        bottom: 10px;
+                      }
+
+                      .modal-header-detail {
+                        background: white;
+                        width: 560px;
+                        max-width: 90%;
+                        padding: 20px;
+                        border-radius: 4x;
+                        position: relative;
+                        transform: translateY(-100);
+                        transition: all 0.3s ease-in-out;
+                      }
+
+                      .btn-open-detail {
+                        background: black;
+                        padding: 10px 40px;
+                        color: white;
+                        border-radius: 5px;
+                        font-size: 15px;
+                        cursor: pointer;
+                      }
+
+                      p.detail {
+                        line-height: 1.6;
+                        margin-bottom: 20px;
+                      }
+
+                      h2.detail {
+                        text-align: center;
+                        /* padding-bottom: 15px;
+                          font-weight: 200; */
+                      }
+
+                      .modal-header-detail button.close-btn-detail {
+                        position: absolute;
+                        right: 10px;
+                        top: 10px;
+                        font-size: 32px;
+                        background: none;
+                        outline: none;
+                        border: none;
+                        cursor: pointer;
+                      }
+
+                      .modal-header-detail button.close-btn-detail:hover {
+                        color: #6b46c1;
+                      }
+
+                      .active-detail {
+                        opacity: 1;
+                        pointer-events: auto;
+                      }
+
+                      .modal-detail.active-detail .modal-header-detail {
+                        transform: translateY(0px);
+                      }
+                    </style>
+                    <script>
+                      const openModalButtons = document.querySelectorAll("[data-modal-target]");
+                      const closeModalButtons = document.querySelectorAll(
+                        "[data-close-button-detail]"
+                      );
+
+                      openModalButtons.forEach((button) => {
+                        button.addEventListener("click", () => {
+                          const modal = document.querySelector(button.dataset.modalTarget);
+                          openModal(modal);
+                        });
+                      });
+
+                      closeModalButtons.forEach((button) => {
+                        button.addEventListener("click", () => {
+                          const modal = button.closest(".modal-detail");
+                          closeModal(modal);
+                        });
+                      });
+
+                      function openModal(modal) {
+                        if (modal == null) return;
+                        modal.classList.add("active-detail");
+                      }
+
+                      function closeModal(modal) {
+                        if (modal == null) return;
+                        modal.classList.remove("active-detail");
+                      }
+                    </script>
+                    <!-- end Pop up Detail -->
 
 
                     <!-- Popup Delete -->
@@ -574,7 +796,8 @@ if (isset($_SESSION["ses_username"]) == "") {
                             ?>
 
                             <div class="align-middle text-center">
-                              <button class="btn btn-danger btn-sm ms-auto" name="submit" data-close-delete>Close</button>
+                              <a href="transaksi.view.php" class="btn btn-danger btn-sm ms-auto">Close</a>
+                              <!-- <button class="btn btn-danger btn-sm ms-auto" name="submit" data-close-delete>Close</button> -->
                               <!-- <button class="btn btn-danger btn-sm ms-auto" href="hapus_user.php?id=<?php echo $row['id']; ?>" data-close-delete>Close</button> -->
                             </div>
                           </div>
@@ -792,6 +1015,7 @@ if (isset($_SESSION["ses_username"]) == "") {
           opacity: 0;
           pointer-events: none;
           transition: all 0.3s ease-in-out;
+          z-index: 10000;
         }
 
         .modal-body-add {

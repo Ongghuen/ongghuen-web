@@ -41,7 +41,7 @@ if (isset($_SESSION["ses_username"]) == "") {
 
 <body class="g-sidenav-show bg-gray-100">
   <div class="position-absolute w-100 min-height-300 top-0" style="
-        background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/profile-layout-header.jpg');
+        background-image: url('../assets/img/nv-bg.jpg');
         background-position-y: 50%;
       ">
     <span class="mask bg-primary opacity-6"></span>
@@ -67,14 +67,14 @@ if (isset($_SESSION["ses_username"]) == "") {
             <span class="nav-link-text ms-1">Dashboard</span>
           </a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link" href="./orders.view.php">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-cart text-warning text-sm opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">Oders</span>
           </a>
-        </li>
+        </li> -->
         <li class="nav-item">
           <a class="nav-link" href="./transaksi.view.php">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -556,7 +556,8 @@ if (isset($_SESSION["ses_username"]) == "") {
                                 <textarea class="form-control" id="exampleFormControlTextarea1" maxlength="500" rows="5"><?= $customDetail ?></textarea>
                               </div>
                               <div class="align-middle text-center">
-                                <button class="btn btn-danger btn-sm ms-auto" type="submit" name="close" data-close-button-detail>Close</button>
+                                <a href="customs.view.php" class="btn btn-danger btn-sm ms-auto">Close</a>
+                                <!-- <button class="btn btn-danger btn-sm ms-auto" type="submit" name="close" data-close-button-detail>Close</button> -->
                                 <!-- <a class="btn btn-danger btn-sm ms-auto" type="submit" data-close-button-edit>Close</a> -->
                               </div>
                             </form>
@@ -579,7 +580,7 @@ if (isset($_SESSION["ses_username"]) == "") {
                           opacity: 0;
                           pointer-events: none;
                           transition: all 0.3s ease-in-out;
-                          z-index: 1;
+                          z-index: 10000;
                         }
 
                         .modal-body-detail {
@@ -691,11 +692,13 @@ if (isset($_SESSION["ses_username"]) == "") {
                             </div>
                             <div></div>
                             <div></div>
-                            <form class="yayyay" action="hapus_custom.php" method="post">
+                            <form class="yayyay" action="customs.view.php?id=<?php echo $row['id']; ?>" method="post">
                               <div class="align-middle text-center">
-                                <a class="btn btn-danger btn-sm ms-auto" href="hapus_custom.php?id=<?php echo $row['id']; ?>">Delete</a>
+                                <a class="btn btn-danger btn-sm ms-auto" href="customs.view.php?id=<?php echo $row['id']; ?>">Delete</a>
 
-                                <button class="btn btn-success btn-sm ms-auto" name="submit" data-close-delete>Close</button>
+
+                                <a href="customs.view.php" class="btn btn-success btn-sm ms-auto">Close</a>
+                                <!-- <button class="btn btn-success btn-sm ms-auto" name="submit" data-close-delete>Close</button> -->
                                 <!-- <button class="btn btn-danger btn-sm ms-auto" href="hapus_user.php?id=<?php echo $row['id']; ?>" data-close-delete>Close</button> -->
                             </form>
                           </div>
@@ -720,7 +723,7 @@ if (isset($_SESSION["ses_username"]) == "") {
                   opacity: 0;
                   pointer-events: none;
                   transition: all 0.3s ease-in-out;
-                  z-index: 1;
+                  z-index: 10000;
                 }
 
                 .modal-body-delete {
@@ -822,7 +825,7 @@ if (isset($_SESSION["ses_username"]) == "") {
                 <div class="modal-header-edit">
                   <h2 class="edit">Edit Form</h2>
                   <div class="modal-body-edit">
-                    <form action="edit_custom.php?id=<?= $row['id'] ?>" method="post" enctype="multipart/form-data">
+                    <form action="customs.view.php?id=<?= $row['id'] ?>" method="post" enctype="multipart/form-data">
                       <div class="form-group">
                         <label for="example-text-input" class="form-control-label">Name</label>
                         <input class="form-control" name="nama" type="text" value="<?= $row['nama'] ?>" maxlength="30" placeholder="Enter Nama" required />
@@ -871,8 +874,10 @@ if (isset($_SESSION["ses_username"]) == "") {
 
 
                       <div class="align-middle text-center">
-                        <button class="btn btn-success btn-sm ms-auto" name="submit">Edit</button>
-                        <button class="btn btn-danger btn-sm ms-auto" type="submit" name="close" data-close-button-edit>Close</button>
+                        <button class="btn btn-success btn-sm ms-auto" name="edit-custom">Edit</button>
+                        <a href="customs.view.php" class="btn btn-danger btn-sm ms-auto">Close</a>
+
+                        <!-- <button class="btn btn-danger btn-sm ms-auto" type="submit" name="close" data-close-button-edit>Close</button> -->
                         <!-- <a class="btn btn-danger btn-sm ms-auto" type="submit" data-close-button-edit>Close</a> -->
                       </div>
                     </form>
@@ -895,7 +900,7 @@ if (isset($_SESSION["ses_username"]) == "") {
                   opacity: 0;
                   pointer-events: none;
                   transition: all 0.3s ease-in-out;
-                  z-index: 1;
+                  z-index: 10000;
                 }
 
                 .modal-body-edit {
@@ -1020,7 +1025,7 @@ if (isset($_SESSION["ses_username"]) == "") {
 
             <div class="form-group">
               <label class="custom-file-label" for="customFileLang">Upload Photo</label>
-              <input type="file" class="form-control" name="foto" require>
+              <input type="file" class="form-control" name="fotoadd" require>
 
             </div>
 
@@ -1091,6 +1096,7 @@ if (isset($_SESSION["ses_username"]) == "") {
         opacity: 0;
         pointer-events: none;
         transition: all 0.3s ease-in-out;
+        z-index: 10000;
       }
 
       .modal-body-add {
@@ -1334,20 +1340,20 @@ if (isset($_SESSION["ses_username"]) == "") {
 <?php
 require("./koneksi.php");
 session_start();
-error_reporting(1);
+error_reporting(0);
 if (isset($_POST['add-custom'])) {
   $namacustom = $_POST['txt_nama'];
   $kategoricustom = $_POST['txt_kategori'];
   $bahancustom = $_POST['txt_bahan'];
   $detailcustom = $_POST['txt_detail'];
 
-  $foto = $_FILES['foto']['name'];
-  $file_tmp = $_FILES['foto']['tmp_name'];
-  move_uploaded_file($file_tmp, '../foto/custom/' . $foto);
+  $fotoadd = $_FILES['fotoadd']['name'];
+  $file_tmp = $_FILES['fotoadd']['tmp_name'];
+  move_uploaded_file($file_tmp, '../foto/custom/' . $fotoadd);
 
 
 
-  $query    = "INSERT INTO `tb_custom` (`id`, `nama`,`foto`,`kategori`, `bahan`, `detail`) VALUES (NULL, '$namacustom', '$foto','$kategoricustom', '$bahancustom', '$detailcustom')";
+  $query    = "INSERT INTO `tb_custom` (`id`, `nama`,`foto`,`kategori`, `bahan`, `detail`) VALUES (NULL, '$namacustom', '$fotoadd','$kategoricustom', '$bahancustom', '$detailcustom')";
   $result   = mysqli_query($koneksi, $query);
 
   if ($result) {
@@ -1363,6 +1369,70 @@ if (isset($_POST['add-custom'])) {
 			}).then((result) => {if (result.value)
 				{window.location = '';}
 			})</script>";
+  }
+}
+
+
+require('./koneksi.php');
+error_reporting(0);
+$id = $_GET['id'];
+$nama = $_POST['nama'];
+$kategori = $_POST['kategori'];
+$bahan = $_POST['bahan'];
+$detail = $_POST['detail'];
+
+$foto = $_FILES['foto']['name'];
+$file_tmp = $_FILES['foto']['tmp_name'];
+move_uploaded_file($file_tmp, '../foto/custom/' . $foto);
+
+
+if (isset($_POST['edit-custom'])) {
+  if (isset($_POST['edit-custom'])) {
+    if ($foto == "") {
+      $sql = mysqli_query($koneksi, "UPDATE `tb_custom` SET nama='$nama', kategori='$kategori',bahan='$bahan',detail='$detail' WHERE id='$id'");
+      // header('location:customs.view.php');
+      echo "<script>
+            Swal.fire({title: 'Data Berhasil Diubah',text: '',icon: 'success',confirmButtonText: 'OK'
+            }).then((result) => {if (result.value)
+                {window.location = 'customs.view.php';}
+            })</script>";
+    } else {
+      $sql = mysqli_query($koneksi, "UPDATE `tb_custom` SET nama='$nama', foto='$foto', kategori='$kategori',bahan='$bahan',detail='$detail' WHERE id='$id'");
+      // header('location:customs.view.php');
+      echo "<script>
+            Swal.fire({title: 'Data Berhasil Diubah',text: '',icon: 'success',confirmButtonText: 'OK'
+            }).then((result) => {if (result.value)
+                {window.location = 'customs.view.php';}
+            })</script>";
+    }
+  } else {
+    echo "<script>
+        Swal.fire({title: 'Data Gagal Disimpan',text: '',icon: 'error',confirmButtonText: 'OK'
+        }).then((result) => {if (result.value)
+            {window.location = 'customs.view.php';}
+        })</script>";
+  }
+}
+
+
+include "koneksi.php";
+if (isset($_GET['id'])) {
+
+  $querydel = "DELETE FROM tb_custom WHERE id = '$_GET[id]' ";
+  $result = mysqli_query($koneksi, $querydel);
+
+  if ($result) {
+    echo "<script>
+    Swal.fire({title: 'Data Berhasil Dihapus',text: '',icon: 'success',confirmButtonText: 'OK'
+    }).then((result) => {if (result.value)
+        {window.location = 'customs.view.php';}
+    })</script>";
+  } else {
+    echo "<script>
+    Swal.fire({title: 'Data Gagal Dihapus',text: '',icon: 'error',confirmButtonText: 'OK'
+    }).then((result) => {if (result.value)
+        {window.location = 'customs.view.php';}
+    })</script>";
   }
 }
 ?>
