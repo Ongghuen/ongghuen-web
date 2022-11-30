@@ -605,7 +605,7 @@ if (isset($_SESSION["ses_username"]) == "") {
                         opacity: 0;
                         pointer-events: none;
                         transition: all 0.3s ease-in-out;
-                        z-index: 1;
+                        z-index: 10000;
                       }
 
                       .modal-body-detail {
