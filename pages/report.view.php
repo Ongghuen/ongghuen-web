@@ -286,9 +286,14 @@ if (isset($_SESSION["ses_username"]) == "") {
               <button class="btn btn-sm bg-gradient-dark mb-1 px-3" type="submit" aria-expanded="false">
                 Filter
               </button>
+            </div>
 
+            <div class="dropdown col-auto">
+
+              <a href="export_report.php" target=”_blank” class="btn btn-sm bg-gradient-dark mb-1 px-3" aria-expanded="false"> Export</a>
 
             </div>
+
             <div class="col-lg-4 col-md-6 me-sm-7 mx-auto mt-0">
               <div class="nav-wrapper position-relative end-0">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
