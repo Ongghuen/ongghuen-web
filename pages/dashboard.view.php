@@ -329,13 +329,53 @@ if (isset($_SESSION["ses_username"]) == "") {
                 <div class="col-8">
                   <div class="numbers">
                     <p class="text-sm mb-0 text-uppercase font-weight-bold">
-                      Today's Money
+                      Today Money
                     </p>
-                    <h5 class="font-weight-bolder">$53,000</h5>
-                    <p class="mb-0">
+
+                    <?php
+                    error_reporting(0);
+
+
+                    $sql = ("SELECT format(SUM(tb_product.harga*tb_detail_transaksi.qty),0) AS total FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product WHERE tb_transaksi.tanggal = curdate()");
+                    $result   = mysqli_query($koneksi, $sql);
+
+                    while ($row = mysqli_fetch_array($result)) {
+
+                      $total   = $row['total'];
+
+                    ?>
+
+
+
+                      <?php
+
+                      if ($total == '') {
+                        echo "
+                        <h5 class='font-weight-bolder'> Rp. 0</h5>
+                        ";
+                      } else {
+
+                        echo "
+
+                        <h5 class='font-weight-bolder'>Rp. $total</h5>
+                        
+                        ";
+                      }
+
+                      ?>
+
+
+
+
+                    <?php
+
+                    }
+                    ?>
+
+                    <!-- <p class="mb-0">
                       <span class="text-success text-sm font-weight-bolder">+55%</span>
                       since yesterday
-                    </p>
+                    </p> -->
                   </div>
                 </div>
                 <div class="col-4 text-end">
@@ -354,13 +394,54 @@ if (isset($_SESSION["ses_username"]) == "") {
                 <div class="col-8">
                   <div class="numbers">
                     <p class="text-sm mb-0 text-uppercase font-weight-bold">
-                      Today's Users
+                      Today Transaction
                     </p>
-                    <h5 class="font-weight-bolder">2,300</h5>
-                    <p class="mb-0">
+
+
+                    <?php
+                    error_reporting(0);
+
+
+                    $sql = ("SELECT COUNT(*) as jml_transaksi FROM tb_transaksi WHERE tb_transaksi.tanggal = curdate()");
+                    $result   = mysqli_query($koneksi, $sql);
+
+                    while ($row = mysqli_fetch_array($result)) {
+
+                      $jml_transaksi   = $row['jml_transaksi'];
+
+                    ?>
+
+
+
+                      <?php
+
+                      if ($jml_transaksi == '') {
+                        echo "
+                        <h5 class='font-weight-bolder'>0</h5>
+                        ";
+                      } else {
+
+                        echo "
+
+                        <h5 class='font-weight-bolder'>$jml_transaksi</h5>
+                        
+                        ";
+                      }
+
+                      ?>
+
+
+
+
+                    <?php
+
+                    }
+                    ?>
+
+                    <!-- <p class="mb-0">
                       <span class="text-success text-sm font-weight-bolder">+3%</span>
                       since last week
-                    </p>
+                    </p> -->
                   </div>
                 </div>
                 <div class="col-4 text-end">
@@ -379,13 +460,51 @@ if (isset($_SESSION["ses_username"]) == "") {
                 <div class="col-8">
                   <div class="numbers">
                     <p class="text-sm mb-0 text-uppercase font-weight-bold">
-                      New Clients
+                      Total Users
                     </p>
-                    <h5 class="font-weight-bolder">+3,462</h5>
-                    <p class="mb-0">
+                    <?php
+                    error_reporting(0);
+
+
+                    $sql = ("SELECT COUNT(*) as user FROM tb_user WHERE tb_user.level = '1'");
+                    $result   = mysqli_query($koneksi, $sql);
+
+                    while ($row = mysqli_fetch_array($result)) {
+
+                      $jml_user   = $row['user'];
+
+                    ?>
+
+
+
+                      <?php
+
+                      if ($jml_user == '') {
+                        echo "
+                        <h5 class='font-weight-bolder'>0</h5>
+                        ";
+                      } else {
+
+                        echo "
+
+                        <h5 class='font-weight-bolder'>$jml_user</h5>
+                        
+                        ";
+                      }
+
+                      ?>
+
+
+
+
+                    <?php
+
+                    }
+                    ?>
+                    <!-- <p class="mb-0">
                       <span class="text-danger text-sm font-weight-bolder">-2%</span>
                       since last quarter
-                    </p>
+                    </p> -->
                   </div>
                 </div>
                 <div class="col-4 text-end">
@@ -404,13 +523,51 @@ if (isset($_SESSION["ses_username"]) == "") {
                 <div class="col-8">
                   <div class="numbers">
                     <p class="text-sm mb-0 text-uppercase font-weight-bold">
-                      Sales
+                      Total Products
                     </p>
-                    <h5 class="font-weight-bolder">$103,430</h5>
-                    <p class="mb-0">
+                    <?php
+                    error_reporting(0);
+
+
+                    $sql = ("SELECT COUNT(tb_product.nama) as product FROM tb_product");
+                    $result   = mysqli_query($koneksi, $sql);
+
+                    while ($row = mysqli_fetch_array($result)) {
+
+                      $jml_product   = $row['product'];
+
+                    ?>
+
+
+
+                      <?php
+
+                      if ($jml_product == '') {
+                        echo "
+                        <h5 class='font-weight-bolder'>0</h5>
+                        ";
+                      } else {
+
+                        echo "
+
+                        <h5 class='font-weight-bolder'>$jml_product</h5>
+                        
+                        ";
+                      }
+
+                      ?>
+
+
+
+
+                    <?php
+
+                    }
+                    ?>
+                    <!-- <p class="mb-0">
                       <span class="text-success text-sm font-weight-bolder">+5%</span>
                       than last month
-                    </p>
+                    </p> -->
                   </div>
                 </div>
                 <div class="col-4 text-end">

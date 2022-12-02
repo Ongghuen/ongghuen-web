@@ -1,5 +1,18 @@
 <?php
 include "koneksi.php";
+session_start();
+error_reporting(0);
+if (isset($_SESSION["ses_username"]) == "") {
+    header("location: login.view.php");
+} else {
+    $data_id = $_SESSION["ses_id"];
+    $data_nama = $_SESSION["ses_nama"];
+    $data_foto = $_SESSION["ses_foto"];
+    $data_nohp = $_SESSION["ses_nohp"];
+    $data_email = $_SESSION["ses_email"];
+    $data_username = $_SESSION["ses_username"];
+    $data_password = $_SESSION["ses_password"];
+}
 ?>
 
 <!DOCTYPE html>

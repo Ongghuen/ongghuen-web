@@ -4,7 +4,7 @@ include "koneksi.php";
 session_start();
 error_reporting(0);
 if (isset($_SESSION["ses_username"]) == "") {
-  header("location: login.php");
+  header("location: login.view.php");
 } else {
   $data_id = $_SESSION["ses_id"];
   $data_nama = $_SESSION["ses_nama"];
@@ -593,7 +593,7 @@ if (isset($_SESSION["ses_username"]) == "") {
                           justify-content: center;
                           opacity: 0;
                           pointer-events: none;
-                          transition: all 0.3s ease-in-out;
+                          /* transition: all 0.3s ease-in-out; */
                           z-index: 10000;
                         }
 
@@ -609,8 +609,8 @@ if (isset($_SESSION["ses_username"]) == "") {
                           padding: 20px;
                           border-radius: 4x;
                           position: relative;
-                          transform: translateY(-100);
-                          transition: all 0.3s ease-in-out;
+                          /* transform: translateY(-100);
+                          transition: all 0.3s ease-in-out; */
                         }
 
                         .btn-open-detail {
@@ -654,7 +654,7 @@ if (isset($_SESSION["ses_username"]) == "") {
                         }
 
                         .modal-detail.active-detail .modal-header-detail {
-                          transform: translateY(0px);
+                          /* transform: translateY(0px); */
                         }
                       </style>
                       <script>
@@ -702,7 +702,7 @@ if (isset($_SESSION["ses_username"]) == "") {
                             <div class="row">
 
                               <p class="delete">
-                                Yakin dek mau ngehapus data orang? dosah loh dek
+                                Yakin dek mau ngehapus data <?php echo $row['nama'] ?> ?
                               </p>
 
                             </div>
@@ -710,7 +710,10 @@ if (isset($_SESSION["ses_username"]) == "") {
                             <div></div>
                             <form class="yayyay" action="products.view.php?id=<?php echo $row['id']; ?>" method="post">
                               <div class="align-middle text-center">
-                                <a class="btn btn-danger btn-sm ms-auto" href="products.view.php?id=<?php echo $row['id']; ?>">Delete</a>
+
+
+                                <button class="btn btn-danger btn-sm ms-auto" type="submit" name="delete">Delete</button>
+                                <!-- <a class="btn btn-danger btn-sm ms-auto" href="products.view.php?id=<?php echo $row['id']; ?>">Delete</a> -->
 
                                 <button class="btn btn-success btn-sm ms-auto" name="submit" data-close-delete>Close</button>
                                 <!-- <button class="btn btn-danger btn-sm ms-auto" href="hapus_user.php?id=<?php echo $row['id']; ?>" data-close-delete>Close</button> -->
@@ -736,7 +739,7 @@ if (isset($_SESSION["ses_username"]) == "") {
                   justify-content: center;
                   opacity: 0;
                   pointer-events: none;
-                  transition: all 0.3s ease-in-out;
+                  /* transition: all 0.3s ease-in-out; */
                   z-index: 10000;
                 }
 
@@ -752,8 +755,8 @@ if (isset($_SESSION["ses_username"]) == "") {
                   padding: 20px;
                   border-radius: 4x;
                   position: relative;
-                  transform: translateY(-100);
-                  transition: all 0.3s ease-in-out;
+                  /* transform: translateY(-100);
+                  transition: all 0.3s ease-in-out; */
                 }
 
                 .btn-open {
@@ -798,7 +801,7 @@ if (isset($_SESSION["ses_username"]) == "") {
                 }
 
                 .modal-delete.active-delete .modal-header-delete {
-                  transform: translateY(0px);
+                  /* transform: translateY(0px); */
                 }
               </style>
               <script>
@@ -888,7 +891,7 @@ if (isset($_SESSION["ses_username"]) == "") {
                       </div>
 
                       <div class="align-middle text-center">
-                        <button class="btn btn-success btn-sm ms-auto" name="edit-product">Edit</button>
+                        <button class="btn btn-success btn-sm ms-auto" type="submit" name="edit-product">Edit</button>
                         <a href="products.view.php" class="btn btn-danger btn-sm ms-auto">Close</a>
 
                         <!-- <button class="btn btn-danger btn-sm ms-auto" type="submit" name="close" data-close-button-edit>Close</button> -->
@@ -913,7 +916,7 @@ if (isset($_SESSION["ses_username"]) == "") {
                   justify-content: center;
                   opacity: 0;
                   pointer-events: none;
-                  transition: all 0.3s ease-in-out;
+                  /* transition: all 0.3s ease-in-out; */
                   z-index: 10000;
                 }
 
@@ -929,8 +932,8 @@ if (isset($_SESSION["ses_username"]) == "") {
                   padding: 20px;
                   border-radius: 4x;
                   position: relative;
-                  transform: translateY(-100);
-                  transition: all 0.3s ease-in-out;
+                  /* transform: translateY(-100);
+                  transition: all 0.3s ease-in-out; */
                 }
 
                 .btn-open-edit {
@@ -974,7 +977,7 @@ if (isset($_SESSION["ses_username"]) == "") {
                 }
 
                 .modal-edit.active-edit .modal-header-edit {
-                  transform: translateY(0px);
+                  /* transform: translateY(0px); */
                 }
               </style>
               <script>
@@ -1104,7 +1107,7 @@ if (isset($_SESSION["ses_username"]) == "") {
         justify-content: center;
         opacity: 0;
         pointer-events: none;
-        transition: all 0.3s ease-in-out;
+        /* transition: all 0.3s ease-in-out; */
         z-index: 10000;
       }
 
@@ -1120,8 +1123,8 @@ if (isset($_SESSION["ses_username"]) == "") {
         padding: 20px;
         border-radius: 4px;
         position: relative;
-        transform: translateY(-100);
-        transition: all 0.3s ease-in-out;
+        /* transform: translateY(-100);
+        transition: all 0.3s ease-in-out; */
       }
 
       .btn-open {
@@ -1165,7 +1168,7 @@ if (isset($_SESSION["ses_username"]) == "") {
       }
 
       .modal-add.active-add .modal-header-add {
-        transform: translateY(0px);
+        /* transform: translateY(0px); */
       }
     </style>
     <script>
@@ -1423,7 +1426,7 @@ if (isset($_POST['edit-product'])) {
 
 include "koneksi.php";
 error_reporting(0);
-if (isset($_GET['id'])) {
+if (isset($_POST['delete'])) {
 
   $querydel = "DELETE FROM tb_product WHERE id = '$_GET[id]' ";
   $result = mysqli_query($koneksi, $querydel);

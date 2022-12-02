@@ -1,13 +1,11 @@
 <?php
 
-use LDAP\Result;
-
 include "koneksi.php";
 
 session_start();
 error_reporting(0);
 if (isset($_SESSION["ses_username"]) == "") {
-  header("location: login.php");
+  header("location: login.view.php");
 } else {
   $data_id = $_SESSION["ses_id"];
   $data_nama = $_SESSION["ses_nama"];
@@ -559,7 +557,7 @@ if (isset($_SESSION["ses_username"]) == "") {
                             justify-content: center;
                             opacity: 0;
                             pointer-events: none;
-                            transition: all 0.3s ease-in-out;
+                            /* transition: all 0.3s ease-in-out; */
                             z-index: 10000;
                           }
 
@@ -575,8 +573,8 @@ if (isset($_SESSION["ses_username"]) == "") {
                             padding: 20px;
                             border-radius: 4x;
                             position: relative;
-                            transform: translateY(-100);
-                            transition: all 0.3s ease-in-out;
+                            /* transform: translateY(-100);
+                            transition: all 0.3s ease-in-out; */
                           }
 
                           .btn-open-edit {
@@ -620,7 +618,7 @@ if (isset($_SESSION["ses_username"]) == "") {
                           }
 
                           .modal-edit.active-edit .modal-header-edit {
-                            transform: translateY(0px);
+                            /* transform: translateY(0px); */
                           }
                         </style>
                         <script>
@@ -666,15 +664,16 @@ if (isset($_SESSION["ses_username"]) == "") {
                               <div class="row">
 
                                 <p class="delete">
-                                  Yakin dek mau ngehapus data orang? dosah loh dek
+                                  Yakin dek mau ngehapus data <?php echo $row['nama'] ?> ?
                                 </p>
 
                               </div>
                               <div></div>
                               <div></div>
-                              <form class="yayyay" action="hapus_user.php" method="post">
+                              <form class="yayyay" action="users.view.php?id=<?= $row['id'] ?>" method="post">
                                 <div class="align-middle text-center">
-                                  <a class="btn btn-success btn-sm ms-auto" href="users.view.php?id=<?= $row['id'] ?>">Delete</a>
+                                  <button class="btn btn-success btn-sm ms-auto" type="submit" name="delete">Delete</button>
+                                  <!-- <a class="btn btn-success btn-sm ms-auto" href="users.view.php?id=<?= $row['id'] ?>">Delete</a> -->
                                   <a href="users.view.php" class="btn btn-danger btn-sm ms-auto">Close</a>
                                   <!-- <button class="btn btn-success btn-sm ms-auto" name="submit" data-close-delete>Close</button> -->
                                   <!-- <button class="btn btn-danger btn-sm ms-auto" href="hapus_user.php?id=<?php echo $row['id']; ?>" data-close-delete>Close</button> -->
@@ -701,7 +700,7 @@ if (isset($_SESSION["ses_username"]) == "") {
                     justify-content: center;
                     opacity: 0;
                     pointer-events: none;
-                    transition: all 0.3s ease-in-out;
+                    /* transition: all 0.3s ease-in-out; */
                     z-index: 10000;
 
                   }
@@ -718,8 +717,8 @@ if (isset($_SESSION["ses_username"]) == "") {
                     padding: 20px;
                     border-radius: 4x;
                     position: relative;
-                    transform: translateY(-100);
-                    transition: all 0.3s ease-in-out;
+                    /* transform: translateY(-100);
+                    transition: all 0.3s ease-in-out; */
                   }
 
                   .btn-open {
@@ -764,7 +763,7 @@ if (isset($_SESSION["ses_username"]) == "") {
                   }
 
                   .modal-delete.active-delete .modal-header-delete {
-                    transform: translateY(0px);
+                    /* transform: translateY(0px); */
                   }
                 </style>
                 <script>
@@ -887,7 +886,7 @@ if (isset($_SESSION["ses_username"]) == "") {
           justify-content: center;
           opacity: 0;
           pointer-events: none;
-          transition: all 0.3s ease-in-out;
+          /* transition: all 0.3s ease-in-out; */
           z-index: 10000;
         }
 
@@ -903,8 +902,8 @@ if (isset($_SESSION["ses_username"]) == "") {
           padding: 20px;
           border-radius: 4px;
           position: relative;
-          transform: translateY(-100);
-          transition: all 0.3s ease-in-out;
+          /* transform: translateY(-100);
+          transition: all 0.3s ease-in-out; */
         }
 
         .btn-open {
@@ -948,7 +947,7 @@ if (isset($_SESSION["ses_username"]) == "") {
         }
 
         .modal-add.active-add .modal-header-add {
-          transform: translateY(0px);
+          /* transform: translateY(0px); */
         }
       </style>
       <script>
@@ -1207,12 +1206,14 @@ if (isset($_POST['edit-user'])) {
 
 include "koneksi.php";
 error_reporting(0);
-if (isset($_GET['id'])) {
 
-  $querydel = "DELETE FROM tb_user WHERE id = '$_GET[id]' ";
-  $result = mysqli_query($koneksi, $querydel);
 
-  if ($result) {
+if (isset($_POST['delete'])) {
+
+  if (isset($_POST['delete'])) {
+    $querydel = "DELETE FROM tb_user WHERE id = '$_GET[id]' ";
+    $result = mysqli_query($koneksi, $querydel);
+
     echo "<script>
     Swal.fire({title: 'Data Berhasil Dihapus',text: '',icon: 'success',confirmButtonText: 'OK'
     }).then((result) => {if (result.value)
@@ -1225,6 +1226,8 @@ if (isset($_GET['id'])) {
         {window.location = 'users.view.php';}
     })</script>";
   }
+} else {
 }
+
 
 ?>

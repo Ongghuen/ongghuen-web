@@ -4,7 +4,7 @@ include "koneksi.php";
 session_start();
 error_reporting(0);
 if (isset($_SESSION["ses_username"]) == "") {
-  header("location: login.php");
+  header("location: login.view.php");
 } else {
   $data_id = $_SESSION["ses_id"];
   $data_nama = $_SESSION["ses_nama"];
@@ -540,7 +540,7 @@ if (isset($_SESSION["ses_username"]) == "") {
                     justify-content: center;
                     opacity: 0;
                     pointer-events: none;
-                    transition: all 0.3s ease-in-out;
+                    /* transition: all 0.3s ease-in-out; */
                     z-index: 10000;
                   }
 
@@ -556,8 +556,8 @@ if (isset($_SESSION["ses_username"]) == "") {
                     padding: 20px;
                     border-radius: 4x;
                     position: relative;
-                    transform: translateY(-100);
-                    transition: all 0.3s ease-in-out;
+                    /* transform: translateY(-100);
+                    transition: all 0.3s ease-in-out; */
                   }
 
                   .btn-open-edit {
@@ -601,7 +601,7 @@ if (isset($_SESSION["ses_username"]) == "") {
                   }
 
                   .modal-edit.active-edit .modal-header-edit {
-                    transform: translateY(0px);
+                    /* transform: translateY(0px); */
                   }
                 </style>
                 <script>

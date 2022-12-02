@@ -4,7 +4,7 @@ include "koneksi.php";
 session_start();
 error_reporting(0);
 if (isset($_SESSION["ses_username"]) == "") {
-  header("location: login.php");
+  header("location: login.view.php");
 } else {
   $data_id = $_SESSION["ses_id"];
   $data_nama = $_SESSION["ses_nama"];
@@ -462,29 +462,29 @@ if (isset($_SESSION["ses_username"]) == "") {
                   <?php
                   $data = $_POST['data'];
                   if (isset($_POST['caridata'])) {
-                    $caringab = ("SELECT tb_transaksi.id, format(SUM(tb_product.harga*tb_detail_transaksi.qty),0) AS total, tb_user.nama,tb_user.alamat,tb_transaksi.status, tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product WHERE tb_user.nama LIKE '" . $data . "%' GROUP BY tb_user.nama");
+                    $caringab = ("SELECT tb_transaksi.id, format(SUM(tb_product.harga*tb_detail_transaksi.qty),0) AS total, tb_user.nama,tb_user.alamat,tb_transaksi.status, tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product WHERE tb_user.nama LIKE '" . $data . "%' GROUP BY tb_transaksi.id");
                     $result   = mysqli_query($koneksi, $caringab);
                   } elseif (isset($_POST['namaasc'])) {
-                    $namaasc = ("SELECT  tb_transaksi.id,  format(SUM(tb_product.harga*tb_detail_transaksi.qty),0) AS total, tb_user.nama, tb_user.alamat, tb_transaksi.status, tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product GROUP BY tb_user.nama ORDER BY tb_user.nama asc");
+                    $namaasc = ("SELECT  tb_transaksi.id,  format(SUM(tb_product.harga*tb_detail_transaksi.qty),0) AS total, tb_user.nama, tb_user.alamat, tb_transaksi.status, tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product GROUP BY tb_transaksi.id ORDER BY tb_user.nama asc");
                     $result   = mysqli_query($koneksi, $namaasc);
                   } elseif (isset($_POST['namadesc'])) {
-                    $namadesc = ("SELECT  tb_transaksi.id,  format(SUM(tb_product.harga*tb_detail_transaksi.qty),0) AS total, tb_user.nama, tb_user.alamat, tb_transaksi.status, tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product GROUP BY tb_user.nama ORDER BY tb_user.nama desc");
+                    $namadesc = ("SELECT  tb_transaksi.id,  format(SUM(tb_product.harga*tb_detail_transaksi.qty),0) AS total, tb_user.nama, tb_user.alamat, tb_transaksi.status, tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product GROUP BY tb_transaksi.id ORDER BY tb_user.nama desc");
                     $result   = mysqli_query($koneksi, $namadesc);
                   } elseif (isset($_POST['totalasc'])) {
-                    $totalasc = ("SELECT  tb_transaksi.id,  format(SUM(tb_product.harga*tb_detail_transaksi.qty),0) AS total, tb_user.nama, tb_user.alamat, tb_transaksi.status,tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product GROUP BY tb_user.nama ORDER BY total desc");
+                    $totalasc = ("SELECT  tb_transaksi.id,  format(SUM(tb_product.harga*tb_detail_transaksi.qty),0) AS total, tb_user.nama, tb_user.alamat, tb_transaksi.status,tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product GROUP BY tb_transaksi.id ORDER BY total desc");
                     $result   = mysqli_query($koneksi, $totalasc);
                   } elseif (isset($_POST['totaldesc'])) {
-                    $totaldesc = ("SELECT  tb_transaksi.id,  format(SUM(tb_product.harga*tb_detail_transaksi.qty),0) AS total, tb_user.nama, tb_user.alamat,tb_transaksi.status, tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product GROUP BY tb_user.nama ORDER BY total asc");
+                    $totaldesc = ("SELECT  tb_transaksi.id,  format(SUM(tb_product.harga*tb_detail_transaksi.qty),0) AS total, tb_user.nama, tb_user.alamat,tb_transaksi.status, tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product GROUP BY tb_transaksi.id ORDER BY total asc");
                     $result   = mysqli_query($koneksi, $totaldesc);
                   } elseif (isset($_POST['from_date']) && isset($_POST['to_date'])) {
 
                     $from_date = $_POST['from_date'];
                     $to_date = $_POST['to_date'];
 
-                    $filter_dek = ("SELECT tb_transaksi.id, format(SUM(tb_product.harga*tb_detail_transaksi.qty),0) AS total, tb_user.nama, tb_user.alamat,tb_transaksi.status, tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product WHERE tb_transaksi.tanggal BETWEEN '$from_date' AND '$to_date' GROUP BY tb_user.nama ORDER BY tb_transaksi.tanggal asc;");
+                    $filter_dek = ("SELECT tb_transaksi.id, format(SUM(tb_product.harga*tb_detail_transaksi.qty),0) AS total, tb_user.nama, tb_user.alamat,tb_transaksi.status, tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product WHERE tb_transaksi.tanggal BETWEEN '$from_date' AND '$to_date' GROUP BY tb_transaksi.id ORDER BY tb_transaksi.tanggal asc;");
                     $result   = mysqli_query($koneksi, $filter_dek);
                   } else {
-                    $query  = "SELECT  tb_transaksi.id,  format(SUM(tb_product.harga*tb_detail_transaksi.qty),0) AS total, tb_user.nama, tb_user.alamat, tb_transaksi.status, tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product GROUP BY tb_user.nama";
+                    $query  = "SELECT  tb_transaksi.id,  format(SUM(tb_product.harga*tb_detail_transaksi.qty),0) AS total, tb_user.nama, tb_user.alamat, tb_transaksi.status, tb_transaksi.tanggal FROM tb_transaksi INNER JOIN tb_user ON tb_user.id=tb_transaksi.user_id INNER JOIN tb_detail_transaksi ON tb_detail_transaksi.id_transaksi=tb_transaksi.id INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product GROUP BY tb_transaksi.id";
                     $result = mysqli_query($koneksi, $query);
                   }
 
@@ -614,7 +614,7 @@ if (isset($_SESSION["ses_username"]) == "") {
                         justify-content: center;
                         opacity: 0;
                         pointer-events: none;
-                        transition: all 0.3s ease-in-out;
+                        /* transition: all 0.3s ease-in-out; */
                         z-index: 10000;
                       }
 
@@ -630,8 +630,8 @@ if (isset($_SESSION["ses_username"]) == "") {
                         padding: 20px;
                         border-radius: 4x;
                         position: relative;
-                        transform: translateY(-100);
-                        transition: all 0.3s ease-in-out;
+                        /* transform: translateY(-100);
+                        transition: all 0.3s ease-in-out; */
                       }
 
                       .btn-open-detail {
@@ -675,7 +675,7 @@ if (isset($_SESSION["ses_username"]) == "") {
                       }
 
                       .modal-detail.active-detail .modal-header-detail {
-                        transform: translateY(0px);
+                        /* transform: translateY(0px); */
                       }
                     </style>
                     <script>
@@ -832,7 +832,7 @@ if (isset($_SESSION["ses_username"]) == "") {
                         justify-content: center;
                         opacity: 0;
                         pointer-events: none;
-                        transition: all 0.3s ease-in-out;
+                        /* transition: all 0.3s ease-in-out; */
                         z-index: 10000;
                       }
 
@@ -848,8 +848,8 @@ if (isset($_SESSION["ses_username"]) == "") {
                         padding: 20px;
                         border-radius: 4x;
                         position: relative;
-                        transform: translateY(-100);
-                        transition: all 0.3s ease-in-out;
+                        /* transform: translateY(-100);
+                        transition: all 0.3s ease-in-out; */
                       }
 
                       .btn-open {
@@ -894,7 +894,7 @@ if (isset($_SESSION["ses_username"]) == "") {
                       }
 
                       .modal-delete.active-delete .modal-header-delete {
-                        transform: translateY(0px);
+                        /* transform: translateY(0px); */
                       }
                     </style>
                     <script>
@@ -1024,7 +1024,7 @@ if (isset($_SESSION["ses_username"]) == "") {
           justify-content: center;
           opacity: 0;
           pointer-events: none;
-          transition: all 0.3s ease-in-out;
+          /* transition: all 0.3s ease-in-out; */
           z-index: 10000;
         }
 
@@ -1040,8 +1040,8 @@ if (isset($_SESSION["ses_username"]) == "") {
           padding: 20px;
           border-radius: 4px;
           position: relative;
-          transform: translateY(-100);
-          transition: all 0.3s ease-in-out;
+          /* transform: translateY(-100);
+          transition: all 0.3s ease-in-out; */
         }
 
         .btn-open {
@@ -1085,7 +1085,7 @@ if (isset($_SESSION["ses_username"]) == "") {
         }
 
         .modal-add.active-add .modal-header-add {
-          transform: translateY(0px);
+          /* transform: translateY(0px); */
         }
       </style>
       <script>

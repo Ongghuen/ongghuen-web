@@ -10,6 +10,8 @@ if (isset($_SESSION["ses_username"]) != '') {
   header("location: report.view.php");
   header("location: transaksi.view.php");
   header("location: users.view.php");
+  header("location: export_report.php");
+  header("location: export_transaksi.php");
 }
 ?>
 
