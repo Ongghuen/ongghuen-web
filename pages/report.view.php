@@ -250,6 +250,21 @@ if (isset($_SESSION["ses_username"]) == "") {
           </form>
 
 
+          <div class="dropdown col-auto">
+            <form class="" action="" method="post">
+              <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-3" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                Status
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <button class="dropdown-item" name="pending" type="submit">Pending</button>
+                <button class="dropdown-item" name="delivery" type="submit">Delivery</button>
+                <button class="dropdown-item" name="done" type="submit">Done</button>
+                <button class="dropdown-item" name="cancel" type="submit">Cancel</button>
+              </ul>
+            </form>
+
+          </div>
+
           <form class="row gx-4" action="" method="post">
             <div class="dropdown col-auto">
 
@@ -387,6 +402,18 @@ if (isset($_SESSION["ses_username"]) == "") {
 
                     $filter_dek = ("SELECT tb_user.nama, tb_product.nama AS produk, format(tb_product.harga, 0) AS harga , tb_detail_transaksi.qty, format(tb_product.harga * tb_detail_transaksi.qty, 0) AS total, tb_transaksi.tanggal FROM tb_detail_transaksi INNER JOIN tb_user ON tb_user.id=tb_detail_transaksi.id_user INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product INNER JOIN tb_transaksi ON tb_transaksi.id=tb_detail_transaksi.id_transaksi WHERE tb_transaksi.tanggal BETWEEN '$from_date'AND '$to_date' ORDER BY tb_transaksi.tanggal asc");
                     $result   = mysqli_query($koneksi, $filter_dek);
+                  } elseif (isset($_POST['pending'])) {
+                    $pending = ("SELECT tb_user.nama, tb_product.nama AS produk, format(tb_product.harga, 0) AS harga , tb_detail_transaksi.qty, format(tb_product.harga * tb_detail_transaksi.qty, 0) AS total, tb_transaksi.tanggal FROM tb_detail_transaksi INNER JOIN tb_user ON tb_user.id=tb_detail_transaksi.id_user INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product INNER JOIN tb_transaksi ON tb_transaksi.id=tb_detail_transaksi.id_transaksi WHERE tb_transaksi.status = 'pending'");
+                    $result   = mysqli_query($koneksi, $pending);
+                  } elseif (isset($_POST['delivery'])) {
+                    $delivery = ("SELECT tb_user.nama, tb_product.nama AS produk, format(tb_product.harga, 0) AS harga , tb_detail_transaksi.qty, format(tb_product.harga * tb_detail_transaksi.qty, 0) AS total, tb_transaksi.tanggal FROM tb_detail_transaksi INNER JOIN tb_user ON tb_user.id=tb_detail_transaksi.id_user INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product INNER JOIN tb_transaksi ON tb_transaksi.id=tb_detail_transaksi.id_transaksi WHERE tb_transaksi.status = 'delivery'");
+                    $result   = mysqli_query($koneksi, $delivery);
+                  } elseif (isset($_POST['done'])) {
+                    $done = ("SELECT tb_user.nama, tb_product.nama AS produk, format(tb_product.harga, 0) AS harga , tb_detail_transaksi.qty, format(tb_product.harga * tb_detail_transaksi.qty, 0) AS total, tb_transaksi.tanggal FROM tb_detail_transaksi INNER JOIN tb_user ON tb_user.id=tb_detail_transaksi.id_user INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product INNER JOIN tb_transaksi ON tb_transaksi.id=tb_detail_transaksi.id_transaksi WHERE tb_transaksi.status = 'done'");
+                    $result   = mysqli_query($koneksi, $done);
+                  } elseif (isset($_POST['cancel'])) {
+                    $cancel = ("SELECT tb_user.nama, tb_product.nama AS produk, format(tb_product.harga, 0) AS harga , tb_detail_transaksi.qty, format(tb_product.harga * tb_detail_transaksi.qty, 0) AS total, tb_transaksi.tanggal FROM tb_detail_transaksi INNER JOIN tb_user ON tb_user.id=tb_detail_transaksi.id_user INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product INNER JOIN tb_transaksi ON tb_transaksi.id=tb_detail_transaksi.id_transaksi WHERE tb_transaksi.status = 'cancel'");
+                    $result   = mysqli_query($koneksi, $cancel);
                   } else {
                     $query  = "SELECT tb_user.nama, tb_product.nama AS produk, format(tb_product.harga, 0) AS harga , tb_detail_transaksi.qty, format(tb_product.harga * tb_detail_transaksi.qty, 0) AS total, tb_transaksi.tanggal FROM tb_detail_transaksi INNER JOIN tb_user ON tb_user.id=tb_detail_transaksi.id_user INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product INNER JOIN tb_transaksi ON tb_transaksi.id=tb_detail_transaksi.id_transaksi";
                     $result = mysqli_query($koneksi, $query);

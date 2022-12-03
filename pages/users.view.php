@@ -325,7 +325,7 @@ if (isset($_SESSION["ses_username"]) == "") {
           <div class="row gx-4">
 
 
-            <div class="dropdown col-auto">
+            <!-- <div class="dropdown col-auto">
 
 
 
@@ -336,17 +336,17 @@ if (isset($_SESSION["ses_username"]) == "") {
                 <button class="dropdown-item" name="urutnama" type="submit">Name</button>
               </ul>
 
-            </div>
+            </div> -->
 
 
             <div class="dropdown col-auto">
 
               <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-4" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                By
+                Sort By
               </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <button class="dropdown-item" name="urutinasc" type="submit">Asc (A-Z)</button>
-                <button class="dropdown-item" name="urutindesc" type="submit">Desc (Z-A)</button>
+                <button class="dropdown-item" name="urutinasc" type="submit">Nama Asc (A-Z)</button>
+                <button class="dropdown-item" name="urutindesc" type="submit">Nama Desc (Z-A)</button>
 
 
               </ul>

@@ -323,7 +323,7 @@ if (isset($_SESSION["ses_username"]) == "") {
       <div class="card-body">
         <div class="row gx-4">
 
-          <div class="dropdown col-auto">
+          <!-- <div class="dropdown col-auto">
             <form action="" method="post">
               <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-3" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                 Sort
@@ -332,6 +332,21 @@ if (isset($_SESSION["ses_username"]) == "") {
                 <button class="dropdown-item" name="urutnama" type="submit">Name</button>
               </ul>
             </form>
+          </div> -->
+
+          <div class="dropdown col-auto">
+            <form action="" method="post">
+
+              <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-4" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                Sort By
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <button class="dropdown-item" name="urutasc" type="submit">Nama Asc (A-Z)</button>
+                <button class="dropdown-item" name="urutdesc" type="submit">Nama Desc (Z-A)</button>
+            </form>
+
+            </ul>
+
           </div>
 
           <div class="dropdown col-auto">
@@ -365,20 +380,7 @@ if (isset($_SESSION["ses_username"]) == "") {
 
 
 
-          <div class="dropdown col-auto">
-            <form action="" method="post">
 
-              <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-4" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                By
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <button class="dropdown-item" name="urutasc" type="submit">Asc (A-Z)</button>
-                <button class="dropdown-item" name="urutdesc" type="submit">Desc (Z-A)</button>
-            </form>
-
-            </ul>
-
-          </div>
 
           <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
             <div class="nav-wrapper position-relative end-0">

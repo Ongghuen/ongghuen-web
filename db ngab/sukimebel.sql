@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 28, 2022 at 03:50 AM
+-- Generation Time: Dec 03, 2022 at 01:28 PM
 -- Server version: 10.4.27-MariaDB
--- PHP Version: 8.1.12
+-- PHP Version: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -55,16 +55,6 @@ CREATE TABLE `tb_custom` (
   `detail` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `tb_custom`
---
-
-INSERT INTO `tb_custom` (`id`, `nama`, `foto`, `kategori`, `bahan`, `detail`) VALUES
-(9, 'Kursi ngab', 'icon_register.png', 1, 1, 'anjas'),
-(10, 'kasur Pengantinn', 'anony.jpeg', 1, 1, 'ppp'),
-(12, 'ahah', 'RARS_18+.svg.png', 1, 1, 'aa'),
-(13, 'Anjas Mara', 'icon_register.png', 2, 2, 'hihi');
-
 -- --------------------------------------------------------
 
 --
@@ -84,12 +74,8 @@ CREATE TABLE `tb_detail_transaksi` (
 --
 
 INSERT INTO `tb_detail_transaksi` (`id`, `id_transaksi`, `id_user`, `id_product`, `qty`) VALUES
-(7, 2, 95, 39, 1),
-(8, 2, 95, 38, 2),
-(9, 3, 58, 38, 4),
-(10, 3, 58, 39, 5),
-(11, 4, 57, 38, 5),
-(12, 4, 57, 39, 5);
+(13, 6, 110, 41, 4),
+(14, 5, 109, 41, 5);
 
 -- --------------------------------------------------------
 
@@ -133,9 +119,7 @@ CREATE TABLE `tb_product` (
 --
 
 INSERT INTO `tb_product` (`id`, `nama`, `foto`, `harga`, `qty`, `kategori`, `deskripsi`) VALUES
-(38, 'Meja Belajarr', 'anony.jpeg', 900000, 20, 4, 'efg'),
-(39, 'Kursi Belajarr', 'icon_login.png', 500000, 50, 4, 'abc'),
-(40, 'Lemari Dosen', 'RARS_18+.svg.png', 1000000, 10, 4, 'anjas');
+(41, 'Meja Makan', '', 700000, 50, 4, 'anjas');
 
 -- --------------------------------------------------------
 
@@ -165,6 +149,7 @@ INSERT INTO `tb_role` (`id`, `nama`) VALUES
 CREATE TABLE `tb_transaksi` (
   `id` int(2) NOT NULL,
   `user_id` int(2) NOT NULL,
+  `status` enum('pending','delivery','done','cancel') NOT NULL,
   `tanggal` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -172,10 +157,9 @@ CREATE TABLE `tb_transaksi` (
 -- Dumping data for table `tb_transaksi`
 --
 
-INSERT INTO `tb_transaksi` (`id`, `user_id`, `tanggal`) VALUES
-(2, 95, '2022-11-24'),
-(3, 58, '2022-11-25'),
-(4, 57, '2022-11-26');
+INSERT INTO `tb_transaksi` (`id`, `user_id`, `status`, `tanggal`) VALUES
+(5, 110, 'done', '2022-12-03'),
+(6, 109, 'done', '2022-12-03');
 
 -- --------------------------------------------------------
 
@@ -189,6 +173,7 @@ CREATE TABLE `tb_user` (
   `foto` varchar(250) NOT NULL,
   `nohp` varchar(13) NOT NULL,
   `email` varchar(50) NOT NULL,
+  `alamat` varchar(250) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
   `level` int(2) NOT NULL
@@ -198,12 +183,10 @@ CREATE TABLE `tb_user` (
 -- Dumping data for table `tb_user`
 --
 
-INSERT INTO `tb_user` (`id`, `nama`, `foto`, `nohp`, `email`, `username`, `password`, `level`) VALUES
-(57, 'Ilham Ibnu Ahmad', 'bjorka.jpg', '085607743539', 'ilham@gmail.com', 'ilham123', 'ilham123', 1),
-(58, 'Fidinova Ika Putri SangAdji', 'icon_login.png', '081231897839', 'fidin@gmail.com', 'fidin123', 'fidin123', 1),
-(95, 'Faisal Oktabrian Sholihin', 'anony.jpeg', '085607743539', 'bjirkangab@gmail.com', '123', '1', 1),
-(97, 'root2 dong tolong', 'bjorka.jpg', '12', 'root2@gmail.com', 'root2', 'root2', 2),
-(108, 'admin', 'bjorka.jpg', '081231897839', 'raihanachmad@gmail.com', 'admin', 'admin', 2);
+INSERT INTO `tb_user` (`id`, `nama`, `foto`, `nohp`, `email`, `alamat`, `username`, `password`, `level`) VALUES
+(109, 'Ilham Ibnu Ahmad', '', '081231897839', 'ilham@gmail.com', 'Probolinggo', 'ilham', '123', 1),
+(110, 'Fidinova Ika Putri ', '', '085733913105', 'fidi@gmail.com', 'Sumenep', 'fidin', 'fidin', 1),
+(111, 'root', '', '', '', '', 'root', 'root', 2);
 
 -- --------------------------------------------------------
 
@@ -303,7 +286,7 @@ ALTER TABLE `tb_custom`
 -- AUTO_INCREMENT for table `tb_detail_transaksi`
 --
 ALTER TABLE `tb_detail_transaksi`
-  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `tb_kategori`
@@ -315,7 +298,7 @@ ALTER TABLE `tb_kategori`
 -- AUTO_INCREMENT for table `tb_product`
 --
 ALTER TABLE `tb_product`
-  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `tb_role`
@@ -327,13 +310,13 @@ ALTER TABLE `tb_role`
 -- AUTO_INCREMENT for table `tb_transaksi`
 --
 ALTER TABLE `tb_transaksi`
-  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
+  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
 
 --
 -- Constraints for dumped tables
