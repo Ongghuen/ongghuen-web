@@ -333,8 +333,8 @@ if (isset($_SESSION["ses_username"]) == "") {
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <button class="dropdown-item" name="namaasc" type="submit"> Nama Asc (A-Z)</button>
                 <button class="dropdown-item" name="namadesc" type="submit"> Nama Desc (Z-A)</button>
-                <button class="dropdown-item" name="totalasc" type="submit">Total Desc (Z-A)</button>
-                <button class="dropdown-item" name="totaldesc" type="submit">Total Asc (A-Z)</button>
+                <button class="dropdown-item" name="totalasc" type="submit">Total Desc (A-Z)</button>
+                <button class="dropdown-item" name="totaldesc" type="submit">Total Asc (Z-A)</button>
               </ul>
             </form>
 

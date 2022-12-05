@@ -767,7 +767,7 @@ if (isset($_SESSION["ses_username"]) == "") {
 
               <?php
 
-              $query  = "SELECT tb_kategori.nama, SUM(tb_detail_transaksi.qty) AS jml_terjual FROM tb_detail_transaksi INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product INNER JOIN tb_kategori ON tb_kategori.id=tb_product.kategori INNER JOIN tb_transaksi ON tb_transaksi.id=tb_detail_transaksi.id_transaksi WHERE tb_transaksi.status = 'done'  ORDER BY jml_terjual desc LIMIT 5;";
+              $query  = "SELECT tb_kategori.nama, SUM(tb_detail_transaksi.qty) AS jml_terjual FROM tb_detail_transaksi INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product INNER JOIN tb_kategori ON tb_kategori.id=tb_product.kategori INNER JOIN tb_transaksi ON tb_transaksi.id=tb_detail_transaksi.id_transaksi WHERE tb_transaksi.status = 'done' group by tb_kategori.nama ORDER BY jml_terjual desc LIMIT 5;";
               $result = mysqli_query($koneksi, $query);
 
               while ($row = mysqli_fetch_array($result)) {
