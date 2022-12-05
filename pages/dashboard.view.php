@@ -446,7 +446,7 @@ if (isset($_SESSION["ses_username"]) == "") {
                 </div>
                 <div class="col-4 text-end">
                   <div class="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle">
-                    <i class="ni ni-world text-lg opacity-10" aria-hidden="true"></i>
+                    <i class="ni ni-cart text-lg opacity-10" aria-hidden="true"></i>
                   </div>
                 </div>
               </div>
@@ -509,7 +509,7 @@ if (isset($_SESSION["ses_username"]) == "") {
                 </div>
                 <div class="col-4 text-end">
                   <div class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
-                    <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i>
+                    <i class="ni ni-single-02 text-lg opacity-10" aria-hidden="true"></i>
                   </div>
                 </div>
               </div>
@@ -572,7 +572,7 @@ if (isset($_SESSION["ses_username"]) == "") {
                 </div>
                 <div class="col-4 text-end">
                   <div class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
-                    <i class="ni ni-cart text-lg opacity-10" aria-hidden="true"></i>
+                    <i class="ni ni-bag-17 text-lg opacity-10" aria-hidden="true"></i>
                   </div>
                 </div>
               </div>
@@ -724,24 +724,24 @@ if (isset($_SESSION["ses_username"]) == "") {
                     <tr>
                       <td>
                         <div class="text-center">
-                          <h6 class="text-sm mb-0"> <?php echo $no ?> </h6>
+                          <h6 class="text-xs font-weight-bold mb-0"> <?php echo $no ?> </h6>
                         </div>
                       </td>
 
 
                       <td>
                         <div class="text-center">
-                          <h6 class="text-sm mb-0"> <?php echo $namapro ?> </h6>
+                          <h6 class="text-xs font-weight-bold mb-0"> <?php echo $namapro ?> </h6>
                         </div>
                       </td>
                       <td>
                         <div class="text-center">
-                          <h6 class="text-sm mb-0">Rp. <?php echo $hargapro ?></h6>
+                          <h6 class="text-xs font-weight-bold mb-0">Rp. <?php echo $hargapro ?></h6>
                         </div>
                       </td>
                       <td class="align-middle text-sm">
                         <div class="col text-center">
-                          <h6 class="text-sm mb-0"><?php echo $jumlahpro ?></h6>
+                          <h6 class="text-xs font-weight-bold mb-0"><?php echo $jumlahpro ?></h6>
                         </div>
                       </td>
                     </tr>
@@ -767,7 +767,7 @@ if (isset($_SESSION["ses_username"]) == "") {
 
               <?php
 
-              $query  = "SELECT tb_kategori.nama, SUM(tb_detail_transaksi.qty) AS jml_terjual FROM tb_detail_transaksi INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product INNER JOIN tb_kategori ON tb_kategori.id=tb_product.kategori INNER JOIN tb_transaksi ON tb_transaksi.id=tb_detail_transaksi.id_transaksi WHERE tb_transaksi.status = 'done' group by tb_kategori.nama ORDER BY jml_terjual desc LIMIT 5;";
+              $query  = "SELECT tb_kategori.nama, SUM(tb_detail_transaksi.qty) AS jml_terjual FROM tb_detail_transaksi INNER JOIN tb_product ON tb_product.id=tb_detail_transaksi.id_product INNER JOIN tb_kategori ON tb_kategori.id=tb_product.kategori INNER JOIN tb_transaksi ON tb_transaksi.id=tb_detail_transaksi.id_transaksi WHERE tb_transaksi.status = 'done' GROUP BY tb_kategori.nama ORDER BY jml_terjual desc LIMIT 5;";
               $result = mysqli_query($koneksi, $query);
 
               while ($row = mysqli_fetch_array($result)) {
@@ -796,14 +796,15 @@ if (isset($_SESSION["ses_username"]) == "") {
                       </button>
                     </div>
                   </li>
+                </ul>
 
-                <?php
+              <?php
 
               }
 
-                ?>
+              ?>
 
-                </ul>
+
             </div>
           </div>
         </div>

@@ -540,7 +540,7 @@ if (isset($_SESSION["ses_username"]) == "") {
                     justify-content: center;
                     opacity: 0;
                     pointer-events: none;
-                    /* transition: all 0.3s ease-in-out; */
+
                     z-index: 10000;
                   }
 
@@ -556,8 +556,7 @@ if (isset($_SESSION["ses_username"]) == "") {
                     padding: 20px;
                     border-radius: 4x;
                     position: relative;
-                    /* transform: translateY(-100);
-                    transition: all 0.3s ease-in-out; */
+
                   }
 
                   .btn-open-edit {
@@ -576,8 +575,7 @@ if (isset($_SESSION["ses_username"]) == "") {
 
                   h2.edit {
                     text-align: center;
-                    /* padding-bottom: 15px;
-                            font-weight: 200; */
+
                   }
 
                   .modal-header-edit button.close-btn-edit {
@@ -598,10 +596,6 @@ if (isset($_SESSION["ses_username"]) == "") {
                   .active-edit {
                     opacity: 1;
                     pointer-events: auto;
-                  }
-
-                  .modal-edit.active-edit .modal-header-edit {
-                    /* transform: translateY(0px); */
                   }
                 </style>
                 <script>

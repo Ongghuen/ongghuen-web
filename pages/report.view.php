@@ -309,7 +309,7 @@ if (isset($_SESSION["ses_username"]) == "") {
 
             </div>
 
-            <div class="col-lg-4 col-md-6 me-sm-7 mx-auto mt-0">
+            <div class="col-lg-4 col-md-6 me-sm-10 mx-auto mt-0">
               <div class="nav-wrapper position-relative end-0">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                   <!-- <form class="input-group" action="" method="post"> -->
